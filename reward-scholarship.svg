@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#g)"/>
+  <rect x="85" y="245" width="730" height="285" rx="28" fill="#ffffff16" stroke="#ffffff40"/>
+  <circle cx="450" cy="365" r="84" fill="#fef08a"/>
+  <polygon points="450,285 469,338 525,338 480,371 497,425 450,392 403,425 420,371 375,338 431,338" fill="#f59e0b"/>
+  <rect x="235" y="430" width="430" height="42" rx="21" fill="#ffffff2a"/>
+  <text x="80" y="110" fill="#dcfce7" font-size="34" font-family="Arial, sans-serif" font-weight="700">EXCELLENCE REWARD</text>
+  <text x="80" y="160" fill="#ffffff" font-size="58" font-family="Arial, sans-serif" font-weight="800">Growth Scholarship</text>
+</svg>

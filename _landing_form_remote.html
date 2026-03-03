@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구름 KDT AI 캠퍼스 | 통합 지원 및 커리어 센터</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        :root {
+            --goorm-blue: #3391FB;
+            --goorm-blue-light: #EBF5FF;
+            --goorm-dark: #1E293B;
+            --goorm-bg: #F8F9FA;
+        }
+
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            background-color: var(--goorm-bg); 
+            color: #333;
+            letter-spacing: -0.02em;
+        }
+
+        .step-container, .mode-container { display: none; }
+        .active { display: block; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 입력창 스타일 */
+        .glass-input {
+            background: #ffffff;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            width: 100%;
+        }
+        .glass-input:focus {
+            border-color: var(--goorm-blue);
+            box-shadow: 0 0 0 4px rgba(51, 145, 251, 0.1);
+            outline: none;
+        }
+
+        /* 옵션 카드 */
+        .option-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option-card:hover {
+            border-color: var(--goorm-blue);
+            background: var(--goorm-blue-light);
+            transform: translateY(-2px);
+        }
+        .option-card.selected {
+            border-color: var(--goorm-blue);
+            background: var(--goorm-blue-light);
+            box-shadow: 0 4px 12px rgba(51, 145, 251, 0.15);
+        }
+        .option-card .check-icon { color: #E2E8F0; transition: color 0.2s; }
+        .option-card.selected .check-icon { color: var(--goorm-blue); }
+
+        /* 커리어 테스트 선택지 */
+        .test-option {
+            background: white;
+            border: 2px solid #F1F5F9;
+            border-radius: 16px;
+            padding: 22px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            font-weight: 600;
+            color: #475569;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .test-option:hover {
+            border-color: var(--goorm-blue);
+            background: var(--goorm-blue-light);
+            color: var(--goorm-blue);
+            transform: scale(1.02);
+        }
+        .test-option:active {
+            transform: scale(0.98);
+            background: #D1E9FF;
+        }
+
+        .career-test-btn {
+            background: linear-gradient(135deg, #3391FB 0%, #6DD5FA 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(51, 145, 251, 0.3);
+            transition: all 0.3s ease;
+        }
+        .career-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(51, 145, 251, 0.4);
+        }
+
+        /* 가이드 모달 커스텀 */
+        .guide-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--goorm-dark);
+        }
+        .guide-box {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid #F1F5F9;
+        }
+        .guide-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #64748B;
+        }
+        .guide-item i {
+            margin-top: 4px;
+            font-size: 0.8rem;
+        }
+
+        .progress-bar { transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b px-8 py-4 flex justify-between items-center sticky top-0 z-[100]">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="location.reload()">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M17.5 19C15.0147 19 13 16.9853 13 14.5C13 12.0147 15.0147 10 17.5 10C19.9853 10 22 12.0147 22 14.5C22 16.9853 19.9853 19 17.5 19Z" fill="#3391FB"/>
+                <path d="M6.5 19C4.01472 19 2 16.9853 2 14.5C2 12.0147 4.01472 10 6.5 10C8.98528 10 11 12.0147 11 14.5C11 16.9853 8.98528 19 6.5 19Z" fill="#3391FB" fill-opacity="0.6"/>
+                <path d="M12 14C9.23858 14 7 11.7614 7 9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9C17 11.7614 14.7614 14 12 14Z" fill="#3391FB" fill-opacity="0.8"/>
+            </svg>
+            <span class="text-slate-800 font-bold text-lg tracking-tight">구름 <span class="text-blue-500">AI 캠퍼스</span></span>
+        </div>
+        <div class="flex items-center gap-4 sm:gap-6">
+            <button onclick="switchMode('test')" class="career-test-btn text-xs sm:text-sm">
+                <i class="fa-solid fa-wand-magic-sparkles mr-1 sm:mr-2"></i> 커리어 테스트
+            </button>
+            <button class="text-slate-400 hover:text-slate-600 text-sm font-medium hidden sm:block">나가기 <i class="fa-solid fa-xmark ml-1"></i></button>
+        </div>
+    </header>
+
+    <!-- Progress Indicator -->
+    <div id="application-progress-container" class="w-full h-1.5 bg-slate-100 overflow-hidden">
+        <div id="progress-bar" class="progress-bar h-full bg-blue-500" style="width: 20%;"></div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow flex flex-col items-center py-12 px-6 overflow-y-auto">
+        
+        <!-- MODE: APPLICATION FORM -->
+        <div id="mode-application" class="mode-container active max-w-2xl w-full">
+            <form id="multi-step-form" onsubmit="return false;">
+                
+                <!-- STEP 1: Availability -->
+                <div class="step-container active" id="step1">
+                    <div class="text-center mb-10">
+                        <div class="inline-block bg-blue-50 text-blue-600 px-4 py-1.5 rounded-full text-xs font-bold mb-4 uppercase tracking-wider">
+                            Real-time Live Learning
+                        </div>
+                        <h2 class="text-3xl font-extrabold text-slate-800 mb-4 leading-snug">매일 09:00 ~ 18:00까지<br>실시간 교육 참여가 가능하신가요?</h2>
+                        <p class="text-slate-500">훈련장려금 지급 및 수료를 위해 정해진 시간 엄수가 필수입니다.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="option-card p-6" onclick="selectOption(this, 'availability', 'yes')">
+                            <div>
+                                <span class="block font-bold text-lg text-slate-800">네, 참여 가능합니다.</span>
+                                <span class="text-sm text-slate-400">학습 기간 동안 오직 교육에만 몰입하겠습니다.</span>
+                            </div>
+                            <i class="fa-solid fa-circle-check check-icon text-2xl"></i>
+                        </div>
+                        <div class="option-card p-6 opacity-60 hover:opacity-100" onclick="selectOption(this, 'availability', 'no')">
+                            <div>
+                                <span class="block font-bold text-lg text-slate-800">아니요, 현재는 어렵습니다.</span>
+                                <span class="text-sm text-slate-400">병행 중인 일정이 있어 조율이 필요합니다.</span>
+                            </div>
+                            <i class="fa-solid fa-circle-check check-icon text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Card Status -->
+                <div class="step-container" id="step2">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-extrabold text-slate-800 mb-4">현재 국민내일배움카드를<br>보유하고 계신가요?</h2>
+                        <p class="text-slate-500">본 캠퍼스는 100% 국비 지원으로 운영됩니다.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="option-card p-5" onclick="selectOption(this, 'card', 'have')">
+                            <span class="font-bold">보유 중 (배송 완료 포함)</span>
+                            <i class="fa-solid fa-check check-icon"></i>
+                        </div>
+                        <div class="option-card p-5" onclick="selectOption(this, 'card', 'will')">
+                            <span class="font-bold">신청 예정 (또는 발급 중)</span>
+                            <i class="fa-solid fa-check check-icon"></i>
+                        </div>
+                        <div class="option-card p-5" onclick="selectOption(this, 'card', 'unknown')">
+                            <span class="font-bold">발급 방법을 모르겠어요</span>
+                            <i class="fa-solid fa-check check-icon"></i>
+                        </div>
+                    </div>
+
+                    <div onclick="openGuide()" class="mt-12 p-8 bg-slate-900 rounded-3xl flex items-center justify-between cursor-pointer group hover:bg-slate-800 transition-all shadow-xl">
+                        <div class="space-y-2">
+                            <p class="text-blue-400 text-xs font-black tracking-widest uppercase">Target Guide</p>
+                            <h3 class="text-white font-bold text-2xl leading-tight">나도 발급 대상자일까?<br><span class="text-slate-400 text-base font-medium">자격 요건 및 신청 가이드 확인하기</span></h3>
+                        </div>
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                            <i class="fa-solid fa-info-circle text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Basic Info -->
+                <div class="step-container" id="step3">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-extrabold text-slate-800 mb-2">기본 정보</h2>
+                        <p class="text-slate-500">연락 가능한 정보를 정확히 입력해주세요.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-bold text-slate-400 ml-1 uppercase tracking-wider">Full Name</label>
+                            <input type="text" placeholder="성함" class="glass-input">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-bold text-slate-400 ml-1 uppercase tracking-wider">Phone</label>
+                            <input type="tel" placeholder="010-0000-0000" class="glass-input">
+                        </div>
+                        <div class="col-span-full space-y-1.5">
+                            <label class="text-xs font-bold text-slate-400 ml-1 uppercase tracking-wider">Email Address</label>
+                            <input type="email" placeholder="example@goorm.io" class="glass-input">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-bold text-slate-400 ml-1 uppercase tracking-wider">Education</label>
+                            <select class="glass-input appearance-none">
+                                <option>학력 선택</option>
+                                <option>대학교 졸업(예정)</option>
+                                <option>대학교 재학/휴학</option>
+                                <option>전문대 졸업(예정)</option>
+                                <option>기타</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-bold text-slate-400 ml-1 uppercase tracking-wider">Major Category</label>
+                            <select class="glass-input appearance-none">
+                                <option>전공 계열</option>
+                                <option>IT/컴퓨터공학</option>
+                                <option>인문/사회과학</option>
+                                <option>상경/경영</option>
+                                <option>예체능/기타</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Assessment -->
+                <div class="step-container" id="step4">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-extrabold text-slate-800 mb-2">적합성 검사</h2>
+                        <p class="text-slate-500">6개의 문항을 통해 현재 학습 준비도를 파악합니다.</p>
+                    </div>
+                    <div id="competency-questions-container" class="space-y-6">
+                        <!-- JS renders here -->
+                    </div>
+                </div>
+
+                <!-- STEP 5: Self Intro -->
+                <div class="step-container" id="step5">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-extrabold text-slate-800 mb-4">마지막으로,<br>당신을 표현해주세요.</h2>
+                        <p class="text-slate-500">구름 KDT AI 캠퍼스는 당신의 잠재력을 봅니다.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden">
+                        <div class="bg-slate-50 px-6 py-4 border-b flex justify-between items-center">
+                            <span class="text-xs font-black text-slate-400 tracking-widest uppercase">Self Statement</span>
+                            <div class="flex gap-1.5">
+                                <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                                <div class="w-3 h-3 rounded-full bg-slate-200"></div>
+                            </div>
+                        </div>
+                        <div class="p-8 space-y-4">
+                            <label class="block text-sm font-bold text-slate-700">지원 동기 및 커리어 목표</label>
+                            <textarea rows="10" class="w-full text-base text-slate-700 leading-relaxed outline-none resize-none placeholder:text-slate-300" 
+                                placeholder="본 과정에 지원한 이유와 수료 후 어떤 모습으로 성장하고 싶은지 들려주세요. 성실한 작성은 선발의 핵심 기준입니다."></textarea>
+                            <div class="flex justify-between items-center pt-6 border-t border-slate-50">
+                                <p class="text-xs text-blue-500 font-bold"><i class="fa-solid fa-lightbulb mr-1"></i> TIP: 자신의 강점과 AI를 연결해보세요.</p>
+                                <span id="char-count" class="text-xs font-mono text-slate-400">0 / 1000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- MODE: CAREER TEST -->
+        <div id="mode-test" class="mode-container max-w-2xl w-full">
+            <div id="test-intro" class="text-center">
+                <div class="w-24 h-24 bg-white rounded-3xl shadow-lg flex items-center justify-center mx-auto mb-8 text-4xl">
+                    <i class="fa-solid fa-compass text-blue-500"></i>
+                </div>
+                <h2 class="text-4xl font-extrabold text-slate-800 mb-6 leading-tight">나에게 가장 잘 맞는<br><span class="text-blue-500">IT 커리어</span>는?</h2>
+                <p class="text-slate-600 mb-12 text-lg leading-relaxed">경험과 성향을 분석하여 당신이 빛날 수 있는<br>최적의 직무 방향성을 제시해 드립니다.</p>
+                <button onclick="startTest()" class="career-test-btn px-16 py-5 text-xl">테스트 시작하기</button>
+            </div>
+
+            <div id="test-question" class="hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <span id="q-num" class="text-blue-500 font-black text-5xl">01</span>
+                    <div class="flex-grow mx-8 h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div id="q-progress" class="h-full bg-blue-500 rounded-full transition-all" style="width: 10%;"></div>
+                    </div>
+                    <span id="q-total" class="text-slate-300 font-bold">/ 10</span>
+                </div>
+                <h3 id="q-text" class="text-2xl font-bold text-slate-800 mb-12 leading-snug">질문 텍스트가 들어갑니다.</h3>
+                <div id="q-options" class="grid grid-cols-1 gap-4">
+                    <!-- JS Options -->
+                </div>
+            </div>
+
+            <div id="test-result" class="hidden">
+                <div class="bg-white p-12 rounded-[48px] shadow-2xl border border-slate-50 text-center">
+                    <div class="inline-block bg-blue-50 text-blue-600 px-6 py-2 rounded-full text-sm font-black mb-6 uppercase tracking-widest">Career Match Found</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-4">분석형 AI 엔지니어</h2>
+                    <p class="text-slate-500 text-lg mb-10 leading-relaxed">당신은 논리적인 구조를 설계하고 데이터를 통해<br>새로운 가치를 발견하는 것에 탁월한 재능이 있습니다.</p>
+                    
+                    <div class="bg-slate-50 rounded-3xl p-8 mb-10 flex justify-around">
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-400 block mb-2">적합도</span>
+                            <span class="text-3xl font-black text-blue-500">98%</span>
+                        </div>
+                        <div class="w-px h-12 bg-slate-200"></div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold text-slate-400 block mb-2">핵심 키워드</span>
+                            <span class="text-xl font-bold text-slate-800">알고리즘</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <button onclick="switchMode('application')" class="bg-blue-500 text-white py-5 rounded-2xl font-bold text-lg shadow-xl hover:bg-blue-600 transition-all">결과 반영하여 지원 계속하기</button>
+                        <button class="bg-slate-900 text-white py-5 rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all">1:1 커리어 컨설팅 신청</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Action -->
+    <footer id="application-footer" class="bg-white border-t p-6 flex justify-center items-center z-50">
+        <div class="max-w-2xl w-full flex justify-between items-center">
+            <button id="prevBtn" onclick="moveStep(-1)" class="text-slate-400 hover:text-slate-800 font-bold px-4 transition-all">
+                <i class="fa-solid fa-arrow-left mr-2"></i> 이전
+            </button>
+            <div class="flex gap-4">
+                <button class="text-blue-500 hover:bg-blue-50 font-bold px-8 py-4 rounded-2xl border border-blue-100 hidden sm:block transition-all">임시저장</button>
+                <button id="nextBtn" onclick="moveStep(1)" class="bg-blue-500 hover:bg-blue-600 text-white px-16 py-4 rounded-2xl font-bold shadow-lg shadow-blue-100 transition-all">다음 단계</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal: Card Guide (Redesigned) -->
+    <div id="guide-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-6">
+        <div class="modal-overlay absolute inset-0" onclick="closeGuide()"></div>
+        <div class="bg-white rounded-[40px] w-full max-w-2xl max-h-[85vh] overflow-hidden relative z-10 shadow-2xl flex flex-col">
+            
+            <div class="p-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+                <h3 class="text-2xl font-black text-slate-800">카드 발급 자격 확인</h3>
+                <button onclick="closeGuide()" class="text-slate-300 hover:text-slate-600 transition-colors">
+                    <i class="fa-solid fa-circle-xmark text-3xl"></i>
+                </button>
+            </div>
+
+            <div class="p-10 overflow-y-auto space-y-10">
+                <div class="text-center">
+                    <p class="text-blue-500 font-black mb-2 uppercase tracking-tighter">Eligibility Check</p>
+                    <h4 class="text-3xl font-extrabold text-slate-800 mb-4">훈련 신청 전, 대상자인지 확인해 보세요.</h4>
+                    <p class="text-slate-500">대부분의 대학생과 미취업자라면 어렵지 않게 발급받을 수 있습니다.</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- 발급 가능 그룹 -->
+                    <div class="guide-box">
+                        <div class="guide-section-title"><i class="fa-solid fa-circle-check text-blue-500"></i> 발급 대상자</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+                            <div class="guide-item"><i class="fa-solid fa-plus text-slate-300"></i> 일자리를 찾는 취업 준비생</div>
+                            <div class="guide-item"><i class="fa-solid fa-plus text-slate-300"></i> 졸업까지 2년 이내 남은 대학(원)생</div>
+                            <div class="guide-item"><i class="fa-solid fa-plus text-slate-300"></i> 대학교 3학년 이상의 졸업예정자</div>
+                            <div class="guide-item"><i class="fa-solid fa-plus text-slate-300"></i> 역량 향상을 원하는 현직 직장인</div>
+                            <div class="guide-item"><i class="fa-solid fa-plus text-slate-300"></i> 재취업을 준비하는 중/장년층</div>
+                        </div>
+                    </div>
+
+                    <!-- 제외 그룹 -->
+                    <div class="guide-box border-slate-100 bg-slate-50/30">
+                        <div class="guide-section-title text-slate-400"><i class="fa-solid fa-circle-exclamation"></i> 제외 대상자</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+                            <div class="guide-item"><i class="fa-solid fa-minus text-slate-200"></i> 현직 공무원 및 사립학교 교직원</div>
+                            <div class="guide-item"><i class="fa-solid fa-minus text-slate-200"></i> 연 매출 4억원 이상의 자영업자</div>
+                            <div class="guide-item"><i class="fa-solid fa-minus text-slate-200"></i> 월 임금 300만원 이상 대기업 종사자</div>
+                            <div class="guide-item"><i class="fa-solid fa-minus text-slate-200"></i> 75세 이상인 분</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-600 p-8 rounded-[32px] text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-100">
+                    <div class="text-center sm:text-left">
+                        <p class="font-bold text-xl mb-1">지금 바로 발급받으러 가기</p>
+                        <p class="text-blue-100 text-sm">HRD-Net 고용24 사이트에서 5분 만에 신청 가능!</p>
+                    </div>
+                    <button class="bg-white text-blue-600 px-8 py-4 rounded-2xl font-black whitespace-nowrap hover:bg-blue-50 transition-colors">신청 페이지 이동</button>
+                </div>
+            </div>
+
+            <div class="p-6 bg-slate-50 border-t border-slate-100">
+                <button onclick="closeGuide()" class="w-full bg-white border border-slate-200 text-slate-600 py-4 rounded-2xl font-bold hover:bg-slate-100 transition-all">내용 확인 완료</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        let testIdx = 0;
+
+        const questions = [
+            {
+                q: "복잡한 코드를 보고 있을 때, 당신은 어떤 생각이 가장 먼저 드나요?",
+                a: ["이게 어떻게 돌아가는지 원리부터 파악하고 싶다", "어디를 고쳐야 더 예쁘게 보일지 고민한다", "이걸 어떻게 설명해야 사람들이 쉽게 이해할까?", "이 코드로 어떤 새로운 서비스를 만들 수 있을까?"]
+            },
+            {
+                q: "웹사이트에서 가장 중요하게 생각하는 요소는?",
+                a: ["빠른 속도와 끊김 없는 데이터 처리", "직관적이고 아름다운 화면 구성", "사용자가 원하는 정보를 정확히 찾는 기능", "독창적이고 재미있는 사용자 인터랙션"]
+            },
+            {
+                q: "갑자기 버그가 발생했다는 소식을 들었을 때, 당신의 행동은?",
+                a: ["차분하게 로그를 분석하며 발생 지점을 찾는다", "문제가 된 부분의 UI가 어색한지부터 확인한다", "팀원들과 즉시 상황을 공유하고 도움을 요청한다", "새로운 방식으로 우회할 방법이 없는지 고민한다"]
+            },
+            {
+                q: "프로젝트 회의에서 당신이 가장 선호하는 역할은?",
+                a: ["기술적인 한계와 가능성을 검토하는 가이드", "최종 결과물의 퀄리티를 책임지는 디테일러", "회의 내용을 정리하고 방향을 잡는 조정자", "끊임없이 새로운 아이디어를 던지는 브레인"]
+            },
+            {
+                q: "새로운 기술을 배울 때 선호하는 방식은?",
+                a: ["공식 문서를 처음부터 끝까지 정독하며 기초를 다진다", "유명한 사이트의 UI를 직접 따라 만들어보며 익힌다", "관련된 스터디나 모임에 참여하여 대화하며 배운다", "일단 간단한 결과물부터 직접 만들어보며 시행착오를 겪는다"]
+            },
+            {
+                q: "데이터 통계 그래프를 볼 때 느끼는 감정은?",
+                a: ["수치 뒤에 숨겨진 인과관계가 궁금해진다", "그래프가 더 깔끔하게 디자인되었으면 좋겠다고 생각한다", "이 데이터를 어떻게 마케팅에 쓸지 고민한다", "데이터가 실시간으로 변하는 모습이 흥미롭다"]
+            },
+            {
+                q: "나의 성향을 한 단어로 표현한다면?",
+                a: ["논리적인 분석가", "창의적인 예술가", "공감하는 소통가", "도전적인 전략가"]
+            },
+            {
+                q: "팀 프로젝트가 끝난 후, 가장 뿌듯한 순간은?",
+                a: ["복잡한 기능을 완벽하게 구현해냈을 때", "완성된 결과물의 디자인이 훌륭할 때", "사용자들의 긍정적인 리뷰가 쏟아질 때", "팀원 모두가 성장했음을 느꼈을 때"]
+            },
+            {
+                q: "평소 즐겨 사용하는 앱의 장점은?",
+                a: ["어떤 상황에서도 멈추지 않는 안정성", "매일 봐도 질리지 않는 트렌디한 디자인", "나의 취향을 정확히 맞춘 개인화 추천", "자꾸만 누르고 싶게 만드는 재미있는 기능"]
+            },
+            {
+                q: "코딩을 할 때 가장 집중이 잘 되는 순간은?",
+                a: ["논리적인 퍼즐이 하나씩 풀려갈 때", "시각적으로 결과물이 하나씩 완성될 때", "코드를 통해 누군가의 문제를 해결해줄 때", "이전에 없던 새로운 기능을 실험해볼 때"]
+            }
+        ];
+
+        const competencyQuestions = [
+            { id: 1, text: "데이터를 논리적으로 분류하고 패턴을 찾아내는 것을 즐긴다." },
+            { id: 2, text: "Python이나 Java 등 기초 프로그래밍 언어의 문법을 이해한다." },
+            { id: 3, text: "문제가 발생했을 때 포기하지 않고 끝까지 해결하려는 집념이 있다." },
+            { id: 4, text: "Git/GitHub 등을 통한 협업 방식에 대해 들어보거나 경험해 보았다." },
+            { id: 5, text: "AI 기술이 세상을 어떻게 바꿀지에 대해 진지하게 고민해 본 적이 있다." },
+            { id: 6, text: "타인과 의견이 다를 때 논리적이고 정중하게 내 생각을 전달할 수 있다." }
+        ];
+
+        function switchMode(mode) {
+            document.querySelectorAll('.mode-container').forEach(m => m.classList.remove('active'));
+            document.getElementById(`mode-${mode}`).classList.add('active');
+            
+            const progress = document.getElementById('application-progress-container');
+            const footer = document.getElementById('application-footer');
+            
+            if(mode === 'test') {
+                progress.style.display = 'none';
+                footer.style.display = 'none';
+            } else {
+                progress.style.display = 'block';
+                footer.style.display = 'flex';
+                updateUI();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function moveStep(direction) {
+            if (currentStep + direction > totalSteps) {
+                submitFinal();
+                return;
+            }
+            if (currentStep + direction < 1) return;
+            currentStep += direction;
+            updateUI();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateUI() {
+            const bar = document.getElementById('progress-bar');
+            bar.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+            document.querySelectorAll('.step-container').forEach((el, idx) => {
+                el.classList.toggle('active', idx + 1 === currentStep);
+            });
+
+            document.getElementById('prevBtn').disabled = (currentStep === 1);
+            document.getElementById('nextBtn').innerText = (currentStep === totalSteps) ? '지원서 제출' : '다음 단계';
+        }
+
+        function selectOption(el, field, val) {
+            const siblings = el.parentElement.querySelectorAll('.option-card');
+            siblings.forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function renderCompetencyQuestions() {
+            const container = document.getElementById('competency-questions-container');
+            container.innerHTML = competencyQuestions.map((q, idx) => `
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                    <p class="text-slate-800 font-bold mb-6 text-lg"><span class="text-blue-500 mr-2">Q${idx+1}.</span>${q.text}</p>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="text-[10px] font-black text-slate-300 uppercase">전혀 아님</span>
+                        <div class="flex flex-grow justify-between gap-1 sm:gap-2 px-2">
+                            ${[1, 2, 3, 4, 5].map(score => `
+                                <button type="button" onclick="setScore(this, ${idx})" class="flex-1 h-12 rounded-xl bg-slate-50 text-slate-400 font-bold hover:bg-blue-50 transition-all score-btn-${idx}">${score}</button>
+                            `).join('')}
+                        </div>
+                        <span class="text-[10px] font-black text-slate-300 uppercase">매우 그러함</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setScore(btn, qIdx) {
+            const row = btn.parentElement;
+            row.querySelectorAll(`.score-btn-${qIdx}`).forEach(b => {
+                b.classList.remove('bg-blue-500', 'text-white', 'shadow-lg');
+                b.classList.add('bg-slate-50', 'text-slate-400');
+            });
+            btn.classList.remove('bg-slate-50', 'text-slate-400');
+            btn.classList.add('bg-blue-500', 'text-white', 'shadow-lg');
+        }
+
+        function startTest() {
+            document.getElementById('test-intro').classList.add('hidden');
+            document.getElementById('test-question').classList.remove('hidden');
+            testIdx = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[testIdx];
+            document.getElementById('q-num').innerText = (testIdx + 1).toString().padStart(2, '0');
+            document.getElementById('q-text').innerText = q.q;
+            document.getElementById('q-progress').style.width = `${((testIdx + 1) / questions.length) * 100}%`;
+            
+            const optionsBox = document.getElementById('q-options');
+            optionsBox.innerHTML = '';
+            q.a.forEach((ans) => {
+                const div = document.createElement('div');
+                div.className = 'test-option';
+                div.innerText = ans;
+                div.onclick = () => {
+                    div.style.backgroundColor = '#EBF5FF';
+                    div.style.borderColor = '#3391FB';
+                    setTimeout(nextQuestion, 200);
+                };
+                optionsBox.appendChild(div);
+            });
+        }
+
+        function nextQuestion() {
+            if(testIdx < questions.length - 1) {
+                testIdx++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('test-question').classList.add('hidden');
+            document.getElementById('test-result').classList.remove('hidden');
+        }
+
+        function openGuide() { 
+            document.getElementById('guide-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeGuide() { 
+            document.getElementById('guide-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function submitFinal() {
+            const btn = document.getElementById('nextBtn');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i>`;
+            setTimeout(() => {
+                document.getElementById('mode-application').classList.add('hidden');
+                document.getElementById('application-footer').classList.add('hidden');
+                document.getElementById('success-overlay').classList.remove('hidden');
+            }, 1500);
+        }
+
+        function applyEntryModeFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const mode = params.get('mode');
+
+            // ?mode=test 로 진입하면 테스트 "소개 화면"으로 전환
+            if (mode === 'test') {
+                switchMode('test');
+            }
+        }
+
+        // Init
+        renderCompetencyQuestions();
+        applyEntryModeFromQuery();
+    </script>
+</body>
+</html>
