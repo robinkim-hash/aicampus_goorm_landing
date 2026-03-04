@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구름톤 트레이닝 | 나에게 맞는 직무 찾기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --goorm-blue: #3391fb;
+            --goorm-blue-light: #ebf5ff;
+            --goorm-dark: #1e293b;
+            --goorm-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(51, 145, 251, 0.12), transparent 34%),
+                linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
+            color: #334155;
+            letter-spacing: -0.02em;
+        }
+
+        .test-option {
+            background: white;
+            border: 2px solid #f1f5f9;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            font-weight: 700;
+            color: #475569;
+            box-shadow: 0 2px 4px rgba(15, 23, 42, 0.03);
+        }
+
+        .test-option:hover {
+            border-color: var(--goorm-blue);
+            background: var(--goorm-blue-light);
+            color: var(--goorm-blue);
+            transform: translateY(-2px);
+        }
+
+        .career-test-btn {
+            background: linear-gradient(135deg, #3391fb 0%, #6dd5fa 100%);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 800;
+            box-shadow: 0 10px 26px rgba(51, 145, 251, 0.28);
+            transition: all 0.25s ease;
+        }
+
+        .career-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(51, 145, 251, 0.34);
+        }
+
+        .fade-up {
+            animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+            <a href="./index.html" class="flex items-center gap-2">
+                <span class="text-2xl font-bold text-slate-900 tracking-tight">goorm<span class="text-blue-600">thon</span></span>
+                <span class="rounded bg-slate-100 px-2 py-1 text-xs font-bold text-slate-600">트레이닝</span>
+            </a>
+            <a href="./index.html" class="text-sm font-bold text-slate-500 transition hover:text-slate-800">
+                홈으로 돌아가기
+            </a>
+        </div>
+    </header>
+
+    <main class="mx-auto flex min-h-[calc(100vh-73px)] max-w-6xl items-center px-5 py-10 sm:px-8">
+        <div class="mx-auto w-full max-w-3xl">
+            <section id="test-intro" class="fade-up rounded-[2rem] border border-white/70 bg-white p-8 text-center shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-12">
+                <div class="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-blue-50 text-4xl text-blue-500 shadow-inner shadow-blue-100">
+                    <i class="fa-solid fa-compass"></i>
+                </div>
+                <p class="mb-4 text-xs font-black uppercase tracking-[0.25em] text-blue-500">Career Fit Check</p>
+                <h1 class="mb-6 text-3xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
+                    나에게 가장 잘 맞는<br><span class="text-blue-500">IT 직무</span>는?
+                </h1>
+                <p class="mb-10 text-base leading-relaxed text-slate-500 sm:text-lg">
+                    경험과 성향을 바탕으로 당신이 몰입하기 좋은 직무 방향성을
+                    빠르게 진단해드립니다.
+                </p>
+                <button type="button" onclick="startTest()" class="career-test-btn px-10 py-4 text-lg sm:px-16 sm:py-5 sm:text-xl">
+                    테스트 시작하기
+                </button>
+            </section>
+
+            <section id="test-question" class="hidden fade-up rounded-[2rem] border border-white/70 bg-white p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-12">
+                <div class="mb-10 flex items-center">
+                    <span id="q-num" class="text-4xl font-black text-blue-500 sm:text-5xl">01</span>
+                    <div class="mx-4 h-2 flex-grow overflow-hidden rounded-full bg-slate-100 sm:mx-8">
+                        <div id="q-progress" class="h-full rounded-full bg-blue-500 transition-all duration-300" style="width: 10%;"></div>
+                    </div>
+                    <span id="q-total" class="text-xl font-bold text-slate-300 sm:text-2xl">/ 10</span>
+                </div>
+                <h2 id="q-text" class="mb-10 text-2xl font-bold leading-snug text-slate-800 sm:text-3xl">질문 텍스트가 들어갑니다.</h2>
+                <div id="q-options" class="grid grid-cols-1 gap-4"></div>
+            </section>
+
+            <section id="test-result" class="hidden fade-up rounded-[2rem] border border-white/70 bg-white p-8 text-center shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-12">
+                <div class="mb-6 inline-block rounded-full bg-blue-50 px-6 py-2 text-sm font-black uppercase tracking-widest text-blue-600">
+                    Career Match Found
+                </div>
+                <h2 id="result-title" class="mb-4 text-3xl font-black text-slate-900 sm:text-4xl">분석형 AI 엔지니어</h2>
+                <p id="result-desc" class="mb-10 text-base leading-relaxed text-slate-500 sm:text-lg">
+                    당신은 논리적인 구조를 설계하고 데이터를 통해 새로운 가치를 발견하는 데 강점이 있습니다.
+                </p>
+
+                <div class="mb-10 flex flex-col gap-4 rounded-3xl bg-slate-50 p-6 sm:flex-row sm:items-center sm:justify-around sm:p-8">
+                    <div class="text-center">
+                        <span class="mb-2 block text-xs font-bold text-slate-400">적합도</span>
+                        <span id="result-score" class="text-3xl font-black text-blue-500">98%</span>
+                    </div>
+                    <div class="hidden h-12 w-px bg-slate-200 sm:block"></div>
+                    <div class="text-center">
+                        <span class="mb-2 block text-xs font-bold text-slate-400">핵심 키워드</span>
+                        <span id="result-keyword" class="text-xl font-bold text-slate-800">알고리즘</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <a href="./index.html" class="rounded-2xl bg-blue-500 px-6 py-5 text-lg font-bold text-white transition hover:bg-blue-600">
+                        홈페이지로 돌아가기
+                    </a>
+                    <a href="https://robinkim-hash.github.io/landing_form/" target="_blank" rel="noopener noreferrer" class="rounded-2xl bg-slate-900 px-6 py-5 text-lg font-bold text-white transition hover:bg-slate-800">
+                        간편 지원하기
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const questions = [
+            {
+                q: "복잡한 코드를 보고 있을 때, 당신은 어떤 생각이 가장 먼저 드나요?",
+                a: ["이게 어떻게 돌아가는지 원리부터 파악하고 싶다", "어디를 고쳐야 더 예쁘게 보일지 고민한다", "이걸 어떻게 설명해야 사람들이 쉽게 이해할까?", "이 코드로 어떤 새로운 서비스를 만들 수 있을까?"]
+            },
+            {
+                q: "웹사이트에서 가장 중요하게 생각하는 요소는?",
+                a: ["빠른 속도와 끊김 없는 데이터 처리", "직관적이고 아름다운 화면 구성", "사용자가 원하는 정보를 정확히 찾는 기능", "독창적이고 재미있는 사용자 인터랙션"]
+            },
+            {
+                q: "갑자기 버그가 발생했다는 소식을 들었을 때, 당신의 행동은?",
+                a: ["차분하게 로그를 분석하며 발생 지점을 찾는다", "문제가 된 부분의 UI가 어색한지부터 확인한다", "팀원들과 즉시 상황을 공유하고 도움을 요청한다", "새로운 방식으로 우회할 방법이 없는지 고민한다"]
+            },
+            {
+                q: "프로젝트 회의에서 당신이 가장 선호하는 역할은?",
+                a: ["기술적인 한계와 가능성을 검토하는 가이드", "최종 결과물의 퀄리티를 책임지는 디테일러", "회의 내용을 정리하고 방향을 잡는 조정자", "끊임없이 새로운 아이디어를 던지는 브레인"]
+            },
+            {
+                q: "새로운 기술을 배울 때 선호하는 방식은?",
+                a: ["공식 문서를 처음부터 끝까지 정독하며 기초를 다진다", "유명한 사이트의 UI를 직접 따라 만들어보며 익힌다", "관련된 스터디나 모임에 참여하여 대화하며 배운다", "일단 간단한 결과물부터 직접 만들어보며 시행착오를 겪는다"]
+            },
+            {
+                q: "데이터 통계 그래프를 볼 때 느끼는 감정은?",
+                a: ["수치 뒤에 숨겨진 인과관계가 궁금해진다", "그래프가 더 깔끔하게 디자인되었으면 좋겠다고 생각한다", "이 데이터를 어떻게 마케팅에 쓸지 고민한다", "데이터가 실시간으로 변하는 모습이 흥미롭다"]
+            },
+            {
+                q: "나의 성향을 한 단어로 표현한다면?",
+                a: ["논리적인 분석가", "창의적인 예술가", "공감하는 소통가", "도전적인 전략가"]
+            },
+            {
+                q: "팀 프로젝트가 끝난 후, 가장 뿌듯한 순간은?",
+                a: ["복잡한 기능을 완벽하게 구현해냈을 때", "완성된 결과물의 디자인이 훌륭할 때", "사용자들의 긍정적인 리뷰가 쏟아질 때", "팀원 모두가 성장했음을 느꼈을 때"]
+            },
+            {
+                q: "평소 즐겨 사용하는 앱의 장점은?",
+                a: ["어떤 상황에서도 멈추지 않는 안정성", "매일 봐도 질리지 않는 트렌디한 디자인", "나의 취향을 정확히 맞춘 개인화 추천", "자꾸만 누르고 싶게 만드는 재미있는 기능"]
+            },
+            {
+                q: "코딩을 할 때 가장 집중이 잘 되는 순간은?",
+                a: ["논리적인 퍼즐이 하나씩 풀려갈 때", "시각적으로 결과물이 하나씩 완성될 때", "코드를 통해 누군가의 문제를 해결해줄 때", "이전에 없던 새로운 기능을 실험해볼 때"]
+            }
+        ];
+
+        const results = [
+            {
+                title: "분석형 AI 엔지니어",
+                desc: "당신은 논리적인 구조를 설계하고 데이터를 통해 새로운 가치를 발견하는 데 강점이 있습니다.",
+                keyword: "알고리즘",
+                score: "98%"
+            },
+            {
+                title: "사용자 중심 프론트엔드 개발자",
+                desc: "화면의 완성도와 사용 경험을 세심하게 다듬는 감각이 뛰어나며, 직관적인 서비스 설계에 강합니다.",
+                keyword: "UI/UX",
+                score: "96%"
+            },
+            {
+                title: "협업형 프로덕트 매니저",
+                desc: "여러 이해관계자 사이에서 방향을 정리하고, 사용자의 요구를 실행 계획으로 연결하는 능력이 돋보입니다.",
+                keyword: "커뮤니케이션",
+                score: "95%"
+            },
+            {
+                title: "도전형 서비스 기획자",
+                desc: "새로운 기능과 실험을 빠르게 시도하며, 시장 반응을 바탕으로 서비스를 성장시키는 성향이 강합니다.",
+                keyword: "실험",
+                score: "94%"
+            }
+        ];
+
+        let testIdx = 0;
+        let answers = [];
+
+        function startTest() {
+            answers = [];
+            testIdx = 0;
+            document.getElementById('test-intro').classList.add('hidden');
+            document.getElementById('test-result').classList.add('hidden');
+            document.getElementById('test-question').classList.remove('hidden');
+            showQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showQuestion() {
+            const q = questions[testIdx];
+            document.getElementById('q-num').innerText = String(testIdx + 1).padStart(2, '0');
+            document.getElementById('q-text').innerText = q.q;
+            document.getElementById('q-progress').style.width = `${((testIdx + 1) / questions.length) * 100}%`;
+
+            const optionsBox = document.getElementById('q-options');
+            optionsBox.innerHTML = '';
+            q.a.forEach((ans, answerIdx) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'test-option';
+                button.innerText = ans;
+                button.onclick = () => {
+                    answers.push(answerIdx);
+                    button.style.backgroundColor = '#ebf5ff';
+                    button.style.borderColor = '#3391fb';
+                    button.style.color = '#3391fb';
+                    setTimeout(nextQuestion, 180);
+                };
+                optionsBox.appendChild(button);
+            });
+        }
+
+        function nextQuestion() {
+            if (testIdx < questions.length - 1) {
+                testIdx += 1;
+                showQuestion();
+                return;
+            }
+            showResult();
+        }
+
+        function showResult() {
+            const total = answers.reduce((sum, value) => sum + value, 0);
+            const result = results[total % results.length];
+
+            document.getElementById('test-question').classList.add('hidden');
+            document.getElementById('test-result').classList.remove('hidden');
+            document.getElementById('result-title').innerText = result.title;
+            document.getElementById('result-desc').innerText = result.desc;
+            document.getElementById('result-keyword').innerText = result.keyword;
+            document.getElementById('result-score').innerText = result.score;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
