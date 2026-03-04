@@ -5,479 +5,400 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>goorm - AI·SW 생태계의 표준</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --page-bg: #060b16;
+            --panel-bg: rgba(11, 18, 32, 0.88);
+            --panel-border: rgba(148, 163, 184, 0.14);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            margin: 0;
             font-family: 'Pretendard', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), transparent 28%),
+                radial-gradient(circle at top right, rgba(168, 85, 247, 0.08), transparent 24%),
+                linear-gradient(180deg, #040816 0%, #08101e 38%, #050914 100%);
+            color: var(--text-main);
+            letter-spacing: -0.02em;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #4f46e5, #9333ea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+
         html {
-            scroll-padding-top: 4rem;
+            scroll-padding-top: 5rem;
         }
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
+
+        .page-shell {
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .hero-grid {
+            background:
+                linear-gradient(135deg, rgba(30, 41, 59, 0.82), rgba(15, 23, 42, 0.96)),
+                radial-gradient(circle at 20% 10%, rgba(99, 102, 241, 0.16), transparent 30%);
+            border: 1px solid var(--panel-border);
+            box-shadow: 0 32px 90px -40px rgba(2, 6, 23, 0.9);
         }
-        .logo-card {
-            display: flex;
+
+        .glass-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            box-shadow: 0 28px 80px -44px rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(14px);
+        }
+
+        .eyebrow {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            height: 4rem;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.75rem;
-            font-weight: 800;
-            color: #4b5563;
-            font-size: 1.125rem;
-            letter-spacing: -0.025em;
-            transition: all 0.3s ease;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
-        .logo-card:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            border-color: #c7d2fe;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .logo-text-sm {
-            font-size: 0.875rem;
+            gap: 0.5rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+            font-size: 0.74rem;
             font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
         }
-        .brochure-section {
+
+        .platform-card {
             position: relative;
             overflow: hidden;
+            border-radius: 2rem;
+            border: 1px solid var(--panel-border);
+            background:
+                linear-gradient(135deg, rgba(8, 15, 30, 0.94), rgba(8, 15, 30, 0.72)),
+                radial-gradient(circle at top right, rgba(255, 255, 255, 0.04), transparent 30%);
+            box-shadow: 0 32px 90px -46px rgba(2, 6, 23, 0.95);
         }
-        .brochure-section::before {
+
+        .platform-card::before {
             content: "";
             position: absolute;
             inset: 0;
             pointer-events: none;
-            opacity: 0.22;
-            background-image: radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.14), transparent 26%);
+            opacity: 0.16;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 28px 28px;
         }
-        .brochure-blue {
-            background: linear-gradient(135deg, #071120 0%, #0b1832 54%, #0d2249 100%);
-            border-top: 1px solid rgba(96, 165, 250, 0.14);
+
+        .platform-blue {
+            background:
+                linear-gradient(135deg, rgba(7, 18, 39, 0.96), rgba(15, 35, 74, 0.78)),
+                radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 32%);
         }
-        .brochure-purple {
-            background: linear-gradient(135deg, #12081f 0%, #1a1030 54%, #2f145b 100%);
-            border-top: 1px solid rgba(196, 181, 253, 0.14);
+
+        .platform-purple {
+            background:
+                linear-gradient(135deg, rgba(20, 10, 38, 0.96), rgba(50, 20, 91, 0.78)),
+                radial-gradient(circle at top right, rgba(168, 85, 247, 0.18), transparent 32%);
         }
-        .brochure-emerald {
-            background: linear-gradient(135deg, #071811 0%, #0c231c 54%, #103c31 100%);
-            border-top: 1px solid rgba(110, 231, 183, 0.14);
+
+        .platform-emerald {
+            background:
+                linear-gradient(135deg, rgba(7, 24, 17, 0.96), rgba(12, 63, 51, 0.78)),
+                radial-gradient(circle at top right, rgba(16, 185, 129, 0.18), transparent 32%);
         }
-        .brochure-section .text-gray-900 {
-            color: #f8fafc !important;
-        }
-        .brochure-section .text-gray-800,
-        .brochure-section .text-gray-700,
-        .brochure-section .text-gray-600,
-        .brochure-section .text-gray-500 {
-            color: #94a3b8 !important;
-        }
-        .brochure-section .section-copy > p {
-            max-width: 34rem;
-        }
-        .brochure-section .showcase-frame {
-            padding: 0.875rem;
-            border-radius: 2rem;
-            overflow: hidden;
+
+        .shot-frame {
+            border-radius: 1.5rem;
+            padding: 0.9rem;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 90px -40px rgba(2, 6, 23, 0.9);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
-        .brochure-blue .showcase-frame {
-            background: linear-gradient(135deg, rgba(7, 18, 39, 0.98), rgba(14, 35, 77, 0.92));
-        }
-        .brochure-purple .showcase-frame {
-            background: linear-gradient(135deg, rgba(22, 10, 38, 0.98), rgba(56, 24, 102, 0.92));
-        }
-        .brochure-emerald .showcase-frame {
-            background: linear-gradient(135deg, rgba(7, 24, 17, 0.98), rgba(14, 65, 53, 0.92));
-        }
-        .brochure-section .showcase-frame img {
-            border-radius: 1.35rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+        .shot-frame img {
             display: block;
             width: 100%;
             height: auto;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .brochure-section .logo-panel {
-            background: rgba(255, 255, 255, 0.04) !important;
-            border-color: rgba(255, 255, 255, 0.08) !important;
-            backdrop-filter: blur(10px);
-        }
-        .brochure-section .logo-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.08);
+
+        .metric-pill {
+            border-radius: 9999px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: rgba(255, 255, 255, 0.04);
             color: #e2e8f0;
-            opacity: 1;
-            filter: none;
-            box-shadow: none;
         }
-        .brochure-section .logo-card:hover {
-            border-color: rgba(255, 255, 255, 0.16);
-            transform: translateY(-2px);
-            box-shadow: none;
+
+        .partner-chip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3.25rem;
+            padding: 0.8rem 0.9rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: center;
         }
-        .brochure-section .stats-strip {
-            border-color: rgba(255, 255, 255, 0.08) !important;
+
+        .soft-copy {
+            color: var(--text-sub);
+        }
+
+        .hero-title {
+            line-height: 1.04;
+        }
+
+        .hero-accent {
+            background: linear-gradient(135deg, #8b5cf6, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 1023px) {
+            .page-shell {
+                width: min(1200px, calc(100% - 24px));
+            }
         }
     </style>
 </head>
-<body class="bg-white text-gray-800">
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="./index.html" class="text-2xl font-bold tracking-tighter text-gray-900">goorm</a>
-                </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors">구름 소개</a>
-                    <a href="#arkain" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors">Arkain</a>
-                    <a href="#exelearnce" class="text-sm font-semibold text-gray-600 hover:text-purple-600 transition-colors">Exelearnce</a>
-                    <a href="#devth" class="text-sm font-semibold text-gray-600 hover:text-emerald-600 transition-colors">Devth</a>
-                    <a href="./index.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600 transition-colors ml-4 pl-4 border-l border-gray-200">메인으로</a>
-                </nav>
-            </div>
+<body>
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+        <div class="page-shell flex h-16 items-center justify-between">
+            <a href="./index.html" class="text-2xl font-bold tracking-tighter text-white">goorm</a>
+            <nav class="hidden items-center gap-7 md:flex">
+                <a href="#about" class="text-sm font-semibold text-slate-400 transition-colors hover:text-white">구름 소개</a>
+                <a href="#arkain" class="text-sm font-semibold text-slate-400 transition-colors hover:text-blue-300">Arkain</a>
+                <a href="#exelearnce" class="text-sm font-semibold text-slate-400 transition-colors hover:text-purple-300">Exelearnce</a>
+                <a href="#devth" class="text-sm font-semibold text-slate-400 transition-colors hover:text-emerald-300">Devth</a>
+                <a href="./index.html" class="border-l border-white/10 pl-7 text-sm font-semibold text-white">메인으로</a>
+            </nav>
         </div>
     </header>
 
-    <section class="relative bg-[#0f172a] pt-24 pb-28 overflow-hidden border-b border-slate-800">
-        <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(#6366F1 1px, transparent 1px); background-size: 32px 32px;"></div>
-        <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.2),transparent_38%),linear-gradient(180deg,#0f172a_0%,#111827_100%)]"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-indigo-500/15 text-indigo-200 font-bold text-sm mb-6 border border-indigo-400/20 shadow-sm">
-                개발 · 교육 · 평가 올인원 플랫폼
+    <main class="pb-24 pt-10">
+        <section class="page-shell">
+            <div class="hero-grid rounded-[2rem] px-6 py-8 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+                <div class="grid gap-10 lg:grid-cols-[1.05fr,0.95fr] lg:items-end">
+                    <div>
+                        <span class="eyebrow">
+                            <i class="fa-solid fa-layer-group text-xs"></i>
+                            Build · Learn · Assess
+                        </span>
+                        <h1 class="hero-title mt-6 text-4xl font-black text-white sm:text-5xl lg:text-6xl">
+                            AI·SW 성장을 완성하는
+                            <span class="hero-accent block">구름 플랫폼 생태계</span>
+                        </h1>
+                        <p class="soft-copy mt-6 max-w-2xl text-base leading-8 sm:text-lg">
+                            개발 환경, 학습 경험, 역량 평가가 각각 따로 놀지 않도록 하나의 흐름으로 설계했습니다.
+                            훈련생은 더 빠르게 배우고, 더 자연스럽게 실전으로 연결됩니다.
+                        </p>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-3">
+                        <div class="glass-panel rounded-3xl p-5">
+                            <div class="text-sm font-bold text-slate-200">개발 환경</div>
+                            <div class="mt-2 text-2xl font-black text-white">Arkain</div>
+                            <div class="mt-2 text-sm text-slate-400">클라우드 IDE</div>
+                        </div>
+                        <div class="glass-panel rounded-3xl p-5">
+                            <div class="text-sm font-bold text-slate-200">학습 경험</div>
+                            <div class="mt-2 text-2xl font-black text-white">Exelearnce</div>
+                            <div class="mt-2 text-sm text-slate-400">실무형 교육</div>
+                        </div>
+                        <div class="glass-panel rounded-3xl p-5">
+                            <div class="text-sm font-bold text-slate-200">역량 평가</div>
+                            <div class="mt-2 text-2xl font-black text-white">Devth</div>
+                            <div class="mt-2 text-sm text-slate-400">코딩 테스트</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-                아이디어를 현실로 만드는<br>
-                <span class="gradient-text">무한한 클라우드 생태계</span>
-            </h1>
-            <p class="mt-6 text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                언제 어디서나 접속 가능한 개발 환경부터, 배움이 즐거운 맞춤형 교육,<br class="hidden md:block">
-                그리고 나의 진짜 실력을 증명할 수 있는 객관적인 역량 평가까지.<br>
-                구름(goorm)이 여러분의 성장을 함께합니다.
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <section id="about" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">우리는 이런 플랫폼을 만듭니다</h2>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    구름(goorm)은 코딩을 처음 접하는 입문자부터 현업 개발자까지, 누구나 환경의 제약 없이 자유롭게 학습하고 개발할 수 있는 클라우드 기반의 에코시스템을 제공합니다.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-2xl shadow-sm">
-                        <i class="fa-solid fa-server"></i>
+        <section id="about" class="page-shell mt-10">
+            <div class="glass-panel rounded-[2rem] px-6 py-8 sm:px-10 sm:py-10">
+                <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-3xl">
+                        <span class="eyebrow">About goorm</span>
+                        <h2 class="mt-5 text-3xl font-bold text-white sm:text-4xl">하나의 여정으로 이어지는 학습 인프라</h2>
+                        <p class="soft-copy mt-4 text-base leading-8 sm:text-lg">
+                            구름은 코딩을 처음 접하는 입문자부터 실무 전환을 준비하는 학습자까지,
+                            학습의 출발과 성장, 검증의 순간을 모두 연결하는 AI·SW 플랫폼을 제공합니다.
+                        </p>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-3">웹 브라우저 하나로 충분한 환경</h4>
-                    <p class="text-gray-600 leading-relaxed text-sm">무거운 프로그램 설치나 복잡한 초기 세팅이 필요 없습니다. 웹 브라우저만 있다면 현업과 동일한 스펙의 실습 및 개발 환경이 즉시 펼쳐집니다.</p>
-                </div>
-                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-2xl shadow-sm">
-                        <i class="fa-solid fa-robot"></i>
+                    <div class="grid gap-3 sm:grid-cols-3">
+                        <div class="metric-pill px-5 py-4 text-center">
+                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Flow 01</div>
+                            <div class="mt-2 text-sm font-semibold">개발 환경 즉시 실행</div>
+                        </div>
+                        <div class="metric-pill px-5 py-4 text-center">
+                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Flow 02</div>
+                            <div class="mt-2 text-sm font-semibold">학습과 실습 동시 진행</div>
+                        </div>
+                        <div class="metric-pill px-5 py-4 text-center">
+                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Flow 03</div>
+                            <div class="mt-2 text-sm font-semibold">실전형 평가로 검증</div>
+                        </div>
                     </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-3">나를 돕는 똑똑한 AI 에이전트</h4>
-                    <p class="text-gray-600 leading-relaxed text-sm">코드를 작성하다 막히면 AI가 오류를 설명해 주고, 원하는 기능을 자연어로 입력하면 빠르게 앱의 뼈대를 만들어 줍니다.</p>
-                </div>
-                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 text-2xl shadow-sm">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-3">나의 실력을 증명하는 평가 시스템</h4>
-                    <p class="text-gray-600 leading-relaxed text-sm">프로그래밍 역량뿐 아니라 AI 툴 활용 능력까지 투명하게 측정하고, 학습한 내용을 객관적으로 확인할 수 있습니다.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="arkain" class="brochure-section brochure-blue py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-16 items-start">
-                <div class="section-copy lg:w-1/2">
-                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-100 text-blue-800 font-bold text-sm mb-4">
-                        <i class="fa-solid fa-cloud-code mr-2"></i> 클라우드 IDE
-                    </div>
-                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Arkain <span class="text-2xl font-semibold text-gray-500 ml-2">아카인</span></h2>
-                    <h3 class="text-2xl text-blue-600 mb-6 font-bold tracking-tight">Your Ideas, Your World, In One Click</h3>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        클릭 몇 번으로 나만의 프로젝트 환경이 만들어집니다. 설치가 필요 없는 클라우드 통합 개발 환경에서 아이디어를 빠르게 코드로 구현해 보세요.
-                    </p>
-                    <div class="mb-8">
-                        <div class="flex items-center justify-between bg-white border border-blue-100 shadow-sm rounded-xl p-4 mb-4">
-                            <div class="text-center w-1/3">
-                                <div class="w-10 h-10 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2"><i class="fa-solid fa-code text-blue-500"></i></div>
-                                <span class="text-[10px] font-bold text-gray-600">DEVELOP<br>(개발)</span>
-                            </div>
-                            <div class="text-blue-300 text-sm"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
-                            <div class="text-center w-1/3">
-                                <div class="w-10 h-10 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2"><i class="fa-solid fa-rocket text-blue-500"></i></div>
-                                <span class="text-[10px] font-bold text-gray-600">DEPLOY<br>(배포)</span>
-                            </div>
-                            <div class="text-blue-300 text-sm"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
-                            <div class="text-center w-1/3">
-                                <div class="w-10 h-10 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2"><i class="fa-solid fa-server text-blue-500"></i></div>
-                                <span class="text-[10px] font-bold text-gray-600">OPERATE<br>(운영)</span>
-                            </div>
+        <section id="arkain" class="page-shell mt-10">
+            <div class="platform-card platform-blue px-6 py-7 sm:px-9 sm:py-9 lg:px-10 lg:py-10">
+                <div class="relative z-10 grid gap-10 lg:grid-cols-[0.92fr,1.08fr] lg:items-center">
+                    <div>
+                        <span class="eyebrow text-blue-100">
+                            <i class="fa-solid fa-cloud-code text-xs"></i>
+                            Cloud IDE
+                        </span>
+                        <h2 class="mt-5 text-4xl font-black text-white sm:text-5xl">Arkain</h2>
+                        <p class="mt-4 text-base leading-8 text-slate-300 sm:text-lg">
+                            설치 없이 바로 열리고, 바로 실행되는 개발 환경입니다.
+                            훈련생은 환경 세팅에 시간을 쓰지 않고 코드 작성과 실습 자체에 집중할 수 있습니다.
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">AI 코드 지원</span>
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">실시간 파일 편집</span>
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">터미널 즉시 실행</span>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 shadow-sm"><i class="fa-solid fa-layer-group text-blue-500 mr-1.5"></i>38종 언어 템플릿</span>
-                            <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-700 shadow-sm"><i class="fa-solid fa-microchip text-green-500 mr-1.5"></i>최신 GPU 연동 (AI/빅데이터)</span>
-                            <span class="px-3 py-1.5 bg-blue-600 border border-blue-700 text-white rounded-lg text-xs font-bold shadow-sm">실시간 미리보기</span>
+                        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">192만+</div>
+                                <div class="mt-1 text-sm text-slate-400">전 세계 사용자</div>
+                            </div>
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">157개국</div>
+                                <div class="mt-1 text-sm text-slate-400">글로벌 서비스 접속</div>
+                            </div>
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">93만+</div>
+                                <div class="mt-1 text-sm text-slate-400">누적 생성 프로젝트</div>
+                            </div>
                         </div>
                     </div>
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-blue-200 text-blue-700 mt-0.5">
-                                <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
-                            </div>
-                            <p class="ml-4 text-gray-700"><span class="font-bold text-gray-900">말로 치면 코드가 되는 AI:</span> 자연어 프롬프트만으로 동작하는 앱을 빠르게 생성하고, 코드 자동 완성을 지원받습니다.</p>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-blue-200 text-blue-700 mt-0.5">
-                                <i class="fa-solid fa-users text-sm"></i>
-                            </div>
-                            <p class="ml-4 text-gray-700"><span class="font-bold text-gray-900">함께하는 코딩의 즐거움:</span> URL 하나만 공유하면 동료와 같은 화면에서 실시간으로 코드를 편집할 수 있습니다.</p>
-                        </li>
-                    </ul>
-                    <div class="stats-strip grid grid-cols-3 gap-4 text-center border-t border-blue-200 pt-8">
-                        <div>
-                            <div class="text-3xl font-black text-blue-600 mb-1">192만+</div>
-                            <div class="text-xs text-gray-500 font-medium">전 세계 사용자 수</div>
+                    <div class="space-y-6">
+                        <div class="shot-frame">
+                            <img src="./arkain-ui-preview.png" alt="Arkain UI 화면">
                         </div>
-                        <div>
-                            <div class="text-3xl font-black text-blue-600 mb-1">157개국</div>
-                            <div class="text-xs text-gray-500 font-medium">글로벌 서비스 접속</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-black text-blue-600 mb-1">93만+</div>
-                            <div class="text-xs text-gray-500 font-medium">누적 생성 프로젝트 수</div>
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            <div class="partner-chip">엔터프라이즈 프라이빗 서버</div>
+                            <div class="partner-chip">하이브리드 원격 근무</div>
+                            <div class="partner-chip">AI·빅데이터 분석 환경</div>
+                            <div class="partner-chip">초기 스타트업 개발 환경</div>
                         </div>
                     </div>
                 </div>
-                <div class="section-media lg:w-1/2 w-full flex flex-col gap-6">
-                    <div class="showcase-frame">
-                        <img src="./arkain-ui-preview.png" alt="Arkain 실제 구현 화면" class="w-full h-auto block">
+            </div>
+        </section>
+
+        <section id="exelearnce" class="page-shell mt-10">
+            <div class="platform-card platform-purple px-6 py-7 sm:px-9 sm:py-9 lg:px-10 lg:py-10">
+                <div class="relative z-10 grid gap-10 lg:grid-cols-[1.08fr,0.92fr] lg:items-center">
+                    <div class="space-y-6 lg:order-2">
+                        <div class="shot-frame">
+                            <img src="./exelearnce-ui-preview.png" alt="Exelearnce UI 화면">
+                        </div>
+                        <div class="grid gap-3 sm:grid-cols-3">
+                            <div class="partner-chip">kakao</div>
+                            <div class="partner-chip">SAMSUNG</div>
+                            <div class="partner-chip">LG Electronics</div>
+                            <div class="partner-chip">KT</div>
+                            <div class="partner-chip">성균관대학교</div>
+                            <div class="partner-chip">고려대학교</div>
+                        </div>
                     </div>
-                    <div class="logo-panel bg-white/80 backdrop-blur rounded-2xl p-6 border border-blue-100 shadow-sm">
-                        <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fa-solid fa-globe text-blue-500 mr-2"></i> 전 세계 157개국, 다양한 환경에서 활용되는 Arkain
-                        </h4>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <div class="logo-card !text-blue-700 !opacity-100 !filter-none bg-blue-50/50 border-blue-100">
-                                <span class="logo-text-sm text-center px-2">엔터프라이즈<br>프라이빗 서버</span>
+                    <div class="lg:order-1">
+                        <span class="eyebrow text-purple-100">
+                            <i class="fa-solid fa-graduation-cap text-xs"></i>
+                            Learning Platform
+                        </span>
+                        <h2 class="mt-5 text-4xl font-black text-white sm:text-5xl">Exelearnce</h2>
+                        <p class="mt-4 text-base leading-8 text-slate-300 sm:text-lg">
+                            강의와 실습을 한 화면에서 이어 주는 실무형 학습 플랫폼입니다.
+                            훈련생은 설명을 본 직후 바로 손으로 따라 하며, 막히는 지점도 빠르게 해결할 수 있습니다.
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">영상 학습 + 실습 병행</span>
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">초보자용 코드 가이드</span>
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">AI 튜터 지원</span>
+                        </div>
+                        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">116만+</div>
+                                <div class="mt-1 text-sm text-slate-400">함께 공부한 수강생</div>
                             </div>
-                            <div class="logo-card !text-blue-700 !opacity-100 !filter-none bg-blue-50/50 border-blue-100">
-                                <span class="logo-text-sm text-center px-2">하이브리드<br>원격 근무</span>
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">547+</div>
+                                <div class="mt-1 text-sm text-slate-400">프로그래밍 강좌</div>
                             </div>
-                            <div class="logo-card !text-blue-700 !opacity-100 !filter-none bg-blue-50/50 border-blue-100">
-                                <span class="logo-text-sm text-center px-2">AI / 빅데이터<br>분석 연구소</span>
-                            </div>
-                            <div class="logo-card !text-blue-700 !opacity-100 !filter-none bg-blue-50/50 border-blue-100">
-                                <span class="logo-text-sm text-center px-2">초기 비즈니스<br>스타트업</span>
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">1.8만명</div>
+                                <div class="mt-1 text-sm text-slate-400">단일 인기 강좌 수강</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="exelearnce" class="brochure-section brochure-purple py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row-reverse gap-16 items-start">
-                <div class="section-copy lg:w-1/2">
-                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-purple-100 text-purple-800 font-bold text-sm mb-4">
-                        <i class="fa-solid fa-graduation-cap mr-2"></i> 실무 중심 AI·SW 교육 플랫폼
-                    </div>
-                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Exelearnce <span class="text-2xl font-semibold text-gray-500 ml-2">엑설런스</span></h2>
-                    <h3 class="text-2xl text-purple-600 mb-6 font-bold tracking-tight">만드는 사람에서 다루는 사람으로</h3>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        눈으로만 보는 강의는 그만. 영상을 보며 직접 코딩하고, 뱃지를 모으며 게임하듯 즐겁게 성장할 수 있는 완벽한 교육 환경을 제공합니다.
-                    </p>
-                    <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                            <h4 class="text-xs font-bold text-gray-800 mb-4 flex items-center"><i class="fa-solid fa-chart-bar text-purple-500 mr-2"></i> 나의 학급 내 정답률 추이</h4>
-                            <div class="flex items-end justify-between h-16 px-2">
-                                <div class="w-4 bg-purple-200 h-[60%] rounded-t"></div>
-                                <div class="w-4 bg-purple-300 h-[40%] rounded-t"></div>
-                                <div class="w-4 bg-purple-400 h-[80%] rounded-t"></div>
-                                <div class="w-4 bg-purple-500 h-[70%] rounded-t"></div>
-                                <div class="w-4 bg-purple-600 h-[95%] rounded-t"></div>
+        <section id="devth" class="page-shell mt-10">
+            <div class="platform-card platform-emerald px-6 py-7 sm:px-9 sm:py-9 lg:px-10 lg:py-10">
+                <div class="relative z-10 grid gap-10 lg:grid-cols-[0.92fr,1.08fr] lg:items-center">
+                    <div>
+                        <span class="eyebrow text-emerald-100">
+                            <i class="fa-solid fa-laptop-code text-xs"></i>
+                            Assessment Platform
+                        </span>
+                        <h2 class="mt-5 text-4xl font-black text-white sm:text-5xl">Devth</h2>
+                        <p class="mt-4 text-base leading-8 text-slate-300 sm:text-lg">
+                            실전과 유사한 화면에서 문제를 읽고, 코드를 작성하고, 결과를 확인하는 개발 역량 평가 플랫폼입니다.
+                            학습의 마지막을 실무 감각으로 검증하는 단계까지 자연스럽게 이어집니다.
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">알고리즘 · SQL · AI 실무</span>
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">실전형 에디터</span>
+                            <span class="metric-pill px-4 py-2 text-sm font-semibold">즉시 채점 결과</span>
+                        </div>
+                        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">77만+</div>
+                                <div class="mt-1 text-sm text-slate-400">테스트 참여 응시자</div>
+                            </div>
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">900+</div>
+                                <div class="mt-1 text-sm text-slate-400">활용 기관</div>
+                            </div>
+                            <div class="rounded-2xl border border-white/8 bg-white/4 px-4 py-4">
+                                <div class="text-2xl font-black text-white">28종</div>
+                                <div class="mt-1 text-sm text-slate-400">평가 가능 언어</div>
                             </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-center">
-                            <h4 class="text-xs font-bold text-gray-800 mb-3 flex items-center"><i class="fa-solid fa-gamepad text-purple-500 mr-2"></i> 게임처럼 즐거운 뱃지 수집</h4>
-                            <div class="flex items-center gap-3 bg-purple-50 p-2.5 rounded-lg">
-                                <div class="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-white font-bold shadow-inner"><i class="fa-solid fa-trophy"></i></div>
-                                <div>
-                                    <div class="text-[10px] text-gray-500 mb-0.5">미션 완료!</div>
-                                    <div class="text-xs font-bold text-purple-700">파이썬 마스터 뱃지 획득</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-purple-200 text-purple-700 mt-0.5">
-                                <i class="fa-solid fa-code text-sm"></i>
-                            </div>
-                            <p class="ml-4 text-gray-700"><span class="font-bold text-gray-900">보고 바로 따라 치는 환경:</span> 한 화면에서 이론 영상을 시청하며 동시에 코딩 실습이 가능합니다.</p>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-purple-200 text-purple-700 mt-0.5">
-                                <i class="fa-solid fa-chalkboard-user text-sm"></i>
-                            </div>
-                            <p class="ml-4 text-gray-700"><span class="font-bold text-gray-900">모르면 바로 묻는 AI 튜터:</span> AI 튜터가 문제의 원인과 힌트를 친절하게 알려줍니다.</p>
-                        </li>
-                    </ul>
-                    <div class="stats-strip grid grid-cols-3 gap-4 text-center border-t border-purple-200 pt-8">
-                        <div>
-                            <div class="text-3xl font-black text-purple-600 mb-1">116만+</div>
-                            <div class="text-xs text-gray-500 font-medium">함께 공부하는 수강생</div>
+                    <div class="space-y-6">
+                        <div class="shot-frame">
+                            <img src="./devth-ui-preview.png" alt="Devth UI 화면">
                         </div>
-                        <div>
-                            <div class="text-3xl font-black text-purple-600 mb-1">547+</div>
-                            <div class="text-xs text-gray-500 font-medium">풍부한 프로그래밍 강좌</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-black text-purple-600 mb-1">1.8만명</div>
-                            <div class="text-xs text-gray-500 font-medium">가장 인기 있는 단일 강좌</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-media lg:w-1/2 w-full flex flex-col gap-6">
-                    <div class="showcase-frame">
-                        <img src="./exelearnce-ui-preview.png" alt="Exelearnce 실제 구현 화면" class="w-full h-auto block">
-                    </div>
-                    <div class="logo-panel bg-white/80 backdrop-blur rounded-2xl p-6 border border-purple-100 shadow-sm">
-                        <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fa-solid fa-building-columns text-purple-500 mr-2"></i> 많은 대학과 기업이 Exelearnce에서 성장하고 있습니다
-                        </h4>
-                        <div class="grid grid-cols-3 md:grid-cols-4 gap-3">
-                            <div class="logo-card hover:text-yellow-500 hover:border-yellow-400">kakao</div>
-                            <div class="logo-card hover:text-blue-700 hover:border-blue-400">SAMSUNG</div>
-                            <div class="logo-card hover:text-red-600 hover:border-red-400">LG Electronics</div>
-                            <div class="logo-card hover:text-blue-500 hover:border-blue-300">KT</div>
-                            <div class="logo-card hover:text-blue-600 hover:border-blue-300">toss</div>
-                            <div class="logo-card hover:text-purple-600 hover:border-purple-300">Kurly</div>
-                            <div class="logo-card hover:text-green-700 hover:border-green-400"><span class="logo-text-sm text-center leading-tight">현대모비스</span></div>
-                            <div class="logo-card hover:text-yellow-600 hover:border-yellow-400"><span class="logo-text-sm text-center leading-tight">KB국민은행</span></div>
-                            <div class="logo-card hover:text-green-800 hover:border-green-500"><span class="logo-text-sm text-center leading-tight">성균관대학교</span></div>
-                            <div class="logo-card hover:text-red-800 hover:border-red-500"><span class="logo-text-sm text-center leading-tight">고려대학교</span></div>
-                            <div class="logo-card hover:text-red-700 hover:border-red-400"><span class="logo-text-sm text-center leading-tight">경희대학교</span></div>
-                            <div class="logo-card hover:text-blue-800 hover:border-blue-500"><span class="logo-text-sm text-center leading-tight">한국과학창의재단</span></div>
+                        <div class="grid gap-3 sm:grid-cols-3">
+                            <div class="partner-chip">LG CNS</div>
+                            <div class="partner-chip">네이버커넥트</div>
+                            <div class="partner-chip">사람인</div>
+                            <div class="partner-chip">Kdata</div>
+                            <div class="partner-chip">한국투자증권</div>
+                            <div class="partner-chip">부산시교육청</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="devth" class="brochure-section brochure-emerald py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-16 items-start">
-                <div class="section-copy lg:w-1/2">
-                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-sm mb-4">
-                        <i class="fa-solid fa-laptop-code mr-2"></i> 개발 역량 평가 플랫폼
-                    </div>
-                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Devth <span class="text-2xl font-semibold text-gray-500 ml-2">뎁스</span></h2>
-                    <h3 class="text-2xl text-emerald-600 mb-6 font-bold tracking-tight">나의 진짜 실력을 증명하는 곳</h3>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        내가 가진 문제 해결 능력을 정확히 파악하고 증명할 수 있는 코딩 테스트 플랫폼입니다. 안정적이고 공정한 환경에서 나의 역량을 마음껏 펼쳐보세요.
-                    </p>
-                    <div class="mb-8">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-md text-[11px] font-bold">알고리즘 프로그래밍</span>
-                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-md text-[11px] font-bold">SQL / 데이터베이스</span>
-                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-md text-[11px] font-bold">AI / ML (데이터 분석)</span>
-                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-700 rounded-md text-[11px] font-bold">라이브러리 활용 실무 테스트</span>
-                        </div>
-                        <div class="bg-white border border-emerald-100 shadow-sm rounded-xl p-4">
-                            <h4 class="text-[11px] font-bold text-emerald-600 mb-2 flex items-center"><i class="fa-solid fa-brain mr-1.5"></i> AISA (AI 프롬프트 역량 분석 리포트)</h4>
-                            <div class="flex items-center justify-between text-[10px] mb-1">
-                                <span class="text-gray-600 font-bold">AI 툴 활용 시 문제 이해력</span>
-                                <div class="w-32 h-1.5 bg-gray-100 rounded-full"><div class="h-full bg-emerald-500 rounded-full" style="width: 80%"></div></div>
-                            </div>
-                            <div class="flex items-center justify-between text-[10px]">
-                                <span class="text-gray-600 font-bold">프롬프트 점진적 개선 능력</span>
-                                <div class="w-32 h-1.5 bg-gray-100 rounded-full"><div class="h-full bg-emerald-400 rounded-full" style="width: 65%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-emerald-200 text-emerald-700 mt-0.5">
-                                <i class="fa-solid fa-chart-line text-sm"></i>
-                            </div>
-                            <p class="ml-4 text-gray-700"><span class="font-bold text-gray-900">상세한 결과 리포트:</span> 내가 작성한 코드와 점수, 강점을 한눈에 볼 수 있는 분석 리포트를 제공합니다.</p>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-emerald-200 text-emerald-700 mt-0.5">
-                                <i class="fa-solid fa-shield-halved text-sm"></i>
-                            </div>
-                            <p class="ml-4 text-gray-700"><span class="font-bold text-gray-900">믿을 수 있는 공정한 환경:</span> 실시간 감독 시스템과 보안 브라우저로 모두가 공정한 조건에서 실력을 평가받습니다.</p>
-                        </li>
-                    </ul>
-                    <div class="stats-strip grid grid-cols-3 gap-4 text-center border-t border-emerald-200 pt-8">
-                        <div>
-                            <div class="text-3xl font-black text-emerald-600 mb-1">77만+</div>
-                            <div class="text-xs text-gray-500 font-medium">테스트에 참여한 응시자</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-black text-emerald-600 mb-1">900+</div>
-                            <div class="text-xs text-gray-500 font-medium">플랫폼을 활용하는 기관</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-black text-emerald-600 mb-1">28종</div>
-                            <div class="text-xs text-gray-500 font-medium">평가 가능한 언어 종류</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-media lg:w-1/2 w-full flex flex-col gap-6">
-                    <div class="showcase-frame">
-                        <img src="./devth-ui-preview.png" alt="Devth 실제 구현 화면" class="w-full h-auto block">
-                    </div>
-                    <div class="logo-panel bg-white/80 backdrop-blur rounded-2xl p-6 border border-emerald-100 shadow-sm">
-                        <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fa-solid fa-handshake text-emerald-500 mr-2"></i> 유수의 기업과 기관이 Devth를 통해 인재를 만납니다
-                        </h4>
-                        <div class="grid grid-cols-3 md:grid-cols-4 gap-3">
-                            <div class="logo-card hover:text-red-700 hover:border-red-400">LG CNS</div>
-                            <div class="logo-card hover:text-blue-800 hover:border-blue-500"><span class="logo-text-sm text-center leading-tight">현대자동차<br>부트캠프</span></div>
-                            <div class="logo-card hover:text-orange-500 hover:border-orange-400"><span class="logo-text-sm text-center leading-tight">스마일게이트</span></div>
-                            <div class="logo-card hover:text-green-500 hover:border-green-400"><span class="logo-text-sm text-center leading-tight">네이버커넥트</span></div>
-                            <div class="logo-card hover:text-yellow-600 hover:border-yellow-500">kakao</div>
-                            <div class="logo-card hover:text-blue-500 hover:border-blue-300">KT</div>
-                            <div class="logo-card hover:text-blue-900 hover:border-blue-600"><span class="logo-text-sm text-center leading-tight">KDB<br>산업은행</span></div>
-                            <div class="logo-card hover:text-blue-700 hover:border-blue-500"><span class="logo-text-sm text-center leading-tight">Kdata<br>(ADP자격)</span></div>
-                            <div class="logo-card hover:text-orange-500 hover:border-orange-400">직방</div>
-                            <div class="logo-card hover:text-blue-600 hover:border-blue-400">사람인</div>
-                            <div class="logo-card hover:text-blue-700 hover:border-blue-500"><span class="logo-text-sm text-center leading-tight">한국투자증권</span></div>
-                            <div class="logo-card hover:text-teal-600 hover:border-teal-400"><span class="logo-text-sm text-center leading-tight">부산시교육청</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+        </section>
+    </main>
 </body>
 </html>
