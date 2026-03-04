@@ -54,6 +54,12 @@
             font-size: 0.875rem;
             font-weight: 700;
         }
+        .brochure-frame {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: #ffffff;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -74,17 +80,18 @@
         </div>
     </header>
 
-    <section class="relative bg-gray-50 pt-24 pb-28 overflow-hidden border-b border-gray-100">
-        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(#4F46E5 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <section class="relative bg-[#0f172a] pt-24 pb-28 overflow-hidden border-b border-slate-800">
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(#6366F1 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.2),transparent_38%),linear-gradient(180deg,#0f172a_0%,#111827_100%)]"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-800 font-bold text-sm mb-6 border border-indigo-200 shadow-sm">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-indigo-500/15 text-indigo-200 font-bold text-sm mb-6 border border-indigo-400/20 shadow-sm">
                 개발 · 교육 · 평가 올인원 플랫폼
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
                 아이디어를 현실로 만드는<br>
                 <span class="gradient-text">무한한 클라우드 생태계</span>
             </h1>
-            <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p class="mt-6 text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
                 언제 어디서나 접속 가능한 개발 환경부터, 배움이 즐거운 맞춤형 교육,<br class="hidden md:block">
                 그리고 나의 진짜 실력을 증명할 수 있는 객관적인 역량 평가까지.<br>
                 구름(goorm)이 여러분의 성장을 함께합니다.
@@ -191,11 +198,14 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 w-full flex flex-col gap-6">
-                    <div class="bg-blue-100/50 rounded-2xl flex flex-col items-center justify-center text-blue-400 border-2 border-dashed border-blue-300 w-full h-[350px] hover:bg-blue-50 transition-colors cursor-pointer">
-                        <i class="fa-regular fa-image text-6xl mb-4"></i>
-                        <span class="font-bold text-xl text-blue-600 text-center px-4"></span>
-                        <span class="text-sm text-blue-500 mt-2">이곳에 실제 이미지를 삽입하세요</span>
+                    <div class="rounded-2xl overflow-hidden border border-blue-200 bg-white shadow-lg w-full h-[350px]">
+                        <object data="./arkain-brochure.pdf#page=1&view=FitH" type="application/pdf" class="brochure-frame">
+                            <iframe src="./arkain-brochure.pdf#page=1&view=FitH" class="brochure-frame"></iframe>
+                        </object>
                     </div>
+                    <a href="./arkain-brochure.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 text-white px-4 py-3 text-sm font-bold shadow-sm hover:bg-blue-700 transition-colors">
+                        <i class="fa-regular fa-file-pdf"></i> Arkain 소개서 전체 보기
+                    </a>
                     <div class="bg-white/80 backdrop-blur rounded-2xl p-6 border border-blue-100 shadow-sm">
                         <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center">
                             <i class="fa-solid fa-globe text-blue-500 mr-2"></i> 전 세계 157개국, 다양한 환경에서 활용되는 Arkain
@@ -284,11 +294,14 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 w-full flex flex-col gap-6">
-                    <div class="bg-purple-100/50 rounded-2xl flex flex-col items-center justify-center text-purple-400 border-2 border-dashed border-purple-300 w-full h-[350px] hover:bg-purple-50 transition-colors cursor-pointer">
-                        <i class="fa-regular fa-image text-6xl mb-4"></i>
-                        <span class="font-bold text-xl text-purple-600 text-center px-4"></span>
-                        <span class="text-sm text-purple-500 mt-2">이곳에 실제 이미지를 삽입하세요</span>
+                    <div class="rounded-2xl overflow-hidden border border-purple-200 bg-white shadow-lg w-full h-[350px]">
+                        <object data="./exelearnce-brochure.pdf#page=1&view=FitH" type="application/pdf" class="brochure-frame">
+                            <iframe src="./exelearnce-brochure.pdf#page=1&view=FitH" class="brochure-frame"></iframe>
+                        </object>
                     </div>
+                    <a href="./exelearnce-brochure.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-600 text-white px-4 py-3 text-sm font-bold shadow-sm hover:bg-purple-700 transition-colors">
+                        <i class="fa-regular fa-file-pdf"></i> Exelearnce 소개서 전체 보기
+                    </a>
                     <div class="bg-white/80 backdrop-blur rounded-2xl p-6 border border-purple-100 shadow-sm">
                         <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center">
                             <i class="fa-solid fa-building-columns text-purple-500 mr-2"></i> 많은 대학과 기업이 Exelearnce에서 성장하고 있습니다
@@ -374,11 +387,14 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 w-full flex flex-col gap-6">
-                    <div class="bg-emerald-100/50 rounded-2xl flex flex-col items-center justify-center text-emerald-400 border-2 border-dashed border-emerald-300 w-full h-[350px] hover:bg-emerald-50 transition-colors cursor-pointer">
-                        <i class="fa-regular fa-image text-6xl mb-4"></i>
-                        <span class="font-bold text-xl text-emerald-600 text-center px-4"></span>
-                        <span class="text-sm text-emerald-500 mt-2">이곳에 실제 이미지를 삽입하세요</span>
+                    <div class="rounded-2xl overflow-hidden border border-emerald-200 bg-white shadow-lg w-full h-[350px]">
+                        <object data="./devth-brochure.pdf#page=1&view=FitH" type="application/pdf" class="brochure-frame">
+                            <iframe src="./devth-brochure.pdf#page=1&view=FitH" class="brochure-frame"></iframe>
+                        </object>
                     </div>
+                    <a href="./devth-brochure.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 text-white px-4 py-3 text-sm font-bold shadow-sm hover:bg-emerald-700 transition-colors">
+                        <i class="fa-regular fa-file-pdf"></i> Devth 소개서 전체 보기
+                    </a>
                     <div class="bg-white/80 backdrop-blur rounded-2xl p-6 border border-emerald-100 shadow-sm">
                         <h4 class="text-sm font-bold text-gray-800 mb-4 flex items-center">
                             <i class="fa-solid fa-handshake text-emerald-500 mr-2"></i> 유수의 기업과 기관이 Devth를 통해 인재를 만납니다
