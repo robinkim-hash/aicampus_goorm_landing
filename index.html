@@ -9,15 +9,36 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; scroll-behavior: smooth; letter-spacing: -0.015em; color: #1f2937; background-color: #fbfcff; }
+        :root {
+            --ink-strong: #0f172a;
+            --ink-base: #1e293b;
+            --ink-soft: #475569;
+            --ink-muted: #64748b;
+            --surface-base: #f8fafc;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            scroll-behavior: smooth;
+            letter-spacing: -0.015em;
+            color: var(--ink-base);
+            background-color: var(--surface-base);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
         .font-black { font-weight: 800; }
-        h1, h2, h3, h4 { letter-spacing: -0.03em; }
+        h1, h2, h3, h4, h5 {
+            letter-spacing: -0.03em;
+            font-weight: 800;
+        }
         .py-24 { padding-top: 5.75rem !important; padding-bottom: 5.75rem !important; }
         .mb-16 { margin-bottom: 3.5rem !important; }
-        .text-gray-500 { color: #64748b !important; }
-        .text-gray-900 { color: #0f172a !important; }
+        .text-gray-500 { color: var(--ink-muted) !important; }
+        .text-gray-600 { color: var(--ink-soft) !important; }
+        .text-gray-700 { color: #334155 !important; }
+        .text-gray-800 { color: var(--ink-base) !important; }
+        .text-gray-900 { color: var(--ink-strong) !important; }
         .gradient-text {
-            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            background: linear-gradient(to right, #1e3a8a 0%, #2563eb 45%, #0ea5e9 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
