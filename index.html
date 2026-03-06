@@ -43,6 +43,7 @@
         }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .word-keep { word-break: keep-all; }
         .career-slide-btn {
             width: 42px;
             height: 42px;
@@ -321,7 +322,7 @@
 
     <!-- Hero Section -->
     <section class="pt-24 pb-24 px-4 sm:px-6 lg:px-8 bg-navy-900 text-white overflow-hidden relative">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-[1fr_1.08fr] gap-12 items-center relative z-10">
             <div>
                 <div class="mb-5 flex items-center gap-2.5">
                     <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/brand-award-2024-hq.png" alt="2024 브랜드 대상 수상 배지" class="h-14 md:h-16 w-auto object-contain">
@@ -348,9 +349,9 @@
                     </button>
                 </div>
             </div>
-            <div class="relative">
+            <div class="relative md:-mr-2 lg:-mr-4">
                 <div class="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full"></div>
-                <a href="https://www.youtube.com/watch?v=bnQMtkDxgLc&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="block relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-navy-700 aspect-video bg-navy-800 group">
+                <a href="https://www.youtube.com/watch?v=bnQMtkDxgLc&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="block relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-navy-700 aspect-video bg-navy-800 group md:origin-right md:scale-[1.05] lg:scale-[1.08]">
                     <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/hackathon-sketch-hq.jpg" alt="딥다이브 해커톤 현장 스케치" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent"></div>
                 </a>
@@ -1006,6 +1007,212 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Career Roadmap Section -->
+    <section id="ai-career-roadmap" class="py-24 bg-[#F4F7FA] px-4 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-bold text-sm shadow-sm mb-6">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                    <span>5대 핵심 직무 커리큘럼</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight word-keep">
+                    산업계가 지금 당장 원하는<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">실전 투입형 AI 엔지니어</span> 로드맵
+                </h2>
+                <p class="text-gray-500 text-lg max-w-3xl mx-auto word-keep">
+                    이론을 넘어 실제 기업의 데이터를 다루고 상용화 수준 프로젝트를 완성하는 실무 중심 트랙입니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mb-20">
+                <article class="col-span-1 md:col-span-2 lg:col-span-2 bg-white p-6 md:p-8 rounded-[2rem] border border-gray-200 hover:-translate-y-1 hover:shadow-xl transition-all">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <span class="text-gray-300 font-black text-3xl">01</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-black text-gray-900 mb-1">데이터 애널리틱스</h3>
+                    <p class="text-xs font-bold text-gray-500 mb-4 word-keep">AI 네이티브 데이터 모델 설계 및 운영</p>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-5 word-keep">파편화된 데이터를 통합하고 SSOT 지표를 설계합니다. 단순 리포팅을 넘어 RAG 기반 분석 에이전트를 구현해 비즈니스 인사이트를 자동화합니다.</p>
+                    <div class="mb-4">
+                        <p class="text-[11px] text-gray-500 font-black uppercase tracking-wider mb-2"><i class="fa-solid fa-code mr-1"></i>Tech Stack</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Python</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">SQL</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">dbt</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">BigQuery</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                        <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
+                        <p class="text-sm font-bold text-gray-800 word-keep">KPI 통합 데이터 마트 및 RAG 에이전트 구축</p>
+                    </div>
+                </article>
+
+                <article class="col-span-1 md:col-span-2 lg:col-span-2 bg-white p-6 md:p-8 rounded-[2rem] border border-gray-200 hover:-translate-y-1 hover:shadow-xl transition-all">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <span class="text-gray-300 font-black text-3xl">02</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-black text-gray-900 mb-1">데이터 플랫폼 엔지니어</h3>
+                    <p class="text-xs font-bold text-gray-500 mb-4 word-keep">AI 네이티브 데이터 플랫폼 설계</p>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-5 word-keep">대규모 데이터를 실시간 수집·가공하여 AI 모델에 고품질 데이터를 안정적으로 공급하는 파이프라인 아키텍처를 설계합니다.</p>
+                    <div class="mb-4">
+                        <p class="text-[11px] text-gray-500 font-black uppercase tracking-wider mb-2"><i class="fa-solid fa-code mr-1"></i>Tech Stack</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Spark</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Kafka</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Airflow</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Vector DB</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                        <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
+                        <p class="text-sm font-bold text-gray-800 word-keep">실시간 스트리밍 기반 데이터 파이프라인 구축</p>
+                    </div>
+                </article>
+
+                <article class="col-span-1 md:col-span-2 lg:col-span-2 bg-white p-6 md:p-8 rounded-[2rem] border border-gray-200 hover:-translate-y-1 hover:shadow-xl transition-all">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <span class="text-gray-300 font-black text-3xl">03</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-black text-gray-900 mb-1">MLOps / 인프라 엔지니어</h3>
+                    <p class="text-xs font-bold text-gray-500 mb-4 word-keep">AI 인프라 운영 및 설계</p>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-5 word-keep">GPU 자원 최적화부터 모델 배포/운영 자동화까지 담당하며, 안정적인 AI 서비스 운영을 위한 AIOps 체계를 구축합니다.</p>
+                    <div class="mb-4">
+                        <p class="text-[11px] text-gray-500 font-black uppercase tracking-wider mb-2"><i class="fa-solid fa-code mr-1"></i>Tech Stack</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Kubernetes</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Docker</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">vLLM</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">ArgoCD</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                        <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
+                        <p class="text-sm font-bold text-gray-800 word-keep">고성능 AI 서빙 및 통합 관측성(SRE) 체계 구축</p>
+                    </div>
+                </article>
+
+                <article class="col-span-1 md:col-span-2 lg:col-span-3 bg-white p-6 md:p-8 rounded-[2rem] border border-gray-200 hover:-translate-y-1 hover:shadow-xl transition-all">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="text-gray-300 font-black text-3xl">04</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-black text-gray-900 mb-1">AI 데이터 보안 엔지니어</h3>
+                    <p class="text-xs font-bold text-gray-500 mb-4 word-keep">AI 네이티브 보안 및 거버넌스</p>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-5 word-keep">프롬프트 인젝션 방어, 데이터 유출 방지, 모델 거버넌스를 다루며 기업이 요구하는 신뢰 가능한 AI 보안 체계를 구축합니다.</p>
+                    <div class="mb-4">
+                        <p class="text-[11px] text-gray-500 font-black uppercase tracking-wider mb-2"><i class="fa-solid fa-code mr-1"></i>Tech Stack</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">DevSecOps</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">LLM 레드티밍</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">NeMo Guardrails</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                        <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
+                        <p class="text-sm font-bold text-gray-800 word-keep">사내 지식 챗봇 취약점 스캐닝 및 가드레일 구현</p>
+                    </div>
+                </article>
+
+                <article class="col-span-1 md:col-span-2 md:col-start-2 lg:col-span-3 lg:col-start-auto bg-white p-6 md:p-8 rounded-[2rem] border border-gray-200 hover:-translate-y-1 hover:shadow-xl transition-all">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-window-maximize"></i>
+                        </div>
+                        <span class="text-gray-300 font-black text-3xl">05</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-black text-gray-900 mb-1">AX 풀스택 빌더</h3>
+                    <p class="text-xs font-bold text-gray-500 mb-4 word-keep">생성형 AI 통합 서비스 개발</p>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-5 word-keep">기획, UI/UX, 백엔드, 배포, 테스트 자동화까지 연결해 생성형 AI 기반 서비스를 빠르게 출시 가능한 형태로 완성합니다.</p>
+                    <div class="mb-4">
+                        <p class="text-[11px] text-gray-500 font-black uppercase tracking-wider mb-2"><i class="fa-solid fa-code mr-1"></i>Tech Stack</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">React</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">FastAPI</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">LangChain</span>
+                            <span class="px-2.5 py-1 bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg">Playwright</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                        <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
+                        <p class="text-sm font-bold text-gray-800 word-keep">자율추론형 자산관리 비서 및 실전 AX 스타터킷</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="bg-gray-900 rounded-[2.5rem] p-8 md:p-12 lg:p-14 text-white relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 flex flex-col lg:flex-row gap-10 items-start">
+                    <div class="lg:w-1/3">
+                        <div class="inline-block px-3 py-1 bg-gray-800 border border-gray-700 rounded-lg text-blue-400 text-xs font-bold mb-4">POWERED BY GOORM</div>
+                        <h3 class="text-3xl md:text-4xl font-black mb-6 leading-tight word-keep">
+                            학습, 평가, 개발까지<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">압도적 프리미엄 지원</span>
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed word-keep">훈련생의 몰입을 위해 학습 플랫폼, 평가 시스템, 개발 환경을 하나로 연결한 통합 경험을 제공합니다.</p>
+                    </div>
+
+                    <div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                        <article class="sm:col-span-2 bg-gray-800/60 border border-gray-700 p-5 md:p-6 rounded-2xl">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="text-blue-400 bg-gray-900/50 w-12 h-12 rounded-xl flex items-center justify-center border border-gray-700">
+                                    <i class="fa-solid fa-display"></i>
+                                </div>
+                                <div class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[11px] font-bold rounded-lg">
+                                    <i class="fa-solid fa-robot"></i>
+                                    AI 구르미 튜터 탑재
+                                </div>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-100 mb-2">exelearnce (엑설런스)</h4>
+                            <p class="text-[13px] text-gray-300 leading-relaxed word-keep">강의·실습·커뮤니티가 통합된 AI·SW 학습경험플랫폼(LXP)입니다. 코드 오류 진단부터 실시간 해설까지 지원하는 AI 구르미로 학습 몰입을 강화합니다.</p>
+                        </article>
+
+                        <article class="bg-gray-800/60 border border-gray-700 p-5 md:p-6 rounded-2xl">
+                            <div class="text-blue-400 bg-gray-900/50 w-12 h-12 rounded-xl flex items-center justify-center border border-gray-700 mb-4">
+                                <i class="fa-solid fa-file-code"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-100 mb-2">devth</h4>
+                            <p class="text-[13px] text-gray-300 leading-relaxed word-keep">기업 채용 환경과 유사한 조건에서 AI 실무 활용력(AISA) 및 알고리즘 역량을 정밀 평가합니다.</p>
+                        </article>
+
+                        <article class="bg-gray-800/60 border border-gray-700 p-5 md:p-6 rounded-2xl">
+                            <div class="text-blue-400 bg-gray-900/50 w-12 h-12 rounded-xl flex items-center justify-center border border-gray-700 mb-4">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-100 mb-2">arkain</h4>
+                            <p class="text-[13px] text-gray-300 leading-relaxed word-keep">초기 세팅 없이 자연어로 시작하는 AI 클라우드 통합 개발환경(IDE)에서 빠르게 빌드하고 검증할 수 있습니다.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-8 border-t border-gray-800 flex flex-wrap gap-3 relative z-10">
+                    <div class="flex items-center gap-3 bg-gray-800/80 px-5 py-3 rounded-2xl border border-gray-700/60">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                        <span class="font-bold text-sm text-gray-200 word-keep">최상급 인프라 및 장비 지원</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-gray-800/80 px-5 py-3 rounded-2xl border border-gray-700/60">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+                        <span class="font-bold text-sm text-gray-200 word-keep">참여기업 채용 연계 포트폴리오</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-gray-800/80 px-5 py-3 rounded-2xl border border-gray-700/60">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                        <span class="font-bold text-sm text-gray-200 word-keep">훈련장려금 및 수강 지원금</span>
                     </div>
                 </div>
             </div>
