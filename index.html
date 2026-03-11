@@ -298,6 +298,31 @@
             70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
             100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
+        @keyframes hero-grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+        @keyframes hero-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes hero-float-delayed {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(12px); }
+        }
+        .hero-grid-pattern {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            animation: hero-grid-move 22s linear infinite;
+        }
+        .hero-float {
+            animation: hero-float 6s ease-in-out infinite;
+        }
+        .hero-float-delayed {
+            animation: hero-float-delayed 7.5s ease-in-out infinite;
+        }
 
     </style>
 </head>
@@ -344,6 +369,11 @@
 
     <!-- Hero Section -->
     <section class="pt-24 pb-24 px-4 sm:px-6 lg:px-8 bg-navy-900 text-white overflow-hidden relative">
+        <div class="absolute inset-0 hero-grid-pattern pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0b1b3d_78%)] pointer-events-none"></div>
+        <div class="absolute -top-20 right-0 w-[560px] h-[560px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-16 w-[420px] h-[420px] bg-indigo-600/20 rounded-full blur-[110px] pointer-events-none"></div>
+
         <div class="max-w-7xl mx-auto grid md:grid-cols-[1fr_1.08fr] gap-12 items-center relative z-10">
             <div>
                 <div class="mb-5 flex items-center gap-2.5">
@@ -373,9 +403,38 @@
             </div>
             <div class="relative md:ml-4 lg:ml-8">
                 <div class="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full"></div>
+
+                <div class="absolute top-3 right-0 md:-right-6 bg-slate-900/85 border border-slate-700 rounded-2xl p-4 shadow-2xl hero-float-delayed z-20 hidden sm:block">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                    </div>
+                    <p class="text-[11px] text-blue-300 font-mono leading-relaxed">model.serve(status="Production")</p>
+                </div>
+
+                <div class="absolute bottom-6 left-0 md:-left-8 bg-slate-900/70 backdrop-blur border border-slate-700 rounded-2xl px-4 py-3 shadow-xl hero-float z-20 hidden sm:flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center">
+                        <i class="fa-solid fa-microchip text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-blue-300 font-black tracking-wide">REAL-WORLD PROJECT</p>
+                        <p class="text-sm text-white font-bold">100% 실무형 포트폴리오</p>
+                    </div>
+                </div>
+
                 <a href="https://www.youtube.com/watch?v=bnQMtkDxgLc&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="block relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-navy-700 aspect-video bg-navy-800 group md:origin-left md:scale-[1.05] lg:scale-[1.08]">
-                    <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/hackathon-sketch-hq.jpg" alt="딥다이브 해커톤 현장 스케치" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent"></div>
+                    <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/hackathon-sketch-hq.jpg" alt="딥다이브 해커톤 현장 스케치" class="w-full h-full object-cover opacity-80 group-hover:opacity-65 group-hover:scale-[1.02] transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-[#0b1b3d] via-transparent to-blue-900/45"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 rounded-full bg-white/20 border border-white/40 backdrop-blur flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-400 transition-all shadow-2xl">
+                            <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-7 bg-gradient-to-t from-[#0b1b3d] via-[#0b1b3d]/90 to-transparent">
+                        <span class="inline-block mb-2 text-[10px] font-black bg-blue-600 text-white px-2 py-1 rounded">DEEP DIVE 해커톤</span>
+                        <h3 class="text-xl md:text-2xl font-black leading-tight">온라인을 넘어 현장으로:<br>우리의 성장 드라마</h3>
+                    </div>
                 </a>
             </div>
         </div>
