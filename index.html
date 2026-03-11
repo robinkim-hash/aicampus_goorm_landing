@@ -403,9 +403,18 @@
             </div>
             <div class="relative md:ml-4 lg:ml-8">
                 <div class="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full"></div>
-                <div class="absolute -top-8 -right-10 bg-slate-900/90 border border-slate-600 rounded-2xl px-4 py-3 shadow-2xl hero-float-delayed z-20 hidden lg:flex items-center gap-2 pointer-events-none">
-                    <i class="fa-solid fa-code text-blue-300 text-sm"></i>
-                    <p class="text-[11px] text-blue-200 font-mono">model.serve()</p>
+                <div class="absolute -top-10 -right-10 bg-gray-900/90 border border-gray-700/80 p-4 rounded-2xl shadow-2xl z-20 hero-float-delayed hidden lg:block pointer-events-none ring-1 ring-white/5">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                    </div>
+                    <pre class="text-[10px] text-blue-300 font-mono leading-relaxed"><code><span class="text-pink-400">import</span> torch
+<span class="text-pink-400">from</span> transformers <span class="text-pink-400">import</span> AutoModel
+
+<span class="text-gray-500"># Deploying AI Model</span>
+model = AutoModel.from_pretrained(<span class="text-green-400">"goorm/AI"</span>)
+model.serve(status=<span class="text-purple-400">"Production"</span>)</code></pre>
                 </div>
                 <div class="absolute -bottom-8 -left-10 bg-slate-900/80 border border-slate-600 rounded-2xl px-4 py-3 shadow-2xl hero-float z-20 hidden lg:flex items-center gap-2 pointer-events-none">
                     <i class="fa-solid fa-microchip text-blue-300 text-sm"></i>
@@ -416,8 +425,11 @@
                     <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/hackathon-sketch-hq.jpg" alt="딥다이브 해커톤 현장 스케치" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-tr from-[#0b1b3d]/35 via-transparent to-blue-900/20"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-20 h-20 rounded-full bg-white/20 border border-white/40 backdrop-blur flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-400 transition-all shadow-2xl">
-                            <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                        <div class="relative">
+                            <div class="absolute inset-0 rounded-full bg-blue-500/60 blur-xl"></div>
+                            <div class="relative w-20 h-20 rounded-full bg-blue-600 border border-blue-300/70 flex items-center justify-center group-hover:bg-blue-500 transition-all shadow-2xl">
+                                <i class="fa-solid fa-play text-white text-2xl ml-1"></i>
+                            </div>
                         </div>
                     </div>
                 </a>
