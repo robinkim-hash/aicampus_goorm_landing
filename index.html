@@ -2040,19 +2040,90 @@
         </div>
     </section>
 
-    <!-- 오프라인 학습 공간 -->
-    <section class="py-24 bg-gray-50 px-4 border-t border-gray-100">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center">
-                <h3 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">판교와 강남</h3>
-                <p class="mt-4 text-gray-500 text-base md:text-lg font-medium leading-relaxed">
-                    나와 가까운 학습 공간에서<br class="hidden sm:block">
-                    팀 프로젝트부터 개별 스터디까지, 공부하고 싶은 날 가까운 오프라인 학습 공간에서 실력을 키워보세요
+    <!-- 학습 공간 (Hybrid Campus) -->
+    <section id="campus-space" class="py-24 bg-gray-50 px-4 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto bg-white rounded-[2.4rem] border border-gray-100 shadow-xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-64 h-64 bg-indigo-50 rounded-full blur-[75px] pointer-events-none"></div>
+
+            <div class="text-center mb-12 relative z-10">
+                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 font-black text-sm border border-indigo-100 shadow-sm">
+                    <i class="fa-solid fa-location-dot text-[13px]"></i>
+                    온/오프라인 하이브리드 캠퍼스
+                </span>
+                <h3 class="mt-6 text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight word-keep">
+                    어디서든 완벽하게 몰입할 수 있는<br class="hidden sm:block">
+                    <span class="text-indigo-600">최적의 학습 공간</span>
+                </h3>
+                <p class="mt-4 text-gray-500 text-base md:text-lg font-medium leading-relaxed max-w-3xl mx-auto word-keep">
+                    시공간의 제약을 뛰어넘는 메타버스 가상 공간과 최고 사양의 오프라인 교육장을 함께 제공합니다.
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 gap-7 max-w-4xl mx-auto mt-10 text-center">
-                <div class="group"><div class="aspect-[16/11] bg-gray-100 rounded-[2.3rem] overflow-hidden border border-gray-200 shadow-sm"><img src="https://robinkim-hash.github.io/aicampus_goorm_landing/pangyo-hq.jpg" alt="IT 거점 판교 구름 스퀘어 이미지" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div><h4 class="mt-7 font-black text-xl text-gray-900">IT 거점 판교 구름 스퀘어</h4></div>
-                <div class="group"><div class="aspect-[16/11] bg-gray-100 rounded-[2.3rem] overflow-hidden border border-gray-200 shadow-sm"><img src="https://robinkim-hash.github.io/aicampus_goorm_landing/gangnam-hq.jpg" alt="강남 교육장 이미지" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div><h4 class="mt-7 font-black text-xl text-gray-900">강남 교육장 (역삼역 1분 거리)</h4></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 relative z-10">
+                <div class="bg-gray-50 rounded-[2rem] p-8 border border-gray-200 hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-laptop-code text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-purple-600 font-black text-xs tracking-[0.14em]">ONLINE CAMPUS</p>
+                            <h4 class="text-2xl font-black text-gray-900 tracking-tight">메타버스 가상 공간 ZEP</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-6 font-medium word-keep">
+                        단순한 화상회의를 넘어, 아바타 기반 협업과 실시간 소통이 가능한 온라인 캠퍼스에서
+                        수업, 팀 활동, 질의응답이 자연스럽게 이어집니다.
+                    </p>
+                    <div class="h-[220px] rounded-2xl border border-purple-100 bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
+                        <div class="text-center text-purple-400">
+                            <i class="fa-solid fa-gamepad text-4xl"></i>
+                            <p class="mt-3 text-sm font-black tracking-wide">METAVERSE SPACE</p>
+                            <p class="mt-1 text-[11px] font-medium text-purple-300">ZEP 화면 캡처 삽입 영역</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-[2rem] p-8 border border-gray-200 hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-building text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-blue-600 font-black text-xs tracking-[0.14em]">OFFLINE CAMPUS</p>
+                            <h4 class="text-2xl font-black text-gray-900 tracking-tight">강남 / 판교 오프라인 교육장</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed mb-6 font-medium word-keep">
+                        팀 프로젝트, 멘토링, 네트워킹이 필요한 순간에는 집중도 높은 오프라인 교육장에서 학습 효율을 극대화합니다.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm group">
+                            <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
+                                <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/gangnam-hq.jpg" alt="강남 교육장 이미지" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="p-4">
+                                <h5 class="font-black text-gray-900 text-sm">강남 교육장</h5>
+                                <p class="text-xs text-gray-500 mt-1 font-medium">서울 강남구 테헤란로 145, 13-14층</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm group">
+                            <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
+                                <img src="https://robinkim-hash.github.io/aicampus_goorm_landing/pangyo-hq.jpg" alt="IT 거점 판교 구름 스퀘어 이미지" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="p-4">
+                                <h5 class="font-black text-gray-900 text-sm">판교 교육장</h5>
+                                <p class="text-xs text-gray-500 mt-1 font-medium">경기 성남시 분당구 판교로 242, PDC A동 9층</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center relative z-10">
+                <p class="inline-flex items-center gap-2 text-xs md:text-sm font-medium text-gray-500 bg-gray-50 px-4 py-2.5 rounded-xl border border-gray-200">
+                    <span class="text-indigo-500 font-black">*</span> 과정 별 온/오프라인 상세 일정은 운영 안내에서 확인할 수 있습니다.
+                </p>
             </div>
         </div>
     </section>
