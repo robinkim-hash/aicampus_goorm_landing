@@ -145,6 +145,16 @@
 
     .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
     .card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 50px -10px rgba(14,165,233,0.15); border-color: #bae6fd; }
+    .btn-ai-gradient {
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        color: #fff;
+        box-shadow: 0 12px 26px rgba(14,165,233,0.28);
+    }
+    .btn-ai-gradient:hover {
+        background: linear-gradient(135deg, #0284c7, #7c3aed);
+        box-shadow: 0 16px 30px rgba(14,165,233,0.34);
+        transform: translateY(-2px);
+    }
 
     @keyframes pulse-border {
         0% { box-shadow: 0 0 0 0 rgba(14,165,233,0.6); }
@@ -426,7 +436,7 @@
                         <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
                         <p class="text-sm font-bold text-gray-800 word-keep">KPI 통합 데이터 마트 및 RAG 에이전트 구축</p>
                     </div>
-                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm text-white transition-all shadow-lg" style="background: linear-gradient(135deg, #0ea5e9, #0284c7)" onmouseenter="this.style.background='linear-gradient(135deg, #0284c7, #7c3aed)'" onmouseleave="this.style.background='linear-gradient(135deg, #0ea5e9, #0284c7)'">
+                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm transition-all btn-ai-gradient">
                         커리큘럼 상세보기
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
@@ -455,7 +465,7 @@
                         <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
                         <p class="text-sm font-bold text-gray-800 word-keep">실시간 스트리밍 기반 데이터 파이프라인 구축</p>
                     </div>
-                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm text-white transition-all shadow-lg" style="background: linear-gradient(135deg, #0ea5e9, #0284c7)" onmouseenter="this.style.background='linear-gradient(135deg, #0284c7, #7c3aed)'" onmouseleave="this.style.background='linear-gradient(135deg, #0ea5e9, #0284c7)'">
+                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm transition-all btn-ai-gradient">
                         커리큘럼 상세보기
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
@@ -484,7 +494,7 @@
                         <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
                         <p class="text-sm font-bold text-gray-800 word-keep">고성능 AI 서빙 및 통합 관측성(SRE) 체계 구축</p>
                     </div>
-                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm text-white transition-all shadow-lg" style="background: linear-gradient(135deg, #0ea5e9, #0284c7)" onmouseenter="this.style.background='linear-gradient(135deg, #0284c7, #7c3aed)'" onmouseleave="this.style.background='linear-gradient(135deg, #0ea5e9, #0284c7)'">
+                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm transition-all btn-ai-gradient">
                         커리큘럼 상세보기
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
@@ -512,7 +522,7 @@
                         <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
                         <p class="text-sm font-bold text-gray-800 word-keep">사내 지식 챗봇 취약점 스캐닝 및 가드레일 구현</p>
                     </div>
-                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm text-white transition-all shadow-lg" style="background: linear-gradient(135deg, #0ea5e9, #0284c7)" onmouseenter="this.style.background='linear-gradient(135deg, #0284c7, #7c3aed)'" onmouseleave="this.style.background='linear-gradient(135deg, #0ea5e9, #0284c7)'">
+                    <button type="button" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm transition-all btn-ai-gradient">
                         커리큘럼 상세보기
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
@@ -541,7 +551,7 @@
                         <p class="text-xs font-black text-blue-900 mb-1"><i class="fa-solid fa-bullseye mr-1"></i>핵심 실무 프로젝트</p>
                         <p class="text-sm font-bold text-gray-800 word-keep">자율추론형 자산관리 비서 및 실전 AX 스타터킷</p>
                     </div>
-                    <a href="./ax-fullstack-curriculum.html?v=20260317-1" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm text-white bg-gray-900 hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-600/25">
+                    <a href="./ax-fullstack-curriculum.html?v=20260317-1" class="w-full mt-5 py-3.5 rounded-xl flex items-center justify-center gap-2 font-extrabold text-sm transition-all btn-ai-gradient">
                         커리큘럼 상세보기
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
@@ -617,7 +627,7 @@
 
 
     <!-- 학습 공간 (Hybrid Campus) -->
-    <section id="campus-space" class="py-24 bg-gray-50 px-4 border-t border-gray-100">
+    <section id="campus-space" class="py-24 px-4 border-t border-sky-50" style="background: linear-gradient(180deg, #fafeff 0%, #f0f9ff 100%)">
         <div class="max-w-7xl mx-auto bg-white rounded-[2.6rem] border border-gray-100 shadow-xl p-8 md:p-14 lg:p-16 relative overflow-hidden">
             <div class="absolute -top-10 -right-10 w-64 h-64 bg-indigo-50 rounded-full blur-[75px] pointer-events-none"></div>
 
@@ -628,7 +638,7 @@
                 </span>
                 <h3 class="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight word-keep">
                     어디서든 완벽하게 몰입할 수 있는<br class="hidden sm:block">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">최적의 학습 공간</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-violet-600">최적의 학습 공간</span>
                 </h3>
                 <p class="mt-4 text-gray-500 text-base md:text-lg font-medium leading-relaxed max-w-3xl mx-auto word-keep">
                     시공간의 제약을 뛰어넘는 메타버스 가상 공간과 최고 사양의 오프라인 교육장을 함께 제공합니다.
@@ -704,8 +714,8 @@
     <section id="benefits" class="py-24 bg-white px-4 border-t border-sky-50">
         <div class="max-w-7xl mx-auto font-bold">
             <div class="text-center mb-16">
-                <span class="text-[#d6336c] font-bold text-sm uppercase bg-[#ffe3ec] border border-[#ffd0e0] px-4 py-1 rounded-full mb-4 inline-block font-black">Limited Reward</span>
-                <h2 class="text-4xl md:text-[2.8rem] font-bold mb-4 tracking-tight font-black text-[#0f172a]">지원만 해도 일단 이득인 <br class="hidden sm:block"><span class="text-[#f43f74] font-black">압도적인 혜택 라인업</span></h2>
+                <span class="section-pill section-pill-rose mb-4">Limited Reward</span>
+                <h2 class="text-4xl md:text-[2.8rem] font-bold mb-4 tracking-tight font-black text-gray-900">지원만 해도 일단 이득인 <br class="hidden sm:block"><span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500 font-black">압도적인 혜택 라인업</span></h2>
                 <p class="text-gray-500 text-base md:text-lg font-medium">실력의 격차를 만들어 줄 수많은 혜택들을 아낌없이 지원합니다.</p>
             </div>
             
@@ -2500,6 +2510,7 @@
     </script>
 </body>
 </html>
+
 
 
 
