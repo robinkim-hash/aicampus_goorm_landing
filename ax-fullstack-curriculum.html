@@ -28,91 +28,102 @@
         .tab-item.active .tab-title { color: #0f172a; }
     </style>
 </head>
-<body class="relative w-full bg-white text-slate-800 py-24 selection:bg-blue-200 selection:text-blue-900">
-    <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40 pointer-events-none"></div>
-    <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-indigo-100/30 rounded-full blur-[100px] pointer-events-none"></div>
+<body class="w-full bg-white text-slate-800 py-24 selection:bg-blue-200 selection:text-blue-900">
+    <div class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40 pointer-events-none"></div>
+        <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-indigo-100/30 rounded-full blur-[100px] pointer-events-none"></div>
 
-    <main class="relative max-w-6xl mx-auto px-5 sm:px-8 z-10">
-        <div class="mb-10">
-            <a href="./index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors">
-                <i class="fa-solid fa-arrow-left"></i>
-                메인 페이지로 돌아가기
-            </a>
-        </div>
-
-        <section class="mb-24 text-center flex flex-col items-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-sm font-bold rounded-full mb-6 border border-blue-200/60 shadow-sm">
-                <i class="fa-solid fa-sparkles text-blue-500"></i>
-                <span id="course-category" class="uppercase tracking-widest"></span>
+        <main class="relative max-w-6xl mx-auto px-5 sm:px-8 z-10">
+            <div class="mb-10">
+                <a href="./index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    메인 페이지로 돌아가기
+                </a>
             </div>
-            <h1 id="course-title" class="text-4xl md:text-[54px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700 mb-6 tracking-tight leading-[1.2]"></h1>
-            <p id="course-description" class="text-lg md:text-xl text-slate-500 font-medium max-w-2xl leading-relaxed mb-12"></p>
 
-            <div class="inline-flex flex-col sm:flex-row gap-6 sm:gap-12 bg-white p-7 rounded-[24px] border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                <div class="flex flex-col items-center sm:items-start text-left">
-                    <p class="text-sm text-blue-500 font-bold mb-2 uppercase tracking-wider">모집 기간</p>
-                    <p class="text-slate-800 font-extrabold flex items-center gap-2.5 text-lg">
-                        <i class="fa-regular fa-calendar text-slate-400"></i>
-                        <span id="course-recruitment"></span>
-                    </p>
+            <section class="mb-24 text-center flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-sm font-bold rounded-full mb-6 border border-blue-200/60 shadow-sm">
+                    <i class="fa-solid fa-sparkles text-blue-500"></i>
+                    <span id="course-category" class="uppercase tracking-widest"></span>
                 </div>
-                <div class="hidden sm:block w-px bg-slate-100"></div>
-                <div class="flex flex-col items-center sm:items-start text-left">
-                    <p class="text-sm text-indigo-500 font-bold mb-2 uppercase tracking-wider">수강 기간</p>
-                    <p class="text-slate-800 font-extrabold flex items-center gap-2.5 text-lg">
-                        <i class="fa-regular fa-calendar text-slate-400"></i>
-                        <span id="course-duration"></span>
-                    </p>
-                </div>
-            </div>
-        </section>
+                <h1 id="course-title" class="text-4xl md:text-[54px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700 mb-6 tracking-tight leading-[1.2]"></h1>
+                <p id="course-description" class="text-lg md:text-xl text-slate-500 font-medium max-w-2xl leading-relaxed mb-12"></p>
 
-        <section class="mb-32">
-            <div class="text-center mb-12">
-                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Learning Space</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">학습 공간 안내</h2>
-            </div>
-            <div id="venue-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"></div>
-        </section>
-
-        <section class="mb-32">
-            <div class="text-center mb-12">
-                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Latest Trends Curriculum</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">최신 트렌드 반영 실전 커리큘럼</h2>
-                <p class="text-slate-500 font-medium text-lg">기초 프로그래밍 언어부터 최신 프레임워크, MSA, 그리고 클라우드 배포까지 올인원으로 학습합니다.</p>
-            </div>
-
-            <div class="bg-slate-50/50 rounded-[32px] p-4 sm:p-6 lg:p-8 border border-slate-200/60 flex flex-col lg:flex-row gap-6 shadow-sm">
-                <div id="curriculum-tabs" class="w-full lg:w-[340px] flex flex-col gap-3"></div>
-
-                <div class="flex-1 bg-white rounded-[28px] border border-slate-200/80 p-8 md:p-12 shadow-[0_4px_24px_rgb(0,0,0,0.02)] min-h-[520px]">
-                    <div class="mb-10 pb-8 border-b border-slate-100 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                        <div>
-                            <h3 id="curriculum-month" class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3"></h3>
-                            <p id="curriculum-title" class="text-slate-500 font-semibold text-lg"></p>
-                        </div>
-                        <div class="inline-flex px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl items-center gap-2">
-                            <i class="fa-solid fa-location-dot text-slate-400"></i>
-                            <span id="curriculum-format" class="text-sm font-bold text-slate-700"></span>
-                        </div>
+                <div class="inline-flex flex-col sm:flex-row gap-6 sm:gap-12 bg-white p-7 rounded-[24px] border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <div class="flex flex-col items-center sm:items-start text-left">
+                        <p class="text-sm text-blue-500 font-bold mb-2 uppercase tracking-wider">모집 기간</p>
+                        <p class="text-slate-800 font-extrabold flex items-center gap-2.5 text-lg">
+                            <i class="fa-regular fa-calendar text-slate-400"></i>
+                            <span id="course-recruitment"></span>
+                        </p>
                     </div>
-
-                    <div id="curriculum-items" class="space-y-12"></div>
+                    <div class="hidden sm:block w-px bg-slate-100"></div>
+                    <div class="flex flex-col items-center sm:items-start text-left">
+                        <p class="text-sm text-indigo-500 font-bold mb-2 uppercase tracking-wider">수강 기간</p>
+                        <p class="text-slate-800 font-extrabold flex items-center gap-2.5 text-lg">
+                            <i class="fa-regular fa-calendar text-slate-400"></i>
+                            <span id="course-duration"></span>
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <div class="text-center mb-12">
-                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Instructors</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">검증된 현직자 강사진</h2>
-                <p class="text-slate-500 font-medium mt-4 text-lg">실무 경험이 풍부한 전문 강사진이 여러분의 성장을 곁에서 이끕니다.</p>
-            </div>
+            <section class="mb-32">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Expected Outcomes</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">이 과정을 마치면 당신은,</h2>
+                    <p class="text-slate-500 font-medium mt-4 text-lg">단순한 개발을 넘어, AI를 비즈니스 가치로 전환하는 주도적인 빌더로 거듭납니다.</p>
+                </div>
+                <div id="expected-outcomes-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </section>
 
-            <div id="instructor-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-        </section>
-    </main>
+            <section class="mb-32">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Learning Space</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">학습 공간 안내</h2>
+                </div>
+                <div id="venue-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"></div>
+            </section>
+
+            <section class="mb-32">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Latest Trends Curriculum</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">최신 트렌드 반영 실전 커리큘럼</h2>
+                    <p class="text-slate-500 font-medium text-lg">기초 프로그래밍 언어부터 최신 프레임워크, MSA, 그리고 클라우드 배포까지 올인원으로 학습합니다.</p>
+                </div>
+
+                <div class="bg-slate-50/50 rounded-[32px] p-4 sm:p-6 lg:p-8 border border-slate-200/60 flex flex-col lg:flex-row gap-6 shadow-sm">
+                    <div id="curriculum-tabs" class="w-full lg:w-[340px] flex flex-col gap-3"></div>
+
+                    <div class="flex-1 bg-white rounded-[28px] border border-slate-200/80 p-8 md:p-12 shadow-[0_4px_24px_rgb(0,0,0,0.02)] min-h-[520px]">
+                        <div class="mb-10 pb-8 border-b border-slate-100 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                            <div>
+                                <h3 id="curriculum-month" class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3"></h3>
+                                <p id="curriculum-title" class="text-slate-500 font-semibold text-lg"></p>
+                            </div>
+                            <div class="inline-flex px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-slate-400"></i>
+                                <span id="curriculum-format" class="text-sm font-bold text-slate-700"></span>
+                            </div>
+                        </div>
+
+                        <div id="curriculum-items" class="space-y-12"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-3 block">Instructors</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">검증된 현직자 강사진</h2>
+                    <p class="text-slate-500 font-medium mt-4 text-lg">실무 경험이 풍부한 전문 강사진이 여러분의 성장을 곁에서 이끕니다.</p>
+                </div>
+
+                <div id="instructor-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </section>
+        </main>
+    </div>
 
     <script>
         const courseOverview = {
@@ -122,6 +133,45 @@
             duration: "2026. 05. 18 ~ 2026. 10. 16 (총 5개월, 752시간)",
             recruitment: "2026. 03. 15 ~ 2026. 04. 25"
         };
+
+        const expectedOutcomes = [
+            {
+                icon: "fa-terminal",
+                iconColor: "text-blue-600",
+                badge: "What you learn",
+                badgeColor: "bg-blue-100 text-blue-700",
+                title: "실무 밀착형 핵심 기술",
+                items: [
+                    "React, Python 기반 풀스택 웹 개발",
+                    "LLM API 및 RAG 파이프라인 연동",
+                    "Figma UI 설계부터 CI/CD 자동 배포까지"
+                ]
+            },
+            {
+                icon: "fa-bolt",
+                iconColor: "text-indigo-600",
+                badge: "Competencies",
+                badgeColor: "bg-indigo-100 text-indigo-700",
+                title: "대체 불가능한 실전 역량",
+                items: [
+                    "AI 모델을 서비스로 구현하는 엔드투엔드 구축력",
+                    "대용량 트래픽 대응 및 QA 자동화 역량",
+                    "애자일(Agile) 기반 팀 협업 및 문제 해결력"
+                ]
+            },
+            {
+                icon: "fa-trophy",
+                iconColor: "text-purple-600",
+                badge: "Outputs",
+                badgeColor: "bg-purple-100 text-purple-700",
+                title: "포트폴리오가 될 결과물",
+                items: [
+                    "[세미] AI 기반 시장 데이터 분석 대시보드",
+                    "[메인] AX 풀스택 AI 서비스 상용화 스타터킷",
+                    "[기업] 현업 연계 실무 프로젝트 (자산관리비서 등)"
+                ]
+            }
+        ];
 
         const venueInfo = [
             {
@@ -296,10 +346,33 @@
             document.getElementById('course-duration').textContent = courseOverview.duration;
         }
 
+        function renderExpectedOutcomes() {
+            const outcomeList = document.getElementById('expected-outcomes-list');
+            outcomeList.innerHTML = expectedOutcomes.map((outcome) => `
+                <article class="bg-white p-8 rounded-[24px] border border-slate-200/80 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(59,130,246,0.08)] hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-100 flex items-center justify-center">
+                            <i class="fa-solid ${outcome.icon} text-2xl ${outcome.iconColor}"></i>
+                        </div>
+                        <span class="px-3 py-1 ${outcome.badgeColor} text-[11px] font-extrabold rounded-lg uppercase tracking-wider">${outcome.badge}</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900 mb-5">${outcome.title}</h3>
+                    <ul class="space-y-3.5">
+                        ${outcome.items.map((item) => `
+                            <li class="flex items-start gap-3 text-slate-600 font-medium text-[15px] leading-relaxed">
+                                <i class="fa-solid fa-check text-blue-400 mt-1"></i>
+                                <span>${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </article>
+            `).join('');
+        }
+
         function renderVenues() {
             const venueList = document.getElementById('venue-list');
             venueList.innerHTML = venueInfo.map((venue) => `
-                <div class="flex items-start gap-5 p-8 rounded-[24px] border border-slate-200/80 bg-gradient-to-br ${venue.gradient} shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <article class="flex items-start gap-5 p-8 rounded-[24px] border border-slate-200/80 bg-gradient-to-br ${venue.gradient} shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
                     <div class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
                         <i class="fa-solid ${venue.icon} w-6 h-6"></i>
                     </div>
@@ -308,7 +381,7 @@
                         <h3 class="text-xl font-extrabold text-slate-900 mb-2">${venue.location}</h3>
                         <p class="text-sm font-medium text-slate-600">${venue.address}</p>
                     </div>
-                </div>
+                </article>
             `).join('');
         }
 
@@ -393,6 +466,7 @@
         }
 
         renderOverview();
+        renderExpectedOutcomes();
         renderVenues();
         renderCurriculum();
         renderInstructors();
