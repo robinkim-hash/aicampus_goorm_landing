@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX 서비스 풀스택 빌더 과정 | 구름 AI 캠퍼스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+            letter-spacing: -0.02em;
+            background: #ffffff;
+            color: #1f2937;
+        }
+        .tab-btn.active {
+            border-color: #3b82f6;
+            background: #ffffff;
+            box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+        }
+        .tab-btn.active .step-badge {
+            background: #2563eb;
+            color: #ffffff;
+            box-shadow: 0 10px 18px -8px rgba(37, 99, 235, 0.5);
+        }
+        .tab-btn.active .step-label {
+            color: #3b82f6;
+        }
+        .tab-btn.active .tab-title {
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-100 py-16">
+    <main class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="mb-10">
+            <a href="./index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i>
+                메인 페이지로 돌아가기
+            </a>
+        </div>
+
+        <section class="mb-20 text-center flex flex-col items-center">
+            <span id="course-category" class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 text-sm font-bold rounded-full mb-4 border border-blue-100 uppercase tracking-widest"></span>
+            <h1 id="course-title" class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight"></h1>
+            <p id="course-description" class="text-lg text-slate-500 font-medium max-w-2xl leading-relaxed mb-10"></p>
+
+            <div class="inline-flex flex-col sm:flex-row gap-6 sm:gap-12 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <div class="flex flex-col items-center sm:items-start text-left">
+                    <p class="text-sm text-slate-400 font-bold mb-1 uppercase tracking-wider">모집 기간</p>
+                    <p id="course-recruitment" class="text-slate-800 font-bold flex items-center gap-2">
+                        <i class="fa-regular fa-calendar"></i>
+                    </p>
+                </div>
+                <div class="hidden sm:block w-px bg-slate-200"></div>
+                <div class="flex flex-col items-center sm:items-start text-left">
+                    <p class="text-sm text-slate-400 font-bold mb-1 uppercase tracking-wider">수강 기간</p>
+                    <p id="course-duration" class="text-slate-800 font-bold flex items-center gap-2">
+                        <i class="fa-regular fa-calendar"></i>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="text-center mb-10">
+                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2 block">Learning Space</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">학습 공간 안내</h2>
+            </div>
+            <div id="venue-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"></div>
+        </section>
+
+        <section class="mb-24">
+            <div class="text-center mb-10">
+                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2 block">Latest Trends Curriculum</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-4">최신 트렌드 반영 실전 커리큘럼</h2>
+                <p class="text-slate-500 font-medium">기초 프로그래밍 언어부터 최신 프레임워크, MSA, 그리고 클라우드 배포까지 올인원으로 학습합니다.</p>
+            </div>
+
+            <div class="bg-[#F8FAFC] rounded-[32px] p-6 lg:p-10 border border-slate-100 flex flex-col lg:flex-row gap-8 shadow-sm">
+                <div id="curriculum-tabs" class="w-full lg:w-[320px] flex flex-col gap-3"></div>
+                <div class="flex-1 bg-white rounded-3xl border border-slate-200 p-8 md:p-12 shadow-sm min-h-[500px]">
+                    <div class="mb-10 pb-6 border-b border-slate-100 flex items-end justify-between gap-4">
+                        <div>
+                            <h3 id="curriculum-month" class="text-3xl font-extrabold text-slate-900 mb-2"></h3>
+                            <p id="curriculum-title" class="text-slate-500 font-medium"></p>
+                        </div>
+                        <div class="hidden sm:flex px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot w-4 h-4 text-slate-400"></i>
+                            <span id="curriculum-format" class="text-sm font-bold text-slate-600"></span>
+                        </div>
+                    </div>
+                    <div id="curriculum-items" class="space-y-12"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-10">
+                <span class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2 block">Instructors</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">검증된 현직자 강사진</h2>
+                <p class="text-slate-500 font-medium mt-4">실무 경험이 풍부한 전문 강사진이 여러분의 성장을 곁에서 이끕니다.</p>
+            </div>
+            <div id="instructor-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </section>
+    </main>
+
+    <script>
+        const courseOverview = {
+            category: "AI 어플리케이션 개발자",
+            title: "AX 서비스 풀스택 빌더 과정",
+            description: "기획부터 배포, AI 모델 튜닝 및 QA 자동화까지. 생성형 AI를 서비스에 이식하여 즉시 출시 가능한 엔드투엔드(End-to-End) 실무형 빌더로 성장합니다.",
+            duration: "2026. 05. 18 ~ 2026. 10. 16 (총 5개월, 752시간)",
+            recruitment: "2026. 03. 15 ~ 2026. 04. 25"
+        };
+
+        const venueInfo = [
+            {
+                type: "오프라인 (1~3개월 차)",
+                location: "구름스퀘어 판교 '백범' 강의장",
+                address: "경기도 성남시 분당구 판교로 242 PDC A동 9층",
+                icon: "fa-location-dot"
+            },
+            {
+                type: "온라인 실시간 (4~5개월 차)",
+                location: "ZEP 메타버스 교육장",
+                address: "현장감을 극대화한 디지털 트윈 가상 교육 공간",
+                icon: "fa-desktop"
+            }
+        ];
+
+        const curriculumData = [
+            {
+                tabTitle: "AI 서비스 기획 &\n기초 아키텍처",
+                month: "1개월 차",
+                format: "오프라인 (판교)",
+                items: [
+                    {
+                        name: "AI 서비스 기획 및 UX/UI 설계",
+                        details: [
+                            "사용자 여정 맵(User Journey Map) 도출",
+                            "Figma를 활용한 와이어프레임 제작 및 프로토타이핑",
+                            "사용성 테스트(UT) 실습 및 피드백 반영"
+                        ]
+                    },
+                    {
+                        name: "파이썬 백엔드 및 데이터 핸들링",
+                        details: [
+                            "객체지향 파이썬(Python) 심화",
+                            "SQL 기초 및 데이터베이스 연동",
+                            "백엔드 데이터 처리 로직 구현 기초"
+                        ]
+                    }
+                ]
+            },
+            {
+                tabTitle: "풀스택 웹 프론트엔드 &\n데이터베이스",
+                month: "2개월 차",
+                format: "오프라인 (판교)",
+                items: [
+                    {
+                        name: "모던 프론트엔드 및 반응형 UI 개발",
+                        details: [
+                            "React 기반 컴포넌트 설계 및 라이프사이클",
+                            "상태 관리 기법 활용",
+                            "Tailwind CSS를 활용한 반응형 UI 구축"
+                        ]
+                    },
+                    {
+                        name: "데이터베이스 설계 및 도메인 모델링",
+                        details: [
+                            "RDB 정규화 및 스키마 설계",
+                            "ORM 활용 및 관계 매핑",
+                            "대용량 트래픽 대비 쿼리 성능 최적화 기술"
+                        ]
+                    }
+                ]
+            },
+            {
+                tabTitle: "API 보안 &\n첫 번째 프로젝트",
+                month: "3개월 차",
+                format: "오프라인 (판교)",
+                items: [
+                    {
+                        name: "RESTful API 및 보안 아키텍처",
+                        details: [
+                            "JWT / OAuth2 인증 기반 보안 설계",
+                            "계층형 백엔드 구조 설계 및 구현",
+                            "Swagger 등을 활용한 API 문서화 자동화"
+                        ]
+                    },
+                    {
+                        name: "AI 기반 시장 데이터 분석 대시보드",
+                        details: [
+                            "[세미 프로젝트] 92시간 진행",
+                            "공공 데이터 및 API 연동을 통한 데이터 수집",
+                            "분석 결과를 직관적으로 보여주는 대시보드 UI 구현",
+                            "프론트엔드-백엔드 통합 연동 실무 경험"
+                        ]
+                    }
+                ]
+            },
+            {
+                tabTitle: "AI 네이티브 엔지니어링 &\n품질 자동화",
+                month: "4개월 차",
+                format: "온라인 (ZEP)",
+                items: [
+                    {
+                        name: "LLM 및 RAG 애플리케이션 엔지니어링",
+                        details: [
+                            "LangChain 기반 RAG(검색 증강 생성) 시스템 구축",
+                            "Function Calling을 활용한 AI 기능 제어",
+                            "프롬프트 엔지니어링 및 응답 품질 고도화"
+                        ]
+                    },
+                    {
+                        name: "AI Native 방법론 및 품질 자동화",
+                        details: [
+                            "AI 모델 튜닝 및 도구 활용 코드 생성",
+                            "E2E(End-to-End) 테스트 자동화 파이프라인",
+                            "안정적인 배포 게이트(CI/CD) 구축"
+                        ]
+                    }
+                ]
+            },
+            {
+                tabTitle: "실무 밀착 메인 &\n기업 연계 프로젝트",
+                month: "5개월 차",
+                format: "온라인 (ZEP)",
+                items: [
+                    {
+                        name: "AX 풀스택 AI 서비스 스타터킷 구축",
+                        details: [
+                            "[기본 프로젝트] 92시간 진행",
+                            "구름 Arkain 서비스 실데이터 활용 (로그 1만건)",
+                            "기획부터 배포, QA 자동화까지 전체 사이클 완주",
+                            "AI 서비스 상용화를 위한 성능 최적화"
+                        ]
+                    },
+                    {
+                        name: "참여기업 실무 프로젝트",
+                        details: [
+                            "[기업 연계 프로젝트] 택 1 수행 (184시간 진행)",
+                            "[지라프에이아이랩스] 자율추론형 자산관리비서 AI 구현",
+                            "[천재교육] AI 답변 품질 블라인드 테스트 도구 개발",
+                            "[로민] 지능형 문서 요약 및 딜리버리 앱 구축"
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        const instructorData = [
+            {
+                name: "임승현",
+                role: "주강사",
+                tags: ["전 교과목 담당", "752시간"],
+                experience: [
+                    "40개 이상 기업 대상 AX 전환 및 AI 교육 진행 (3년 이상)",
+                    "100만 사용자 AI 채용 검사 플랫폼 AI 서비스 제품 엔지니어 경력 (3년 이상)",
+                    "현업 밀착형 프로젝트 설계 및 아키텍처 멘토링"
+                ]
+            },
+            {
+                name: "서정욱",
+                role: "보조강사 및 프로젝트 멘토",
+                tags: ["정규 교과", "프로젝트 교과"],
+                experience: [
+                    "인프런 '100가지 프롬프트로 배우는 AI 활용법: 입문편' 강사",
+                    "카카오엔터프라이즈 소프트웨어 엔지니어 (전)",
+                    "대규모 트래픽 분산 처리 및 모던 웹 애플리케이션 개발 전문"
+                ]
+            }
+        ];
+
+        let activeTab = 0;
+
+        function renderOverview() {
+            document.getElementById('course-category').textContent = courseOverview.category;
+            document.getElementById('course-title').textContent = courseOverview.title;
+            document.getElementById('course-description').textContent = courseOverview.description;
+            document.getElementById('course-recruitment').insertAdjacentText('beforeend', ' ' + courseOverview.recruitment);
+            document.getElementById('course-duration').insertAdjacentText('beforeend', ' ' + courseOverview.duration);
+        }
+
+        function renderVenues() {
+            const venueList = document.getElementById('venue-list');
+            venueList.innerHTML = venueInfo.map((venue) => `
+                <div class="flex items-start gap-5 p-7 rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow">
+                    <div class="p-3.5 bg-blue-50 rounded-2xl border border-blue-100">
+                        <i class="fa-solid ${venue.icon} w-5 h-5 text-blue-600"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block px-2.5 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md mb-2">${venue.type}</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">${venue.location}</h3>
+                        <p class="text-sm font-medium text-slate-500">${venue.address}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderTabs() {
+            const tabs = document.getElementById('curriculum-tabs');
+            tabs.innerHTML = curriculumData.map((item, index) => {
+                const isActive = activeTab === index;
+                return `
+                    <button type="button" data-index="${index}" class="tab-btn ${isActive ? 'active' : ''} text-left p-5 rounded-2xl border transition-all duration-200 flex items-center gap-4 ${isActive ? '' : 'border-transparent bg-white/60 hover:bg-white hover:border-slate-200'}">
+                        <div class="step-badge flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold transition-colors ${isActive ? '' : 'bg-slate-100 text-slate-400'}">${index + 1}</div>
+                        <div>
+                            <p class="step-label text-xs font-bold mb-1 tracking-wider ${isActive ? '' : 'text-slate-400'}">STEP 0${index + 1}</p>
+                            <h3 class="tab-title font-bold text-[16px] leading-snug whitespace-pre-line ${isActive ? '' : 'text-slate-500'}">${item.tabTitle}</h3>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+
+            tabs.querySelectorAll('[data-index]').forEach((btn) => {
+                btn.addEventListener('click', function () {
+                    activeTab = Number(this.dataset.index);
+                    renderCurriculum();
+                });
+            });
+        }
+
+        function renderCurriculum() {
+            const current = curriculumData[activeTab];
+            document.getElementById('curriculum-month').textContent = current.month;
+            document.getElementById('curriculum-title').textContent = current.tabTitle.replace('\n', ' ');
+            document.getElementById('curriculum-format').textContent = current.format;
+
+            const itemsWrap = document.getElementById('curriculum-items');
+            itemsWrap.innerHTML = current.items.map((course) => `
+                <div>
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                            <i class="fa-solid fa-check text-xs"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900">${course.name}</h4>
+                    </div>
+                    <ul class="pl-9 space-y-3.5">
+                        ${course.details.map((detail) => `
+                            <li class="relative flex items-start text-slate-600 font-medium leading-relaxed md:text-[15px]">
+                                <span class="absolute left-[-18px] top-[10px] w-1.5 h-1.5 rounded-full bg-blue-400 opacity-70"></span>
+                                ${detail}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
+
+            renderTabs();
+        }
+
+        function renderInstructors() {
+            const instructorList = document.getElementById('instructor-list');
+            instructorList.innerHTML = instructorData.map((instructor) => `
+                <div class="bg-white border border-slate-200 rounded-2xl p-8 hover:border-blue-300 hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-5 mb-6">
+                        <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200">
+                            <i class="fa-regular fa-user w-8 h-8 text-slate-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mb-1">${instructor.name}</h3>
+                            <p class="text-blue-600 font-bold text-sm">${instructor.role}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        ${instructor.tags.map((tag) => `<span class="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-600 text-xs font-bold rounded-md">${tag}</span>`).join('')}
+                    </div>
+                    <ul class="space-y-3">
+                        ${instructor.experience.map((exp) => `
+                            <li class="flex items-start gap-2.5 text-slate-600 text-sm font-medium">
+                                <i class="fa-solid fa-briefcase w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5"></i>
+                                <span class="leading-relaxed">${exp}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        renderOverview();
+        renderVenues();
+        renderCurriculum();
+        renderInstructors();
+    </script>
+</body>
+</html>
