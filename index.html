@@ -145,6 +145,47 @@
 
     .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
     .card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 50px -10px rgba(14,165,233,0.15); border-color: #bae6fd; }
+    .company-logo-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 9999px;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        background: rgba(255, 255, 255, 0.1);
+        color: inherit;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1;
+    }
+    .company-logo-chip.light {
+        background: #f8fafc;
+        border-color: #e2e8f0;
+        color: #334155;
+    }
+    .company-logo-mark {
+        width: 20px;
+        height: 20px;
+        border-radius: 9999px;
+        border: 1px solid #e2e8f0;
+        object-fit: contain;
+        background: #fff;
+        padding: 2px;
+        flex-shrink: 0;
+    }
+    .company-logo-initial {
+        width: 20px;
+        height: 20px;
+        border-radius: 9999px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #e2e8f0;
+        color: #475569;
+        font-size: 10px;
+        font-weight: 800;
+        flex-shrink: 0;
+    }
     .btn-ai-gradient {
         background: linear-gradient(135deg, #0ea5e9, #0284c7);
         color: #fff;
@@ -1837,20 +1878,7 @@
                     </div>
                 </div>
 
-                <div class="mt-8 flex flex-wrap justify-center gap-2.5">
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">Google</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">Apple</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">삼성전자</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">NAVER</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">네이버 클라우드</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">롯데이노베이트</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">무신사</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">SK쉴더스</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">SK 증권</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">LIG넥스원</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">한글과컴퓨터</span>
-                    <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[11px] font-bold text-blue-100">DB Inc</span>
-                </div>
+                <div id="career-concert-logos" class="mt-8 flex flex-wrap justify-center gap-2.5"></div>
             </div>
         </div>
     </section>
@@ -1868,57 +1896,11 @@
             </div>
             
             <div class="bg-white rounded-[4rem] p-8 md:p-16 border border-gray-100 shadow-sm relative overflow-hidden">
-                <div class="flex flex-wrap justify-center gap-2.5 relative z-10">
-                    <!-- 대기업/주요 IT 기업 & 특별 요청 기업 -->
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-blue-700 shadow-sm hover:-translate-y-1 transition-transform">삼성전자</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-green-600 shadow-sm hover:-translate-y-1 transition-transform">네이버</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-blue-700 shadow-sm hover:-translate-y-1 transition-transform">네이버 클라우드</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-blue-700 shadow-sm hover:-translate-y-1 transition-transform">롯데이노베이트</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-red-600 shadow-sm hover:-translate-y-1 transition-transform">LIG 넥스원</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-indigo-700 shadow-sm hover:-translate-y-1 transition-transform">토스 페이먼츠</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">르노 코리아</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">MBC C&I</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">SK쉴더스</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-green-700 shadow-sm hover:-translate-y-1 transition-transform">NH농협은행</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">BC카드</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">메가존클라우드</span>
-                    
-                    <!-- 중견/안정적 IT 기업 -->
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">딜로이트</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-pink-600 shadow-sm hover:-translate-y-1 transition-transform">에이블리코퍼레이션</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-gray-900 shadow-sm hover:-translate-y-1 transition-transform">엠로</span>
-                    <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-sm font-black text-blue-500 shadow-sm hover:-translate-y-1 transition-transform italic">goorm</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">한일네트웍스</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">가비아</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">소프트캠프</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">케이사인</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">윈스테크넷</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">한전KDN</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">NIT SERVICE</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">이지케어텍</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">펜타시스템테크놀러지</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">씨엔티테크</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">한컴시큐어</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">가온데이터</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">고이장례연구소</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">더캐리</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">메가존소프트</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">인크로스</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">맘맘</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">엑세스랩</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">남강하이테크</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">네비웍스</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">빅마음</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">세율곡</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">에이샛</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">오픈마루</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">울산대학교</span>
-                    <span class="px-4 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 shadow-sm hover:-translate-y-1 transition-transform">유저커넥트</span>
-                </div>
+                <div id="placements-logos" class="flex flex-wrap justify-center gap-2.5 relative z-10"></div>
 
                 <!-- 블러 처리된 수많은 기업들 (더 많아 보이게 하는 효과) -->
                 <div class="relative mt-2">
-                    <div class="flex flex-wrap justify-start gap-2 transform scale-95 opacity-50" aria-hidden="true">
+                    <div id="placements-logos-muted" class="flex flex-wrap justify-start gap-2 transform scale-95 opacity-50" aria-hidden="true">
                         <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">인베스티</span>
                         <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">주식회사 메디브</span>
                         <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">지에스티(가산)</span>
@@ -2503,8 +2485,77 @@
             onScroll();
         };
 
+        window.companyListCareerConcert = [
+            { name: 'Google', domain: 'google.com' },
+            { name: 'Apple', domain: 'apple.com' },
+            { name: '삼성전자', domain: 'samsung.com' },
+            { name: 'NAVER', domain: 'naver.com' },
+            { name: '네이버 클라우드', domain: 'ncloud.com' },
+            { name: '롯데이노베이트', domain: 'lotteinnovate.com' },
+            { name: '무신사', domain: 'musinsa.com' },
+            { name: 'SK쉴더스', domain: 'skshieldus.com' },
+            { name: 'SK 증권', domain: 'sks.co.kr' },
+            { name: 'LIG넥스원', domain: 'lignex1.com' },
+            { name: '한글과컴퓨터', domain: 'hancom.com' },
+            { name: 'DB Inc', domain: 'dbinc.co.kr' }
+        ];
+
+        window.companyListPlacements = [
+            { name: '삼성전자', domain: 'samsung.com' }, { name: '네이버', domain: 'naver.com' },
+            { name: '네이버 클라우드', domain: 'ncloud.com' }, { name: '롯데이노베이트', domain: 'lotteinnovate.com' },
+            { name: 'LIG 넥스원', domain: 'lignex1.com' }, { name: '토스 페이먼츠', domain: 'tosspayments.com' },
+            { name: '르노 코리아', domain: 'renault.co.kr' }, { name: 'MBC C&I', domain: 'mbccni.co.kr' },
+            { name: 'SK쉴더스', domain: 'skshieldus.com' }, { name: 'NH농협은행', domain: 'nonghyup.com' },
+            { name: 'BC카드', domain: 'bccard.com' }, { name: '메가존클라우드', domain: 'megazone.com' },
+            { name: '딜로이트', domain: 'deloitte.com' }, { name: '에이블리코퍼레이션', domain: 'ably.team' },
+            { name: '엠로', domain: 'emro.co.kr' }, { name: 'goorm', domain: 'goorm.io' },
+            { name: '한일네트웍스' }, { name: '가비아', domain: 'gabia.com' }, { name: '소프트캠프', domain: 'softcamp.co.kr' },
+            { name: '케이사인', domain: 'ksign.com' }, { name: '윈스테크넷', domain: 'wins21.com' },
+            { name: '한전KDN', domain: 'kdn.com' }, { name: 'NIT SERVICE' }, { name: '이지케어텍', domain: 'ezcaretech.com' },
+            { name: '펜타시스템테크놀러지', domain: 'penta.co.kr' }, { name: '씨엔티테크', domain: 'cntt.co.kr' },
+            { name: '한컴시큐어', domain: 'hancomsecure.com' }, { name: '가온데이터' }, { name: '고이장례연구소' },
+            { name: '더캐리' }, { name: '메가존소프트', domain: 'megazonesoft.com' }, { name: '인크로스', domain: 'incross.com' },
+            { name: '맘맘' }, { name: '엑세스랩' }, { name: '남강하이테크' }, { name: '네비웍스', domain: 'naviworks.com' },
+            { name: '빅마음' }, { name: '세율곡' }, { name: '에이샛' }, { name: '오픈마루' }, { name: '울산대학교', domain: 'ulsan.ac.kr' },
+            { name: '유저커넥트' }
+        ];
+
+        window.companyListPlacementsMuted = [
+            '인베스티','주식회사 메디브','지에스티(가산)','케이씨넷','팬텍솔루션','피델릭스','핀다','CMT정보통신','메타디엑스',
+            '비에이블컴퍼니','틸론','나무ICT','쎌바이오텍인터내셔날','커브','백패커','메가존소프트','디지탈쉽','인포그랩',
+            '이베이재팬','선도소프트','솔리데오','몬드리안에이아이','마젤원','주식회사 금바다','엣지크로스','인크로스',
+            '역삼베이','온택트헬스','윤숲','해주세요 컴퍼니','컨플','원더윅스','아우라웍스','더헤르츠'
+        ];
+
+        window.makeCompanyChip = function(company, isLight) {
+            var name = company.name;
+            var initials = (name || '?').replace(/[^A-Za-z0-9가-힣]/g, '').slice(0, 2).toUpperCase();
+            var cls = 'company-logo-chip' + (isLight ? ' light' : '');
+            var logo = company.domain ? 'https://logo.clearbit.com/' + company.domain : '';
+            return '<span class="' + cls + '">' +
+                (logo
+                    ? '<img class="company-logo-mark" src="' + logo + '" alt="' + name + ' 로고" onerror="this.style.display=\\'none\\'; this.nextElementSibling.style.display=\\'inline-flex\\';">' +
+                      '<span class="company-logo-initial">' + initials + '</span>'
+                    : '<span class="company-logo-initial" style="display:inline-flex;">' + initials + '</span>') +
+                '<span>' + name + '</span></span>';
+        };
+
+        window.renderCompanyLogos = function() {
+            var c1 = document.getElementById('career-concert-logos');
+            if (c1) c1.innerHTML = window.companyListCareerConcert.map(function(c) { return window.makeCompanyChip(c, false); }).join('');
+
+            var c2 = document.getElementById('placements-logos');
+            if (c2) c2.innerHTML = window.companyListPlacements.map(function(c) { return window.makeCompanyChip(c, true); }).join('');
+
+            var c3 = document.getElementById('placements-logos-muted');
+            if (c3) c3.innerHTML = window.companyListPlacementsMuted.map(function(name) {
+                return '<span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">' + name + '</span>';
+            }).join('');
+        };
+
         window.initCareerSlider();
         window.renderProjectDemo();
+        window.renderCompanyLogos();
         window.initLandingReveal();
         window.initLandingScrollIndicator();
     </script>
