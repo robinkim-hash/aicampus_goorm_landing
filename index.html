@@ -323,6 +323,59 @@
         .hero-float-delayed {
             animation: hero-float-delayed 7.5s ease-in-out infinite;
         }
+        .landing-reveal {
+            opacity: 0;
+            transform: translateY(26px) scale(0.985);
+            transition: opacity 0.72s ease, transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: var(--landing-reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+        .landing-reveal.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .landing-scroll-indicator {
+            position: fixed;
+            left: 20px;
+            bottom: 92px;
+            z-index: 45;
+            transition: opacity 0.28s ease, transform 0.28s ease;
+        }
+        .landing-scroll-indicator.hide {
+            opacity: 0;
+            transform: translateY(8px);
+            pointer-events: none;
+        }
+        .landing-mouse-shell {
+            width: 24px;
+            height: 38px;
+            border: 2px solid #94a3b8;
+            border-radius: 9999px;
+            position: relative;
+            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%);
+        }
+        .landing-mouse-wheel {
+            width: 4px;
+            height: 8px;
+            border-radius: 9999px;
+            background: #3b82f6;
+            position: absolute;
+            left: 50%;
+            top: 7px;
+            transform: translateX(-50%);
+            animation: landing-wheel-drop 1.5s ease-in-out infinite;
+        }
+        @keyframes landing-wheel-drop {
+            0% { opacity: 0; transform: translate(-50%, 0); }
+            30% { opacity: 1; transform: translate(-50%, 4px); }
+            100% { opacity: 0; transform: translate(-50%, 10px); }
+        }
+        @media (max-width: 768px) {
+            .landing-scroll-indicator {
+                left: 12px;
+                bottom: 98px;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 antialiased selection:bg-blue-100 selection:text-blue-900 pb-24">
@@ -2216,6 +2269,18 @@
             </a>
         </div>
     </div>
+    
+    <div id="landing-scroll-indicator" class="landing-scroll-indicator">
+        <div class="flex items-center gap-3 px-4 py-3 bg-white/90 border border-slate-200 rounded-2xl shadow-lg backdrop-blur-sm">
+            <div class="landing-mouse-shell">
+                <span class="landing-mouse-wheel"></span>
+            </div>
+            <div class="leading-none">
+                <p class="text-[10px] tracking-[0.2em] font-black text-slate-400 uppercase">Scroll</p>
+                <p class="text-xs font-bold text-slate-600">아래로 이동</p>
+            </div>
+        </div>
+    </div>
 
     <footer class="bg-gray-100 text-gray-500 py-16 text-center text-sm pb-32 border-t border-gray-200 font-medium">
         <p>© goorm Inc. All rights reserved.</p>
@@ -2532,8 +2597,58 @@
             if (e.key === 'Escape') closeEligibilityModal();
         });
 
+        window.initLandingReveal = function() {
+            var targets = [];
+            var pushUnique = function(el) {
+                if (!el) return;
+                if (targets.indexOf(el) === -1) targets.push(el);
+            };
+
+            document.querySelectorAll('section').forEach(function(section) {
+                pushUnique(section);
+            });
+
+            document.querySelectorAll('section article, section img, section h2, section h3').forEach(function(el) {
+                pushUnique(el);
+            });
+
+            targets.forEach(function(el, idx) {
+                if (el.closest('#eligibility-modal')) return;
+                el.classList.add('landing-reveal');
+                el.style.setProperty('--landing-reveal-delay', ((idx % 6) * 60) + 'ms');
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach(function(el) { el.classList.add('show'); });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function(entries, obs) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+            targets.forEach(function(el) { observer.observe(el); });
+        };
+
+        window.initLandingScrollIndicator = function() {
+            var indicator = document.getElementById('landing-scroll-indicator');
+            if (!indicator) return;
+            var onScroll = function() {
+                indicator.classList.toggle('hide', window.scrollY > 140);
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        };
+
         window.initCareerSlider();
         window.renderProjectDemo();
+        window.initLandingReveal();
+        window.initLandingScrollIndicator();
     </script>
 </body>
 </html>
