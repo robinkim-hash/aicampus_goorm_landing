@@ -159,6 +159,106 @@
         border-color: #e2e8f0;
         color: #334155;
     }
+    .placement-marquee-shell {
+        position: relative;
+        display: grid;
+        gap: 1rem;
+    }
+    .placement-marquee-shell::before,
+    .placement-marquee-shell::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: min(10vw, 120px);
+        z-index: 5;
+        pointer-events: none;
+    }
+    .placement-marquee-shell::before {
+        left: 0;
+        background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 100%);
+    }
+    .placement-marquee-shell::after {
+        right: 0;
+        background: linear-gradient(270deg, #fff 0%, rgba(255,255,255,0) 100%);
+    }
+    .placement-marquee {
+        overflow: hidden;
+        width: 100%;
+    }
+    .placement-logo-track {
+        display: flex;
+        width: max-content;
+        gap: 0.9rem;
+        animation: placement-marquee 42s linear infinite;
+        will-change: transform;
+    }
+    .placement-logo-track-slow {
+        animation-duration: 56s;
+        animation-delay: -18s;
+    }
+    .placement-marquee:hover .placement-logo-track {
+        animation-play-state: paused;
+    }
+    .placement-logo-card {
+        width: 210px;
+        min-height: 82px;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 1rem;
+        border-radius: 1.15rem;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    }
+    .placement-logo-media {
+        width: 48px;
+        height: 48px;
+        border-radius: 0.9rem;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex: 0 0 auto;
+    }
+    .placement-logo-media img {
+        width: 100%;
+        height: 100%;
+        padding: 0.45rem;
+        object-fit: contain;
+    }
+    .placement-logo-media img + .placement-logo-fallback {
+        display: none;
+    }
+    .placement-logo-fallback {
+        color: #0284c7;
+        font-size: 0.82rem;
+        font-weight: 900;
+        line-height: 1;
+    }
+    .placement-logo-name {
+        color: #0f172a;
+        font-size: 0.93rem;
+        font-weight: 900;
+        line-height: 1.22;
+        word-break: keep-all;
+    }
+    .placement-logo-sub {
+        margin-top: 0.18rem;
+        color: #94a3b8;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    @keyframes placement-marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
     .btn-ai-gradient {
         background: linear-gradient(135deg, #0ea5e9, #0284c7);
         color: #fff;
@@ -1839,56 +1939,6 @@
                 </div>
             </div>
 
-            <div class="mt-12 grid grid-cols-1 lg:grid-cols-[0.82fr_1.38fr] gap-6">
-                <div class="bg-slate-950 text-white rounded-[2rem] p-8 md:p-10 border border-slate-800 shadow-xl relative overflow-hidden">
-                    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-400 via-emerald-300 to-blue-500"></div>
-                    <p class="text-[11px] font-black tracking-[0.18em] uppercase text-sky-300 mb-4">Employment Agreement</p>
-                    <h3 class="text-2xl md:text-3xl font-black leading-tight mb-4">취업 협약 기업</h3>
-                    <div class="mt-8 rounded-2xl bg-white/8 border border-white/12 p-6">
-                        <p class="text-3xl md:text-4xl font-black tracking-tight">벤처기업협회</p>
-                        <p class="mt-4 text-sm leading-relaxed text-slate-300 font-medium">
-                            벤처·스타트업 생태계와 연결되는 취업 협약 네트워크를 통해,
-                            교육 이후 다양한 기업 연계 기회를 넓혀갑니다.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-200 shadow-sm">
-                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
-                        <div>
-                            <p class="text-[11px] font-black tracking-[0.18em] uppercase text-blue-600 mb-3">Career Matching Network</p>
-                            <h3 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">취업 지원 의사 확인 기업</h3>
-                            <p class="mt-3 text-sm md:text-base text-gray-500 font-medium leading-relaxed">
-                                채용 연계와 커리어 매칭 가능성을 열어둔 기업 네트워크입니다.
-                            </p>
-                        </div>
-                        <div class="shrink-0 rounded-xl bg-blue-50 border border-blue-100 px-4 py-3 text-blue-700 font-black text-sm">
-                            15개 기업
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2.5">
-                        <span class="company-logo-chip light">카카오엔터프라이즈</span>
-                        <span class="company-logo-chip light">두산디지털이노베이션</span>
-                        <span class="company-logo-chip light">천재교육</span>
-                        <span class="company-logo-chip light">한국컴퓨팅산업협회</span>
-                        <span class="company-logo-chip light">S2W</span>
-                        <span class="company-logo-chip light">틸론</span>
-                        <span class="company-logo-chip light">로드컴플릿</span>
-                        <span class="company-logo-chip light">로민</span>
-                        <span class="company-logo-chip light">에이럭스</span>
-                        <span class="company-logo-chip light">유니와이드</span>
-                        <span class="company-logo-chip light">엑세스랩</span>
-                        <span class="company-logo-chip light">에스티엔인포텍</span>
-                        <span class="company-logo-chip light">디노아이티</span>
-                        <span class="company-logo-chip light">이엑스프로모션</span>
-                        <span class="company-logo-chip light">쓰리에스코어</span>
-                    </div>
-                    <p class="mt-6 text-xs text-gray-400 font-medium leading-relaxed">
-                        * 실제 채용 및 연계 여부는 기업별 채용 상황, 직무 적합도, 전형 결과에 따라 달라질 수 있습니다.
-                    </p>
-                </div>
-            </div>
-
             <div class="mt-16 bg-[#0A1F55] rounded-[2.5rem] md:rounded-[3rem] px-6 md:px-12 py-10 md:py-14 text-white shadow-2xl">
                 <div class="text-center max-w-3xl mx-auto">
                     <p class="text-[11px] md:text-xs font-bold tracking-[0.22em] uppercase text-blue-200/80">GOORM CAREER CENTER</p>
@@ -1992,42 +2042,8 @@
                 </div>
             </div>
             
-            <div class="bg-white rounded-[4rem] p-8 md:p-16 border border-gray-100 shadow-sm relative overflow-hidden">
-                <div id="placements-logos" class="flex flex-wrap justify-center gap-2.5 relative z-10"></div>
-
-                <!-- 블러 처리된 수많은 기업들 (더 많아 보이게 하는 효과) -->
-                <div class="relative mt-2">
-                    <div id="placements-logos-muted" class="flex flex-wrap justify-start gap-2 transform scale-95 opacity-50" aria-hidden="true">
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">메타디엑스</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">비에이블컴퍼니</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">틸론</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">나무ICT</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">쎌바이오텍인터내셔날</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">커브</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">백패커</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">메가존소프트</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">디지탈쉽</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">인포그랩</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">이베이재팬</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">선도소프트</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">솔리데오</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">몬드리안에이아이</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">마젤원</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">주식회사 금바다</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">엣지크로스</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">인크로스</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">역삼베이</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">온택트헬스</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">윤숲</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">해주세요 컴퍼니</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">컨플</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">원더윅스</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">아우라웍스</span>
-                        <span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">더헤르츠</span>
-                    </div>
-                    <!-- 하단 페이드아웃 그라데이션 (아래로 갈수록 투명해지는 효과) -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white z-20 pointer-events-none"></div>
-                </div>
+            <div class="bg-white rounded-[2.5rem] py-9 md:py-12 border border-gray-100 shadow-sm relative overflow-hidden">
+                <div id="placements-logos" class="placement-marquee-shell relative z-10"></div>
             </div>
         </div>
     </section>
@@ -2580,19 +2596,56 @@
         ];
 
         window.companyListPlacements = [
-            '삼성전자','네이버','네이버 클라우드','롯데이노베이트','LIG 넥스원','토스 페이먼츠','르노 코리아','MBC C&I',
-            'SK쉴더스','NH농협은행','BC카드','메가존클라우드','딜로이트','에이블리코퍼레이션','엠로','goorm','한일네트웍스',
-            '가비아','소프트캠프','케이사인','윈스테크넷','한전KDN','NIT SERVICE','이지케어텍','펜타시스템테크놀러지',
-            '씨엔티테크','한컴시큐어','가온데이터','고이장례연구소','더캐리','메가존소프트','인크로스','맘맘','엑세스랩',
-            '남강하이테크','네비웍스','빅마음','세율곡','에이샛','오픈마루','울산대학교','유저커넥트',
-            '인베스티','주식회사 메디브','지에스티(가산)','케이씨넷','팬텍솔루션','피델릭스','핀다','CMT정보통신'
-        ];
-
-        window.companyListPlacementsMuted = [
-            '메타디엑스',
-            '비에이블컴퍼니','틸론','나무ICT','쎌바이오텍인터내셔날','커브','백패커','메가존소프트','디지탈쉽','인포그랩',
-            '이베이재팬','선도소프트','솔리데오','몬드리안에이아이','마젤원','주식회사 금바다','엣지크로스','인크로스',
-            '역삼베이','온택트헬스','윤숲','해주세요 컴퍼니','컨플','원더윅스','아우라웍스','더헤르츠'
+            { name: '삼성전자', domain: 'samsung.com' },
+            { name: '네이버', domain: 'naver.com' },
+            { name: '네이버 클라우드', domain: 'ncloud.com' },
+            { name: '롯데이노베이트', domain: 'lotteinnovate.com' },
+            { name: 'LIG 넥스원', domain: 'lignex1.com' },
+            { name: '토스 페이먼츠', domain: 'tosspayments.com' },
+            { name: '르노 코리아', domain: 'renaultkoream.com' },
+            { name: 'MBC C&I', domain: 'mbccni.co.kr' },
+            { name: 'SK쉴더스', domain: 'skshieldus.com' },
+            { name: 'NH농협은행', domain: 'nonghyup.com' },
+            { name: 'BC카드', domain: 'bccard.com' },
+            { name: '메가존클라우드', domain: 'megazone.com' },
+            { name: '딜로이트', domain: 'deloitte.com' },
+            { name: '에이블리코퍼레이션', domain: 'a-bly.com' },
+            { name: '엠로', domain: 'emro.co.kr' },
+            { name: 'goorm', domain: 'goorm.io' },
+            { name: '한일네트웍스', domain: 'hanilnetworks.com' },
+            { name: '가비아', domain: 'gabia.com' },
+            { name: '소프트캠프', domain: 'softcamp.co.kr' },
+            { name: '케이사인', domain: 'ksign.com' },
+            { name: '윈스테크넷', domain: 'wins21.com' },
+            { name: '한전KDN', domain: 'kdn.com' },
+            { name: 'NIT SERVICE', domain: 'nitsvc.com' },
+            { name: '이지케어텍', domain: 'ezcaretech.com' },
+            { name: '펜타시스템테크놀러지', domain: 'penta.co.kr' },
+            { name: '씨엔티테크', domain: 'cntt.co.kr' },
+            { name: '한컴시큐어', domain: 'hancomwith.com' },
+            { name: '가온데이터', domain: 'gaondata.com' },
+            { name: '고이장례연구소' },
+            { name: '더캐리', domain: 'the-carry.com' },
+            { name: '메가존소프트', domain: 'megazonesoft.com' },
+            { name: '인크로스', domain: 'incross.com' },
+            { name: '맘맘', domain: 'mommom.me' },
+            { name: '엑세스랩', domain: 'accesslab.co.kr' },
+            { name: '남강하이테크' },
+            { name: '네비웍스', domain: 'neviworks.com' },
+            { name: '빅마음' },
+            { name: '세율곡' },
+            { name: '에이샛', domain: 'asat.co.kr' },
+            { name: '오픈마루', domain: 'openmaru.io' },
+            { name: '울산대학교', domain: 'ulsan.ac.kr' },
+            { name: '유저커넥트' },
+            { name: '인베스티' },
+            { name: '주식회사 메디브', domain: 'medibloc.com' },
+            { name: '지에스티(가산)', domain: 'gst.co.kr' },
+            { name: '케이씨넷', domain: 'kcnet.co.kr' },
+            { name: '팬텍솔루션' },
+            { name: '피델릭스', domain: 'fidelix.co.kr' },
+            { name: '핀다', domain: 'finda.co.kr' },
+            { name: 'CMT정보통신' }
         ];
 
         window.makeCompanyChip = function(name, isLight) {
@@ -2600,17 +2653,58 @@
             return '<span class="' + cls + '">' + name + '</span>';
         };
 
+        window.escapeHtml = function(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        };
+
+        window.getCompanyInitials = function(name) {
+            var cleaned = String(name).replace(/[^A-Za-z0-9가-힣]/g, '');
+            return cleaned.slice(0, 2).toUpperCase();
+        };
+
+        window.makePlacementLogoCard = function(company) {
+            var name = window.escapeHtml(company.name);
+            var initials = window.escapeHtml(window.getCompanyInitials(company.name));
+            var logo = company.domain
+                ? '<img src="https://logo.clearbit.com/' + window.escapeHtml(company.domain) + '" alt="' + name + ' 로고" loading="lazy" onerror="this.remove()">'
+                : '';
+            return [
+                '<div class="placement-logo-card" aria-label="' + name + '">',
+                    '<div class="placement-logo-media">',
+                        logo,
+                        '<span class="placement-logo-fallback">' + initials + '</span>',
+                    '</div>',
+                    '<div>',
+                        '<div class="placement-logo-name">' + name + '</div>',
+                        '<div class="placement-logo-sub">Alumni Company</div>',
+                    '</div>',
+                '</div>'
+            ].join('');
+        };
+
+        window.makePlacementMarquee = function(companies, extraClass) {
+            var doubled = companies.concat(companies);
+            return '<div class="placement-marquee"><div class="placement-logo-track ' + (extraClass || '') + '">' +
+                doubled.map(window.makePlacementLogoCard).join('') +
+                '</div></div>';
+        };
+
         window.renderCompanyLogos = function() {
             var c1 = document.getElementById('career-concert-logos');
             if (c1) c1.innerHTML = window.companyListCareerConcert.map(function(c) { return window.makeCompanyChip(c, false); }).join('');
 
             var c2 = document.getElementById('placements-logos');
-            if (c2) c2.innerHTML = window.companyListPlacements.map(function(c) { return window.makeCompanyChip(c, true); }).join('');
-
-            var c3 = document.getElementById('placements-logos-muted');
-            if (c3) c3.innerHTML = window.companyListPlacementsMuted.map(function(name) {
-                return '<span class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold text-gray-500">' + name + '</span>';
-            }).join('');
+            if (c2) {
+                var midpoint = Math.ceil(window.companyListPlacements.length / 2);
+                c2.innerHTML =
+                    window.makePlacementMarquee(window.companyListPlacements.slice(0, midpoint), '') +
+                    window.makePlacementMarquee(window.companyListPlacements.slice(midpoint), 'placement-logo-track-slow');
+            }
         };
 
         window.initCareerSlider();
