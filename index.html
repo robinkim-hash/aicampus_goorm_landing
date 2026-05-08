@@ -159,58 +159,71 @@
         border-color: #e2e8f0;
         color: #334155;
     }
-    .placement-scroll-shell {
+    .placement-flow-panel {
         position: relative;
+        overflow: hidden;
+        padding: 2.8rem 0;
+        background:
+            linear-gradient(115deg, rgba(2, 8, 23, 0.96) 0%, rgba(2, 56, 117, 0.94) 48%, rgba(14, 116, 184, 0.82) 100%);
     }
-    .placement-scroll-shell::before,
-    .placement-scroll-shell::after {
+    .placement-flow-panel::before,
+    .placement-flow-panel::after {
         content: "";
         position: absolute;
-        top: 0;
-        bottom: 2.2rem;
-        width: min(8vw, 96px);
+        inset-y: 0;
+        width: min(12vw, 150px);
         z-index: 5;
         pointer-events: none;
     }
-    .placement-scroll-shell::before {
+    .placement-flow-panel::before {
         left: 0;
-        background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0) 100%);
+        background: linear-gradient(90deg, rgba(2, 8, 23, 0.98) 0%, rgba(2, 8, 23, 0) 100%);
     }
-    .placement-scroll-shell::after {
+    .placement-flow-panel::after {
         right: 0;
-        background: linear-gradient(270deg, #fff 0%, rgba(255,255,255,0) 100%);
+        background: linear-gradient(270deg, rgba(14, 116, 184, 0.88) 0%, rgba(14, 116, 184, 0) 100%);
     }
-    .placement-logo-board {
+    .placement-flow-shell {
+        position: relative;
+        z-index: 2;
         display: grid;
-        grid-auto-flow: column;
-        grid-template-rows: repeat(3, minmax(82px, auto));
-        grid-auto-columns: 220px;
+        gap: 1rem;
+    }
+    .placement-logo-row {
+        display: flex;
         gap: 0.9rem;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scroll-snap-type: x proximity;
-        padding: 0.25rem 2rem 1.05rem;
-        scrollbar-color: #cbd5e1 transparent;
-        scrollbar-width: thin;
+        width: max-content;
+        animation: placement-flow-left 46s linear infinite;
+        will-change: transform;
+    }
+    .placement-logo-row-reverse {
+        animation-name: placement-flow-right;
+        animation-duration: 54s;
+        transform: translateX(-50%);
+    }
+    .placement-flow-shell:hover .placement-logo-row {
+        animation-play-state: paused;
     }
     .placement-logo-card {
+        width: 280px;
         min-height: 82px;
+        flex: 0 0 auto;
         display: flex;
         align-items: center;
         gap: 0.85rem;
         padding: 1rem;
         border-radius: 1.15rem;
-        border: 1px solid #e2e8f0;
-        background: #fff;
-        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
-        scroll-snap-align: start;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 16px 34px rgba(2, 8, 23, 0.14);
+        backdrop-filter: blur(10px);
     }
     .placement-logo-media {
         width: 48px;
         height: 48px;
         border-radius: 0.9rem;
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.94);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -233,45 +246,31 @@
         line-height: 1;
     }
     .placement-logo-name {
-        color: #0f172a;
-        font-size: 0.93rem;
+        color: #fff;
+        font-size: 1rem;
         font-weight: 900;
         line-height: 1.22;
         word-break: keep-all;
     }
     .placement-logo-sub {
         margin-top: 0.18rem;
-        color: #94a3b8;
+        color: rgba(219, 234, 254, 0.68);
         font-size: 0.68rem;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
     }
-    .placement-scroll-hint {
-        margin-top: 0.9rem;
-        padding: 0 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        color: #64748b;
-        font-size: 0.78rem;
-        font-weight: 800;
+    @keyframes placement-flow-left {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
     }
-    .placement-scroll-hint-line {
-        height: 1px;
-        flex: 1;
-        background: linear-gradient(90deg, #e2e8f0 0%, transparent 100%);
+    @keyframes placement-flow-right {
+        from { transform: translateX(-50%); }
+        to { transform: translateX(0); }
     }
     @media (max-width: 640px) {
-        .placement-logo-board {
-            grid-template-rows: repeat(2, minmax(82px, auto));
-            grid-auto-columns: 190px;
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        .placement-scroll-hint {
-            padding: 0 1rem;
+        .placement-logo-card {
+            width: 230px;
         }
     }
     .btn-ai-gradient {
@@ -2057,15 +2056,8 @@
                 </div>
             </div>
             
-            <div class="bg-white rounded-[2.5rem] py-9 md:py-12 border border-gray-100 shadow-sm relative overflow-hidden">
-                <div class="px-8 md:px-12 mb-7 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-                    <div class="text-left">
-                        <p class="text-[11px] font-black tracking-[0.18em] uppercase text-blue-600 mb-2">Company Scale Flow</p>
-                        <h3 class="text-xl md:text-2xl font-black text-gray-900">대기업부터 중소·스타트업까지</h3>
-                    </div>
-                    <p class="text-sm text-gray-500 font-bold">오른쪽으로 넘기면 더 다양한 진출 기업을 볼 수 있습니다.</p>
-                </div>
-                <div id="placements-logos" class="placement-scroll-shell relative z-10"></div>
+            <div class="placement-flow-panel rounded-[2.5rem] border border-slate-800 shadow-xl">
+                <div id="placements-logos" class="placement-flow-shell"></div>
             </div>
         </div>
     </section>
@@ -2709,17 +2701,20 @@
             ].join('');
         };
 
-        window.makePlacementScrollBoard = function(companies) {
+        window.makePlacementLogoRow = function(companies, extraClass) {
+            var repeatedCompanies = companies.concat(companies);
             return [
-                '<div class="placement-logo-board" aria-label="졸업생 진출 기업 목록">',
-                    companies.map(window.makePlacementLogoCard).join(''),
-                '</div>',
-                '<div class="placement-scroll-hint" aria-hidden="true">',
-                    '<span>대기업 · 플랫폼 · 금융</span>',
-                    '<span class="placement-scroll-hint-line"></span>',
-                    '<span>중견 · 중소 · 스타트업</span>',
-                    '<i class="fa-solid fa-arrow-right-long text-slate-400"></i>',
+                '<div class="placement-logo-row ' + (extraClass || '') + '" aria-label="졸업생 진출 기업 목록">',
+                    repeatedCompanies.map(window.makePlacementLogoCard).join(''),
                 '</div>'
+            ].join('');
+        };
+
+        window.makePlacementFlowBoard = function(companies) {
+            var midpoint = Math.ceil(companies.length / 2);
+            return [
+                window.makePlacementLogoRow(companies.slice(0, midpoint), ''),
+                window.makePlacementLogoRow(companies.slice(midpoint), 'placement-logo-row-reverse')
             ].join('');
         };
 
@@ -2729,7 +2724,7 @@
 
             var c2 = document.getElementById('placements-logos');
             if (c2) {
-                c2.innerHTML = window.makePlacementScrollBoard(window.companyListPlacements);
+                c2.innerHTML = window.makePlacementFlowBoard(window.companyListPlacements);
             }
         };
 
