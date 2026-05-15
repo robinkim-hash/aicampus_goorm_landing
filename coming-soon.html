@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI CAMPUS - Coming Soon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #101010;
+      --line: rgba(255, 255, 255, 0.09);
+      --muted: rgba(255, 255, 255, 0.45);
+      --blue: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: #fff;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: radial-gradient(rgba(255,255,255,0.1) 0.5px, transparent 0.5px);
+      background-size: 3px 3px;
+      mix-blend-mode: soft-light;
+    }
+
+    .hero-grid {
+      background-image:
+        radial-gradient(circle at center, rgba(37, 99, 235, 0.35) 0%, rgba(37, 99, 235, 0) 56%),
+        radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: auto, 40px 40px;
+      background-position: center, center;
+    }
+
+    .mix-nav {
+      mix-blend-mode: difference;
+    }
+
+    .soft-reveal {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .soft-reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .moel-white {
+      filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255,255,255,0.2));
+      opacity: 0.96;
+    }
+
+    .track-card:hover .track-title {
+      color: #2563eb;
+    }
+
+    .track-card:hover .track-arrow {
+      opacity: 1;
+    }
+
+    .timeline-card {
+      transition: transform 0.2s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <div class="relative z-10 min-h-screen selection:bg-white selection:text-black">
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex justify-between items-center bg-black/35 backdrop-blur-md border-b border-white/5">
+      <div class="text-xl font-black tracking-tighter uppercase italic">AI Campus.</div>
+      <div class="flex items-center gap-10">
+        <div class="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-white/55">
+          <a href="#philosophy" class="hover:text-white transition-colors">Philosophy</a>
+          <a href="#tracks" class="hover:text-white transition-colors">Tracks</a>
+          <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+          <a href="#career-test" class="hover:text-white transition-colors">Career Test</a>
+        </div>
+        <a href="#notify" class="notify-jump-link bg-white text-black px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_25px_rgba(255,255,255,0.35)]">사전신청하기</a>
+      </div>
+    </nav>
+
+    <div class="fixed right-4 md:right-6 bottom-6 z-[90] hidden sm:flex flex-col gap-3 items-end">
+      <a href="#notify" class="notify-jump-link inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-full text-xs font-black tracking-[0.12em] uppercase shadow-[0_10px_30px_rgba(37,99,235,0.45)] hover:scale-105 transition-transform">
+        <i class="fa-regular fa-envelope"></i>
+        사전 알림 신청하기
+      </a>
+      <a href="career-test.html" class="inline-flex items-center gap-2 bg-white text-black px-4 py-2.5 rounded-full text-[11px] font-black tracking-[0.1em] uppercase shadow-[0_10px_24px_rgba(255,255,255,0.2)] hover:scale-105 transition-transform">
+        <i class="fa-solid fa-clipboard-check"></i>
+        커리어 테스트
+      </a>
+    </div>
+
+    <div class="fixed sm:hidden bottom-0 inset-x-0 z-[90] p-3 bg-black/85 backdrop-blur-md border-t border-white/10">
+      <a href="#notify" class="notify-jump-link w-full inline-flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-2xl text-sm font-black tracking-[0.12em] uppercase shadow-[0_10px_30px_rgba(37,99,235,0.45)]">
+        <i class="fa-regular fa-envelope"></i>
+        사전 알림 신청하기
+      </a>
+    </div>
+
+    <header class="hero-grid relative pt-64 pb-40 px-6 md:px-12 overflow-hidden soft-reveal">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col items-start gap-3 mb-10">
+          <div class="flex items-center gap-3 md:gap-4">
+            <img src="https://statics.goorm.io/logo/goorm.svg" alt="goorm 로고" class="moel-white h-8 md:h-9 w-auto object-contain" />
+            <span class="text-sm md:text-base font-black tracking-[0.18em] text-white/90 uppercase">X</span>
+            <img src="https://www.moel.go.kr/images/layout/logo.png" alt="고용노동부 로고" class="moel-white h-8 md:h-9 w-auto object-contain" />
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-[0.26em] border border-white/20 px-4 py-1.5 rounded-full text-white/80">
+            6월 16일, 당신의 한계를 뛰어넘을 시간이 옵니다
+          </span>
+          <a
+            href="#notify"
+            class="notify-jump-link inline-flex items-center gap-2 rounded-full bg-white text-black px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] shadow-[0_10px_24px_rgba(255,255,255,0.24)] hover:scale-105 transition-transform"
+          >
+            <i class="fa-regular fa-envelope"></i>
+            사전 알림 신청하기
+          </a>
+        </div>
+
+        <h1 class="text-[10vw] md:text-[7.5vw] font-black leading-[0.9] tracking-tighter mb-16 uppercase italic break-keep">
+          AI is <span class="text-blue-600">Changing</span><br />
+          The Jobs.
+        </h1>
+
+        <div class="grid md:grid-cols-2 gap-20 items-end">
+          <div class="max-w-xl">
+            <h2 class="text-3xl md:text-5xl font-black mb-8 leading-tight tracking-tight break-keep">
+              당신은 바꾸는 쪽인가, <br />바뀌는 쪽인가.
+            </h2>
+            <p class="text-lg md:text-xl text-white/55 font-medium leading-relaxed mb-12 break-keep">
+              <span class="text-white">AI CAMPUS</span>는 구름이 설계한 고밀도 실무형 교육 캠퍼스입니다.
+              결심한 사람에게만 열리는 6개월, 이제 당신의 가치를 결과로 증명할 시간입니다.
+            </p>
+            <div class="flex items-center gap-8">
+              <div class="flex flex-col">
+                <span class="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">Duration</span>
+                <span class="text-2xl font-black tracking-tight">6 Months</span>
+              </div>
+              <div class="h-10 w-px bg-white/10"></div>
+              <div class="flex flex-col">
+                <span class="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">Total Hours</span>
+                <span class="text-2xl font-black tracking-tight underline decoration-blue-600 underline-offset-8">752H</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-end">
+            <div class="flex gap-4 md:gap-8 mb-4 text-right">
+              <div class="flex flex-col items-center">
+                <span id="cd-days" class="text-4xl md:text-6xl font-black tracking-tighter tabular-nums">00</span>
+                <span class="text-[9px] font-black uppercase tracking-widest text-white/30 mt-2">일</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span id="cd-hours" class="text-4xl md:text-6xl font-black tracking-tighter tabular-nums">00</span>
+                <span class="text-[9px] font-black uppercase tracking-widest text-white/30 mt-2">시간</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span id="cd-minutes" class="text-4xl md:text-6xl font-black tracking-tighter tabular-nums">00</span>
+                <span class="text-[9px] font-black uppercase tracking-widest text-white/30 mt-2">분</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span id="cd-seconds" class="text-4xl md:text-6xl font-black tracking-tighter tabular-nums">00</span>
+                <span class="text-[9px] font-black uppercase tracking-widest text-white/30 mt-2">초</span>
+              </div>
+            </div>
+            <p class="text-[10px] font-black uppercase tracking-widest text-blue-600 animate-pulse">06.16 Registration Opens</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="soft-reveal py-20 px-6 md:px-12 bg-white/5 border-y border-white/5">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <article class="rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/18 to-white/10 px-5 py-6">
+          <p class="text-[10px] font-black uppercase tracking-[0.22em] text-blue-200">브랜드대상</p>
+          <p class="mt-3 text-2xl md:text-3xl font-black tracking-tight text-white">2년 연속 1위</p>
+          <p class="mt-1 text-xs font-bold text-white/80">2024·2025 코딩 교육 부문</p>
+        </article>
+        <article class="rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/18 to-white/10 px-5 py-6">
+          <p class="text-[10px] font-black uppercase tracking-[0.22em] text-blue-200">누적 수강생</p>
+          <p class="mt-3 text-2xl md:text-3xl font-black tracking-tight text-white">2,000+</p>
+          <p class="mt-1 text-xs font-bold text-white/80">KDT 누적 기준</p>
+        </article>
+        <article class="rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/18 to-white/10 px-5 py-6">
+          <p class="text-[10px] font-black uppercase tracking-[0.22em] text-blue-200">수업 만족도</p>
+          <p class="mt-3 text-2xl md:text-3xl font-black tracking-tight text-white">4.8점</p>
+          <p class="mt-1 text-xs font-bold text-white/80">HRD-net 기준</p>
+        </article>
+        <article class="rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-500/18 to-white/10 px-5 py-6">
+          <p class="text-[10px] font-black uppercase tracking-[0.22em] text-blue-200">취업 성공률</p>
+          <p class="mt-3 text-2xl md:text-3xl font-black tracking-tight text-white">90%</p>
+          <p class="mt-1 text-xs font-bold text-white/80">클라우드 3회차 기준</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="soft-reveal px-6 md:px-12 py-8">
+      <div class="max-w-7xl mx-auto rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-4 text-center">
+        <p class="text-sm md:text-base font-medium text-white/70 break-keep">
+          본 과정은 고용노동부 주관 K-디지털 트레이닝 AI 캠퍼스 사업으로 운영됩니다.
+        </p>
+      </div>
+    </section>
+
+    <section id="philosophy" class="soft-reveal py-40 bg-white text-black px-6 md:px-12 rounded-[4rem] md:rounded-[6rem] mx-2 md:mx-6 shadow-2xl relative z-20">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-5xl mb-32">
+          <h3 class="text-4xl md:text-7xl font-black tracking-tighter leading-[0.95] uppercase italic mb-16 break-keep">
+            AI는 이미 데이터를 분석하고, <br />
+            코드를 짜고, 보안을 점검합니다.
+          </h3>
+          <p class="text-2xl md:text-4xl font-bold leading-tight tracking-tight break-keep text-black/80">
+            문제는 AI를 쓰는 사람이 아니라, <br />
+            <span class="text-blue-600 underline decoration-blue-200 underline-offset-8">AI를 설계하고 운영하는 사람</span>이 턱없이 부족하다는 것입니다.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-20">
+          <div class="lg:col-span-8">
+            <div class="max-w-3xl space-y-12">
+              <p class="text-xl md:text-2xl font-bold leading-relaxed break-keep">
+                산업 현장의 기업들이 이 과정에 직접 참여하는 이유가 있습니다.
+                <span class="block mt-4 bg-black text-white px-4 py-2 inline-block">지금 당장 필요한 사람을 직접 키우기 위해서입니다.</span>
+              </p>
+              <p class="text-lg md:text-xl text-black/60 font-medium leading-relaxed break-keep">
+                데이터, 인프라, 보안, 풀스택.
+                AI 서비스가 돌아가는 데 필요한 모든 직무를 <span class="text-black font-black">752시간 동안</span> 실전으로 쌓습니다.
+                이론이 아니라 실제로 배포되는 서비스를 직접 만듭니다.
+              </p>
+            </div>
+          </div>
+          <div class="lg:col-span-4 flex flex-col justify-end items-start lg:items-end">
+            <div class="space-y-10 w-full">
+              <div class="flex justify-between items-end border-b border-black/10 pb-4">
+                <span class="text-[10px] font-black uppercase tracking-widest">Training Time</span>
+                <span class="text-4xl font-black italic underline decoration-blue-600">752H</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-black/10 pb-4">
+                <span class="text-[10px] font-black uppercase tracking-widest">Real Project</span>
+                <span class="text-4xl font-black italic">80% +</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-black/10 pb-4">
+                <span class="text-[10px] font-black uppercase tracking-widest">K-Digital Training</span>
+                <span class="text-4xl font-black italic text-blue-600">GOORM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tracks" class="soft-reveal py-40 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-24 border-b border-white/10 pb-12">
+          <h3 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-blue-600">07.21 Tracks.</h3>
+          <div class="text-right hidden md:block">
+            <span class="text-[10px] font-black uppercase tracking-widest text-white/30 block mb-2">Selection Criteria</span>
+            <span class="text-xl font-bold">Only for Architects</span>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-24 mb-40">
+          <article class="track-card group cursor-pointer">
+            <div class="flex justify-between items-start mb-8">
+              <span class="text-sm font-black text-white/20 italic tracking-tighter">01.</span>
+              <div class="flex gap-2">
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Data</span>
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Platform</span>
+              </div>
+            </div>
+            <h4 class="track-title text-3xl md:text-5xl font-black leading-none tracking-tighter mb-10 break-keep uppercase italic transition-colors">
+              AI 네이티브 데이터 플랫폼 엔지니어
+            </h4>
+            <div class="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-all border-t border-white/10 pt-6">
+              <span class="text-[10px] font-black uppercase tracking-[0.2em]">752 Hours of Mastery</span>
+              <i class="fa-solid fa-arrow-right track-arrow opacity-50 transition-opacity"></i>
+            </div>
+          </article>
+
+          <article class="track-card group cursor-pointer">
+            <div class="flex justify-between items-start mb-8">
+              <span class="text-sm font-black text-white/20 italic tracking-tighter">02.</span>
+              <div class="flex gap-2">
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Fullstack</span>
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">AX</span>
+              </div>
+            </div>
+            <h4 class="track-title text-3xl md:text-5xl font-black leading-none tracking-tighter mb-10 break-keep uppercase italic transition-colors">
+              AX 서비스 풀스택 빌더
+            </h4>
+            <div class="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-all border-t border-white/10 pt-6">
+              <span class="text-[10px] font-black uppercase tracking-[0.2em]">752 Hours of Mastery</span>
+              <i class="fa-solid fa-arrow-right track-arrow opacity-50 transition-opacity"></i>
+            </div>
+          </article>
+
+          <article class="track-card group cursor-pointer">
+            <div class="flex justify-between items-start mb-8">
+              <span class="text-sm font-black text-white/20 italic tracking-tighter">03.</span>
+              <div class="flex gap-2">
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Infra</span>
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Architecture</span>
+              </div>
+            </div>
+            <h4 class="track-title text-3xl md:text-5xl font-black leading-none tracking-tighter mb-10 break-keep uppercase italic transition-colors">
+              AI 인프라 운영 및 설계 엔지니어
+            </h4>
+            <div class="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-all border-t border-white/10 pt-6">
+              <span class="text-[10px] font-black uppercase tracking-[0.2em]">752 Hours of Mastery</span>
+              <i class="fa-solid fa-arrow-right track-arrow opacity-50 transition-opacity"></i>
+            </div>
+          </article>
+
+          <article class="track-card group cursor-pointer">
+            <div class="flex justify-between items-start mb-8">
+              <span class="text-sm font-black text-white/20 italic tracking-tighter">04.</span>
+              <div class="flex gap-2">
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Security</span>
+                <span class="text-[9px] font-black uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full opacity-40">Native</span>
+              </div>
+            </div>
+            <h4 class="track-title text-3xl md:text-5xl font-black leading-none tracking-tighter mb-10 break-keep uppercase italic transition-colors">
+              AI 네이티브 보안 엔지니어
+            </h4>
+            <div class="flex justify-between items-center opacity-40 group-hover:opacity-100 transition-all border-t border-white/10 pt-6">
+              <span class="text-[10px] font-black uppercase tracking-[0.2em]">752 Hours of Mastery</span>
+              <i class="fa-solid fa-arrow-right track-arrow opacity-50 transition-opacity"></i>
+            </div>
+          </article>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-[3rem] p-12 md:p-20">
+          <div class="grid md:grid-cols-3 gap-12 items-center">
+            <span class="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">Upcoming in Sep</span>
+            <div class="text-xl md:text-2xl font-black uppercase tracking-tighter italic opacity-40">AI 데이터 모델 설계 및 운영</div>
+            <div class="text-xl md:text-2xl font-black uppercase tracking-tighter italic opacity-40">AX 서비스 풀스택 빌더 2차</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="soft-reveal py-40 bg-[#0a0a0a]">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-28">
+        <div class="grid lg:grid-cols-2 gap-24 items-center">
+          <div class="aspect-[4/5] bg-[#111] rounded-[3rem] overflow-hidden relative border border-white/5">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-12">
+              <i class="fa-solid fa-location-dot text-white mb-8 opacity-20 text-[110px]"></i>
+              <h4 class="text-3xl font-black uppercase italic tracking-tighter text-center">Goorm Square</h4>
+              <p class="text-white/40 mt-6 text-sm font-bold uppercase tracking-widest text-center leading-relaxed">
+                온/오프라인 하이브리드<br />수강생 전용 라운지 무료 Pass
+              </p>
+            </div>
+          </div>
+
+          <div class="max-w-xl">
+            <span class="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-6 block">Experience 01</span>
+            <h3 class="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-[0.9] mb-12">
+              Space for <br />Growth.
+            </h3>
+            <p class="text-xl text-white/40 font-medium leading-relaxed mb-16 break-keep">
+              구름 IDE로 완성되는 온라인 인프라는 기본입니다. 서로의 코드가 충돌하고 영감이 전염되는 오프라인 캠퍼스 공간에서 진정한 협업을 경험하세요.
+            </p>
+            <div class="space-y-6">
+              <div class="flex items-center gap-6">
+                <i class="fa-solid fa-users text-blue-600 text-xl"></i>
+                <h5 class="font-black text-lg uppercase tracking-tight italic">과정 중 대규모 합반 프로젝트</h5>
+              </div>
+              <div class="flex items-center gap-6 text-white/60">
+                <i class="fa-solid fa-trophy text-xl"></i>
+                <h5 class="font-black text-lg uppercase tracking-tight italic">이후 KDT 연합 해커톤</h5>
+              </div>
+              <div class="flex items-center gap-6 text-white/60">
+                <i class="fa-solid fa-music text-xl"></i>
+                <h5 class="font-black text-lg uppercase tracking-tight italic">매월 커리어 콘서트</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+          <article class="bg-[#0f1118] border border-white/10 rounded-[2.4rem] p-10">
+            <div class="flex items-center gap-3 text-blue-500 mb-6">
+              <i class="fa-solid fa-users text-xl"></i>
+              <span class="text-[11px] font-black uppercase tracking-[0.25em]">Collaborative Project</span>
+            </div>
+            <h4 class="text-3xl font-black leading-tight tracking-tight break-keep">직군의 장벽을 허무는<br />대규모 합반 프로젝트</h4>
+            <p class="mt-5 text-white/55 text-base leading-relaxed break-keep">
+              기획, 데이터, 인프라, 보안, 풀스택 수강생이 하나의 스쿼드로 움직이며 실제 서비스 아키텍처를 공동 설계·구현·배포합니다.
+            </p>
+          </article>
+
+          <article class="bg-[#0f1118] border border-white/10 rounded-[2.4rem] p-10">
+            <div class="flex items-center gap-3 text-yellow-400 mb-6">
+              <i class="fa-solid fa-trophy text-xl"></i>
+              <span class="text-[11px] font-black uppercase tracking-[0.25em]">KDT Joint Hackathon</span>
+            </div>
+            <h4 class="text-3xl font-black leading-tight tracking-tight break-keep">과정 이후, KDT 훈련생과<br />함께하는 연합 해커톤</h4>
+            <p class="mt-5 text-white/55 text-base leading-relaxed break-keep">
+              합반 프로젝트와는 별도로, 캠퍼스 과정을 마친 뒤 다른 KDT 훈련생들과 24시간 연합 해커톤을 진행합니다.
+            </p>
+            <div class="mt-6 grid grid-cols-2 gap-3">
+              <img src="hackathon-group-1.jpeg" alt="해커톤 1회차" class="h-32 w-full object-cover rounded-xl border border-white/10" />
+              <img src="hackathon-group-2.jpeg" alt="해커톤 2회차" class="h-32 w-full object-cover rounded-xl border border-white/10" />
+            </div>
+          </article>
+        </div>
+
+        <article class="bg-blue-600 rounded-[2.8rem] p-10 md:p-12 text-white">
+          <div class="flex items-center gap-3 mb-6">
+            <i class="fa-solid fa-music text-2xl"></i>
+            <span class="text-[11px] font-black uppercase tracking-[0.25em] text-blue-100">Career Concert</span>
+          </div>
+          <h4 class="text-3xl md:text-4xl font-black uppercase italic tracking-tight leading-tight">Career Concert & Networking</h4>
+          <p class="mt-4 text-blue-100 text-base md:text-lg leading-relaxed break-keep">
+            매월 IT 업계 현직자와 함께 취업 트렌드, 포트폴리오, 면접 피드백을 다룹니다. 재학생부터 졸업생까지 이어지는 오픈 커뮤니티 네트워킹으로 기회를 확장합니다.
+          </p>
+          <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="rounded-2xl bg-white/15 border border-white/20 p-4">
+              <p class="text-[11px] font-black uppercase tracking-widest text-blue-100">총 참여자</p>
+              <p class="mt-1 text-3xl font-black">700+</p>
+            </div>
+            <div class="rounded-2xl bg-white/15 border border-white/20 p-4">
+              <p class="text-[11px] font-black uppercase tracking-widest text-blue-100">초청 현직자</p>
+              <p class="mt-1 text-3xl font-black">30+</p>
+            </div>
+            <div class="rounded-2xl bg-white/15 border border-white/20 p-4">
+              <p class="text-[11px] font-black uppercase tracking-widest text-blue-100">파트너 기관</p>
+              <p class="mt-1 text-3xl font-black">20+</p>
+            </div>
+            <div class="rounded-2xl bg-white/15 border border-white/20 p-4">
+              <p class="text-[11px] font-black uppercase tracking-widest text-blue-100">누적 진행</p>
+              <p class="mt-1 text-3xl font-black">17회</p>
+            </div>
+          </div>
+          <div class="mt-7 flex flex-wrap gap-2 text-[11px] font-black text-blue-100">
+            <span class="px-3 py-1.5 rounded-full bg-white/20 border border-white/25">Google</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/20 border border-white/25">Apple</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/20 border border-white/25">삼성전자</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/20 border border-white/25">네이버</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/20 border border-white/25">네이버 클라우드</span>
+            <span class="px-3 py-1.5 rounded-full bg-white/20 border border-white/25">롯데이노베이트</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="soft-reveal py-40 bg-white text-black px-6 md:px-12 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-24 relative z-10">
+        <div class="flex-1">
+          <span class="text-[10px] font-black uppercase tracking-[0.4em] text-black/30 mb-8 block">Final Proof</span>
+          <h3 class="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-[0.9] mb-12">
+            Official <br /><span class="text-blue-600">Proof</span>.
+          </h3>
+          <p class="text-xl text-black/60 font-medium leading-relaxed mb-12 break-keep">
+            752시간의 치열함을 견딘 결과물은 단순한 종이가 아닙니다. 당신이 현업에 즉시 투입 가능한 실전 설계자임을 증명하는 가장 확실한 패스포트입니다.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <div class="bg-black text-white px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">구름 파트너사 채용 우대</div>
+            <div class="border border-black/10 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest">디지털 배지 발급</div>
+          </div>
+        </div>
+        <div class="flex-1 w-full max-w-lg">
+          <div class="aspect-[3/4] bg-[#fdfdfd] border-[1.1rem] border-white shadow-2xl rounded-sm p-10 flex flex-col justify-between items-start transform rotate-2">
+            <div class="flex justify-between items-start w-full opacity-20">
+              <span class="text-[10px] font-black uppercase tracking-[0.3em]">AI CAMPUS</span>
+              <i class="fa-solid fa-award text-4xl"></i>
+            </div>
+            <div class="space-y-4">
+              <span class="text-[10px] font-black uppercase tracking-[0.4em] text-black/20">Certified Architect</span>
+              <h5 class="text-5xl font-black italic tracking-tighter uppercase underline decoration-blue-600 underline-offset-8">Gildong.</h5>
+            </div>
+            <div class="w-full border-t border-black/10 pt-10">
+              <p class="text-[10px] font-bold text-black/40 uppercase tracking-widest leading-loose">
+                752H ADVANCED AI <br />ENGINEERING TRACK COMPLETED.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="soft-reveal py-36 px-6 md:px-12 bg-[#070707]">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-12">
+          <span class="text-[10px] font-black uppercase tracking-[0.4em] text-white/35">Schedule</span>
+          <h3 class="mt-4 text-4xl md:text-6xl font-black uppercase italic tracking-tighter">입교 스케줄</h3>
+        </div>
+        <div class="space-y-4">
+          <article class="timeline-card p-8 rounded-[1.8rem] border border-white/10 bg-white/5">
+            <p class="text-xs font-black uppercase tracking-[0.2em] text-white/35">06.16 - 07.14</p>
+            <h4 class="mt-2 text-2xl font-black">1차 수강생 모집</h4>
+            <p class="mt-1 text-white/55">서류 및 면접 전형을 통한 정예 수강생 선발</p>
+          </article>
+          <article class="timeline-card p-8 rounded-[1.8rem] border border-white/10 bg-white/5">
+            <p class="text-xs font-black uppercase tracking-[0.2em] text-white/35">07.17</p>
+            <h4 class="mt-2 text-2xl font-black">최종 합격자 발표</h4>
+            <p class="mt-1 text-white/55">AI 캠퍼스 1기 합격자 안내</p>
+          </article>
+          <article class="timeline-card p-8 rounded-[1.8rem] border border-blue-500/50 bg-gradient-to-br from-blue-600/40 to-indigo-600/40">
+            <p class="text-xs font-black uppercase tracking-[0.2em] text-blue-100">07.21</p>
+            <h4 class="mt-2 text-2xl font-black">1차 과정 대개강</h4>
+            <p class="mt-1 text-blue-100/80">현업 밀착형 4개 트랙 정규 교육 시작</p>
+          </article>
+          <article class="timeline-card p-8 rounded-[1.8rem] border border-white/10 bg-white/5 opacity-60">
+            <p class="text-xs font-black uppercase tracking-[0.2em] text-white/35">09월 예정</p>
+            <h4 class="mt-2 text-2xl font-black">2차 과정 정식 오픈</h4>
+            <p class="mt-1 text-white/55">데이터 모델 및 풀스택 2차 과정 순차 운영</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="career-test" class="soft-reveal px-6 md:px-12 py-10 bg-[#070707]">
+      <div class="max-w-5xl mx-auto rounded-[2rem] border border-white/10 bg-white/[0.04] px-7 md:px-10 py-8 md:py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <p class="text-[10px] font-black uppercase tracking-[0.32em] text-blue-300">Career Test</p>
+          <h4 class="mt-2 text-2xl md:text-3xl font-black tracking-tight break-keep">나에게 맞는 AI 커리어 트랙, 3분 진단</h4>
+          <p class="mt-2 text-white/60 break-keep">기존 랜딩페이지의 커리어 테스트로 바로 연결됩니다.</p>
+        </div>
+        <a href="career-test.html" class="inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-3 text-sm font-black uppercase tracking-[0.12em] hover:scale-105 transition-transform">
+          테스트 시작하기
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <section id="notify" class="soft-reveal py-56 relative overflow-hidden px-6">
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <h3 class="text-6xl md:text-[10vw] font-black uppercase italic tracking-tighter leading-none mb-16">
+          YOUR <span class="text-blue-600">TURN</span>.
+        </h3>
+
+        <div id="notify-form-wrap">
+          <form id="notify-form" class="max-w-2xl mx-auto flex flex-col gap-12">
+            <p class="text-xl md:text-2xl text-white/40 font-bold break-keep italic">
+              6월 16일 오전 10시, <br />설계자로 거듭날 당신을 위한 첫 번째 초대장이 발송됩니다.
+            </p>
+            <div class="relative group">
+              <input
+                id="notify-email"
+                type="email"
+                placeholder="ENTER YOUR EMAIL"
+                required
+                class="w-full bg-transparent border-b-2 border-white/10 px-0 py-8 text-2xl font-black text-white focus:outline-none focus:border-blue-600 transition-colors uppercase placeholder:text-white/10"
+              />
+              <button type="submit" class="absolute right-0 top-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <p class="text-[9px] font-black uppercase tracking-[0.4em] text-white/20 mt-4 underline decoration-blue-600/30 underline-offset-8">
+              Registration: 06.16 - 07.14
+            </p>
+          </form>
+        </div>
+
+        <div id="notify-success" class="hidden p-20 bg-blue-600 rounded-[4rem] shadow-2xl shadow-blue-500/40">
+          <i class="fa-solid fa-circle-check text-6xl mb-8"></i>
+          <h4 class="text-4xl font-black italic tracking-tighter mb-4">READY TO ARCHITECT.</h4>
+          <p class="text-blue-100 font-bold uppercase tracking-widest">See you on June 16.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-20 px-6 md:px-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-12 text-white/30">
+      <div class="flex flex-col items-center md:items-start gap-2">
+        <span class="text-xl font-black uppercase italic tracking-tighter text-white">AI Campus.</span>
+        <span class="text-[9px] font-black uppercase tracking-[0.4em] italic">Architect the Future with Goorm</span>
+      </div>
+      <div class="flex gap-16 text-[9px] font-black uppercase tracking-[0.3em]">
+        <a href="#" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#" class="hover:text-white transition-colors">Career</a>
+        <a href="#" class="hover:text-white transition-colors">Contact</a>
+      </div>
+      <div class="text-[9px] font-black uppercase tracking-widest">
+        © 2026 AI CAMPUS X GOORM.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const reveal = document.querySelectorAll(".soft-reveal");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        reveal.forEach((el) => io.observe(el));
+      } else {
+        reveal.forEach((el) => el.classList.add("show"));
+      }
+
+      function pad(v) {
+        return String(v).padStart(2, "0");
+      }
+
+      function getTargetDate() {
+        const fixed = new Date("2026-07-21T09:00:00+09:00");
+        const now = new Date();
+        if (now <= fixed) return fixed;
+        const next = new Date(fixed);
+        next.setFullYear(fixed.getFullYear() + 1);
+        return next;
+      }
+
+      const target = getTargetDate();
+      const d = document.getElementById("cd-days");
+      const h = document.getElementById("cd-hours");
+      const m = document.getElementById("cd-minutes");
+      const s = document.getElementById("cd-seconds");
+
+      function tick() {
+        const now = new Date();
+        let diff = target.getTime() - now.getTime();
+        if (diff < 0) diff = 0;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        if (d) d.textContent = pad(days);
+        if (h) h.textContent = pad(hours);
+        if (m) m.textContent = pad(mins);
+        if (s) s.textContent = pad(secs);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+
+      const form = document.getElementById("notify-form");
+      const input = document.getElementById("notify-email");
+      const wrap = document.getElementById("notify-form-wrap");
+      const done = document.getElementById("notify-success");
+      const notifyJumpLinks = document.querySelectorAll(".notify-jump-link");
+
+      if (form && input && wrap && done) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!input.value) return;
+          wrap.classList.add("hidden");
+          done.classList.remove("hidden");
+        });
+      }
+
+      if (notifyJumpLinks.length && input) {
+        notifyJumpLinks.forEach(function (link) {
+          link.addEventListener("click", function () {
+            setTimeout(function () {
+              input.focus();
+            }, 350);
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
