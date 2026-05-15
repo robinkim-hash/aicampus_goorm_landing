@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=coming-soon.html">
+    <script>
+      (function () {
+        if (!window.location.pathname.endsWith("/coming-soon.html")) {
+          window.location.replace("coming-soon.html");
+        }
+      })();
+    </script>
     <title>goorm AI Campus - 실무형 AI 엔지니어 입학 안내</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
@@ -465,6 +473,7 @@
                 <a href="#ai-career-roadmap" class="hover:text-blue-600 transition">전공 로드맵</a>
                 <a href="#github-output" class="hover:text-blue-600 transition font-bold">AI Lab</a>
                 <a href="#career-support" class="hover:text-blue-600 transition font-bold">커리어센터</a>
+                <a href="./coming-soon.html" class="hover:text-blue-600 transition font-bold text-sky-600">커밍쑨</a>
                 <a href="#event" class="hover:text-blue-600 transition text-gray-400">이벤트</a>
             </div>
             <button class="bg-[#FEE500] text-[#000000] px-5 py-2 rounded-xl font-bold text-sm hover:bg-[#FADA0A] transition flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transform transition-all">
@@ -496,6 +505,10 @@
                     <a href="https://www.youtube.com/watch?v=bnQMtkDxgLc&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto min-h-[60px] px-4 inline-flex items-center justify-center gap-2 text-white/82 hover:text-white font-bold transition-colors">
                         <i class="fa-brands fa-youtube text-lg"></i>
                         캠퍼스 영상 보기
+                    </a>
+                    <a href="./coming-soon.html" class="w-full sm:w-auto min-h-[60px] px-4 inline-flex items-center justify-center gap-2 text-sky-100 hover:text-white font-bold transition-colors">
+                        <i class="fa-solid fa-hourglass-half text-base"></i>
+                        커밍쑨 페이지
                     </a>
                 </div>
             </div>
