@@ -317,6 +317,15 @@
             renderQuestion();
         }
 
+        function shuffleOptions(options) {
+            const shuffled = [...options];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         function renderQuestion() {
             const currentQ = questions[currentQuestionIndex];
             
@@ -327,9 +336,10 @@
             // Render Title
             questionTitle.innerHTML = currentQ.q;
             
-            // Render Options (Shuffle them slightly for UX, or keep static. Keeping static for now)
+            // Render Options (shuffled each time question is shown)
+            const shuffledOptions = shuffleOptions(currentQ.options);
             optionsContainer.innerHTML = '';
-            currentQ.options.forEach(opt => {
+            shuffledOptions.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = "option-btn w-full text-left p-4 sm:p-5 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 text-sm sm:text-base leading-snug";
                 btn.innerHTML = opt.text;
