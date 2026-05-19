@@ -1,286 +1,405 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>구름톤 트레이닝 | 나에게 맞는 직무 찾기</title>
+    <title>AI 빌더 성향 테스트 - 구름 AI 캠퍼스</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
-        :root {
-            --goorm-blue: #3391fb;
-            --goorm-blue-light: #ebf5ff;
-            --goorm-dark: #1e293b;
-            --goorm-bg: #f8fafc;
-        }
-
+        
         body {
             font-family: 'Pretendard', sans-serif;
-            background:
-                radial-gradient(circle at top right, rgba(51, 145, 251, 0.12), transparent 34%),
-                linear-gradient(180deg, #f8fbff 0%, #f8fafc 100%);
-            color: #334155;
-            letter-spacing: -0.02em;
+            background-color: #0f172a; /* slate-900 */
+            color: #f8fafc; /* slate-50 */
         }
 
-        .test-option {
-            background: white;
-            border: 2px solid #f1f5f9;
-            border-radius: 1rem;
-            padding: 1.25rem;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            font-weight: 700;
-            color: #475569;
-            box-shadow: 0 2px 4px rgba(15, 23, 42, 0.03);
+        .fade-in {
+            animation: fadeIn 0.4s ease-in forwards;
         }
 
-        .test-option:hover {
-            border-color: var(--goorm-blue);
-            background: var(--goorm-blue-light);
-            color: var(--goorm-blue);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .option-btn:hover {
             transform: translateY(-2px);
+            border-color: #3b82f6; /* blue-500 */
+            background-color: #1e293b; /* slate-800 */
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
         }
 
-        .career-test-btn {
-            background: linear-gradient(135deg, #3391fb 0%, #6dd5fa 100%);
-            color: white;
-            border-radius: 9999px;
-            font-weight: 800;
-            box-shadow: 0 10px 26px rgba(51, 145, 251, 0.28);
-            transition: all 0.25s ease;
+        .loader {
+            border: 4px solid #1e293b;
+            border-bottom-color: #3b82f6;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
         }
 
-        .career-test-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 32px rgba(51, 145, 251, 0.34);
-        }
-
-        .fade-up {
-            animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
-        <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-            <a href="./index.html" class="flex items-center gap-2">
-                <span class="text-2xl font-bold text-slate-900 tracking-tight">goorm<span class="text-blue-600">thon</span></span>
-                <span class="rounded bg-slate-100 px-2 py-1 text-xs font-bold text-slate-600">트레이닝</span>
-            </a>
-            <a href="./index.html" class="text-sm font-bold text-slate-500 transition hover:text-slate-800">
-                홈으로 돌아가기
-            </a>
-        </div>
-    </header>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-    <main class="mx-auto flex min-h-[calc(100vh-73px)] max-w-6xl items-center px-5 py-10 sm:px-8">
-        <div class="mx-auto w-full max-w-3xl">
-            <section id="test-intro" class="fade-up rounded-[2rem] border border-white/70 bg-white p-8 text-center shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-12">
-                <div class="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-blue-50 text-4xl text-blue-500 shadow-inner shadow-blue-100">
-                    <i class="fa-solid fa-compass"></i>
+    <!-- 메인 컨테이너 -->
+    <div id="app-container" class="w-full max-w-2xl bg-slate-900/50 rounded-2xl p-6 sm:p-10 relative overflow-hidden">
+        
+        <!-- 1. 인트로 화면 -->
+        <div id="intro-screen" class="text-center flex flex-col items-center fade-in">
+            <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6">
+                <i data-lucide="cloud-lightning" class="w-8 h-8 text-blue-400"></i>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">당신 안에 숨겨진<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">AI 빌더 DNA</span> 찾기</h1>
+            <p class="text-slate-400 mb-8 leading-relaxed max-w-md">
+                나는 어떤 AI 엔지니어가 어울릴까?<br>
+                10가지 상황별 질문을 통해 구름 AI 캠퍼스의<br>
+                5개 하드코어 트랙 중 당신에게 딱 맞는 과정을 추천해 드립니다.
+            </p>
+            <button onclick="startTest()" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-colors shadow-lg shadow-blue-500/20">
+                테스트 시작하기
+            </button>
+        </div>
+
+        <!-- 2. 질문 화면 -->
+        <div id="question-screen" class="hidden flex flex-col w-full">
+            <!-- 프로그레스 바 -->
+            <div class="w-full mb-8">
+                <div class="flex justify-between text-sm text-slate-400 font-medium mb-2">
+                    <span id="progress-text">1 / 10</span>
                 </div>
-                <p class="mb-4 text-xs font-black uppercase tracking-[0.25em] text-blue-500">Career Fit Check</p>
-                <h1 class="mb-6 text-3xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
-                    나에게 가장 잘 맞는<br><span class="text-blue-500">IT 직무</span>는?
-                </h1>
-                <p class="mb-10 text-base leading-relaxed text-slate-500 sm:text-lg">
-                    경험과 성향을 바탕으로 당신이 몰입하기 좋은 직무 방향성을
-                    빠르게 진단해드립니다.
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ease-out" style="width: 10%;"></div>
+                </div>
+            </div>
+
+            <div class="min-h-[300px] flex flex-col justify-center">
+                <h2 id="question-title" class="text-2xl sm:text-3xl font-semibold mb-8 leading-snug break-keep">질문 내용</h2>
+                <div id="options-container" class="flex flex-col gap-3">
+                    <!-- 옵션 버튼들이 동적으로 생성됩니다 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 로딩 화면 -->
+        <div id="loading-screen" class="hidden text-center flex flex-col items-center justify-center py-20">
+            <span class="loader w-12 h-12 mb-6"></span>
+            <h2 class="text-xl font-bold mb-2">AI 빌더 DNA 분석 중...</h2>
+            <p class="text-slate-400">당신의 성향에 완벽하게 맞는 과정을 찾고 있습니다.</p>
+        </div>
+
+        <!-- 4. 결과 화면 -->
+        <div id="result-screen" class="hidden flex flex-col items-center text-center fade-in">
+            <div id="result-icon-container" class="w-20 h-20 bg-slate-800 rounded-2xl flex items-center justify-center mb-6 ring-4 ring-slate-800/50">
+                <i id="result-icon" data-lucide="award" class="w-10 h-10 text-white"></i>
+            </div>
+            
+            <p id="result-subtitle" class="text-blue-400 font-semibold mb-2">서브타이틀</p>
+            <h1 id="result-title" class="text-3xl sm:text-4xl font-bold mb-6 tracking-tight">결과 타이틀</h1>
+            
+            <div class="bg-slate-800/50 p-6 rounded-2xl mb-8 border border-slate-700/50">
+                <p id="result-desc" class="text-slate-300 leading-relaxed text-left break-keep">
+                    결과 설명이 들어갑니다.
                 </p>
-                <button type="button" onclick="startTest()" class="career-test-btn px-10 py-4 text-lg sm:px-16 sm:py-5 sm:text-xl">
-                    테스트 시작하기
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <button onclick="window.open('https://goorm.co', '_blank')" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-colors shadow-lg shadow-blue-500/20">
+                    추천 과정 자세히 보기
                 </button>
-            </section>
-
-            <section id="test-question" class="hidden fade-up rounded-[2rem] border border-white/70 bg-white p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-12">
-                <div class="mb-10 flex items-center">
-                    <span id="q-num" class="text-4xl font-black text-blue-500 sm:text-5xl">01</span>
-                    <div class="mx-4 h-2 flex-grow overflow-hidden rounded-full bg-slate-100 sm:mx-8">
-                        <div id="q-progress" class="h-full rounded-full bg-blue-500 transition-all duration-300" style="width: 10%;"></div>
-                    </div>
-                    <span id="q-total" class="text-xl font-bold text-slate-300 sm:text-2xl">/ 10</span>
-                </div>
-                <h2 id="q-text" class="mb-10 text-2xl font-bold leading-snug text-slate-800 sm:text-3xl">질문 텍스트가 들어갑니다.</h2>
-                <div id="q-options" class="grid grid-cols-1 gap-4"></div>
-            </section>
-
-            <section id="test-result" class="hidden fade-up rounded-[2rem] border border-white/70 bg-white p-8 text-center shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-12">
-                <div class="mb-6 inline-block rounded-full bg-blue-50 px-6 py-2 text-sm font-black uppercase tracking-widest text-blue-600">
-                    Career Match Found
-                </div>
-                <h2 id="result-title" class="mb-4 text-3xl font-black text-slate-900 sm:text-4xl">분석형 AI 엔지니어</h2>
-                <p id="result-desc" class="mb-10 text-base leading-relaxed text-slate-500 sm:text-lg">
-                    당신은 논리적인 구조를 설계하고 데이터를 통해 새로운 가치를 발견하는 데 강점이 있습니다.
-                </p>
-
-                <div class="mb-10 flex flex-col gap-4 rounded-3xl bg-slate-50 p-6 sm:flex-row sm:items-center sm:justify-around sm:p-8">
-                    <div class="text-center">
-                        <span class="mb-2 block text-xs font-bold text-slate-400">적합도</span>
-                        <span id="result-score" class="text-3xl font-black text-blue-500">98%</span>
-                    </div>
-                    <div class="hidden h-12 w-px bg-slate-200 sm:block"></div>
-                    <div class="text-center">
-                        <span class="mb-2 block text-xs font-bold text-slate-400">핵심 키워드</span>
-                        <span id="result-keyword" class="text-xl font-bold text-slate-800">알고리즘</span>
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-4">
-                    <a href="./index.html" class="rounded-2xl bg-blue-500 px-6 py-5 text-lg font-bold text-white transition hover:bg-blue-600">
-                        홈페이지로 돌아가기
-                    </a>
-                    <a href="https://robinkim-hash.github.io/landing_form/" target="_blank" rel="noopener noreferrer" class="rounded-2xl bg-slate-900 px-6 py-5 text-lg font-bold text-white transition hover:bg-slate-800">
-                        간편 지원하기
-                    </a>
-                </div>
-            </section>
+                <button onclick="resetTest()" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-lg transition-colors border border-slate-700">
+                    다시 하기
+                </button>
+            </div>
         </div>
-    </main>
+
+    </div>
 
     <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 상태 변수
+        let currentQuestionIndex = 0;
+        let scores = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+
+        // 질문 데이터
         const questions = [
             {
-                q: "복잡한 코드를 보고 있을 때, 당신은 어떤 생각이 가장 먼저 드나요?",
-                a: ["이게 어떻게 돌아가는지 원리부터 파악하고 싶다", "어디를 고쳐야 더 예쁘게 보일지 고민한다", "이걸 어떻게 설명해야 사람들이 쉽게 이해할까?", "이 코드로 어떤 새로운 서비스를 만들 수 있을까?"]
+                q: "평소 당신의 문제 해결 스타일과 가장 가까운 것은?",
+                options: [
+                    { type: 'A', text: "머릿속에 떠오른 걸 빠르게 실행해 보고, 부딪히면서 수정한다." },
+                    { type: 'B', text: "문제가 생기기 전에 모니터링 체계를 세우고, 안정성을 우선한다." },
+                    { type: 'C', text: "반복되고 귀찮은 노가다는 무조건 자동화시켜야 직성이 풀린다." },
+                    { type: 'D', text: "직감보다는 정확한 데이터와 지표를 수집해 근거 있게 결정한다." },
+                    { type: 'E', text: "\"만약 최악의 상황이 벌어진다면?\"을 가정하고 대비책을 찾는다." }
+                ]
             },
             {
-                q: "웹사이트에서 가장 중요하게 생각하는 요소는?",
-                a: ["빠른 속도와 끊김 없는 데이터 처리", "직관적이고 아름다운 화면 구성", "사용자가 원하는 정보를 정확히 찾는 기능", "독창적이고 재미있는 사용자 인터랙션"]
+                q: "AI 서비스를 하나의 거대한 도시에 비유한다면, 당신이 짓고 싶은 곳은?",
+                options: [
+                    { type: 'A', text: "시민들이 매일 방문하며 열광하는 화려하고 편리한 복합 문화 공간" },
+                    { type: 'B', text: "도시가 멈추지 않게 전력을 공급하고 교통망을 제어하는 중앙 통제 센터" },
+                    { type: 'C', text: "도시 구석구석 맑은 물이 끊기지 않고 흐르게 만드는 완벽한 상하수도망" },
+                    { type: 'D', text: "교통량과 시민의 데이터를 분석해 다음 정책 방향을 정하는 시청 기획실" },
+                    { type: 'E', text: "외부의 침입을 막고 시민의 프라이버시를 안전하게 지키는 방어 사령부" }
+                ]
             },
             {
-                q: "갑자기 버그가 발생했다는 소식을 들었을 때, 당신의 행동은?",
-                a: ["차분하게 로그를 분석하며 발생 지점을 찾는다", "문제가 된 부분의 UI가 어색한지부터 확인한다", "팀원들과 즉시 상황을 공유하고 도움을 요청한다", "새로운 방식으로 우회할 방법이 없는지 고민한다"]
+                q: "팀 프로젝트에서 당신이 가장 선호하거나 편안함을 느끼는 역할은?",
+                options: [
+                    { type: 'A', text: "기획 아이디어를 눈에 보이는 결과물로 뚝딱 만들어내는 '메이커'" },
+                    { type: 'B', text: "팀원들이 안정적으로 작업할 수 있게 기반 환경을 닦아주는 '운영자'" },
+                    { type: 'C', text: "흩어진 재료를 모아다 팀원들이 쓰기 좋게 전달해 주는 '조달자'" },
+                    { type: 'D', text: "우리 결과물의 품질 기준을 세우고, 데이터를 분석하는 '설계자'" },
+                    { type: 'E', text: "프로젝트가 마주할 리스크를 짚어내고 꼼꼼하게 검증하는 '검증관'" }
+                ]
             },
             {
-                q: "프로젝트 회의에서 당신이 가장 선호하는 역할은?",
-                a: ["기술적인 한계와 가능성을 검토하는 가이드", "최종 결과물의 퀄리티를 책임지는 디테일러", "회의 내용을 정리하고 방향을 잡는 조정자", "끊임없이 새로운 아이디어를 던지는 브레인"]
+                q: "새로운 IT 기술을 배울 때, 당신이 가장 선호하는 방식은?",
+                options: [
+                    { type: 'A', text: "튜토리얼을 보며 일단 나만의 작은 토이 프로젝트부터 만들어본다." },
+                    { type: 'B', text: "이 기술이 내부 자원(메모리/네트워크)을 어떻게 쓰는지 아키텍처부터 본다." },
+                    { type: 'C', text: "여러 오픈소스나 툴을 레고 블록처럼 연결해서 하나의 흐름으로 조립해 본다." },
+                    { type: 'D', text: "이 기술이 비즈니스나 의사결정에 어떤 임팩트를 주는지 활용 사례를 분석한다." },
+                    { type: 'E', text: "이 기술이 가진 구조적 약점이나 보안 취약점은 없는지 삐딱하게 파고든다." }
+                ]
             },
             {
-                q: "새로운 기술을 배울 때 선호하는 방식은?",
-                a: ["공식 문서를 처음부터 끝까지 정독하며 기초를 다진다", "유명한 사이트의 UI를 직접 따라 만들어보며 익힌다", "관련된 스터디나 모임에 참여하여 대화하며 배운다", "일단 간단한 결과물부터 직접 만들어보며 시행착오를 겪는다"]
+                q: "최신 AI 기술(LLM 등)을 처음 접했을 때, 당신이 가장 먼저 든 생각은?",
+                options: [
+                    { type: 'A', text: "\"이 똑똑한 AI를 연동해서 당장 어떤 재밌는 서비스를 만들어볼까?\"" },
+                    { type: 'B', text: "\"수백만 명이 쓸 텐데, 이 엄청난 연산을 감당하는 서버는 어떻게 구축했을까?\"" },
+                    { type: 'C', text: "\"이 AI를 학습시키기 위해 그 방대한 데이터를 어떻게 수집하고 적재했을까?\"" },
+                    { type: 'D', text: "\"AI가 엉뚱한 대답을 하지 않도록, 지식 베이스(RAG)를 어떻게 설계했을까?\"" },
+                    { type: 'E', text: "\"이거 교묘하게 질문하면 숨겨진 내부 정보나 프롬프트도 털어낼 수 있겠는데?\"" }
+                ]
             },
             {
-                q: "데이터 통계 그래프를 볼 때 느끼는 감정은?",
-                a: ["수치 뒤에 숨겨진 인과관계가 궁금해진다", "그래프가 더 깔끔하게 디자인되었으면 좋겠다고 생각한다", "이 데이터를 어떻게 마케팅에 쓸지 고민한다", "데이터가 실시간으로 변하는 모습이 흥미롭다"]
+                q: "코딩이나 프로젝트를 할 때, 당신을 가장 짜릿하게 만드는 순간은?",
+                options: [
+                    { type: 'A', text: "\"내가 만든 게 움직인다!\" 사용자가 직접 클릭하고 반응하는 결과물을 완성했을 때" },
+                    { type: 'B', text: "\"트래픽이 터져도 끄떡없지!\" 무거운 요청을 안정적으로 처리하는 구조를 설계했을 때" },
+                    { type: 'C', text: "\"데이터가 막힘없이 흐르네!\" 수백만 개의 데이터를 자동 처리하는 파이프라인을 뚫었을 때" },
+                    { type: 'D', text: "\"이게 원인이었어!\" 흩어진 데이터 속에서 서비스 방향을 결정할 지표를 찾아냈을 때" },
+                    { type: 'E', text: "\"아무도 못 찾은 리스크 발견!\" 시스템의 숨겨진 허점을 먼저 찾고 안전하게 방어했을 때" }
+                ]
             },
             {
-                q: "나의 성향을 한 단어로 표현한다면?",
-                a: ["논리적인 분석가", "창의적인 예술가", "공감하는 소통가", "도전적인 전략가"]
+                q: "프로젝트에 치명적인 에러가 발생했습니다! 당신의 첫 행동은?",
+                options: [
+                    { type: 'A', text: "사용자의 화면과 기능 흐름에서 어느 부분이 멈췄는지 UI/UX부터 확인한다." },
+                    { type: 'B', text: "시스템의 현재 상태(CPU/메모리)와 인프라 운영 로그를 보며 장애를 추적한다." },
+                    { type: 'C', text: "데이터가 들어오고 나가는 파이프라인 흐름이 어디서 끊겼는지부터 확인한다." },
+                    { type: 'D', text: "잘못된 데이터가 들어가서 분석 지표나 모델 결과값이 꼬이지 않았는지 확인한다." },
+                    { type: 'E', text: "누군가의 비정상적인 접근이나 권한 우회가 있었는지 보안 로그부터 점검한다." }
+                ]
             },
             {
-                q: "팀 프로젝트가 끝난 후, 가장 뿌듯한 순간은?",
-                a: ["복잡한 기능을 완벽하게 구현해냈을 때", "완성된 결과물의 디자인이 훌륭할 때", "사용자들의 긍정적인 리뷰가 쏟아질 때", "팀원 모두가 성장했음을 느꼈을 때"]
+                q: "프로젝트 결과물을 평가할 때, 당신이 가장 중요하게 생각하는 기준은?",
+                options: [
+                    { type: 'A', text: "사용자가 직관적이고 편안하게 이 서비스를 경험하고 있는가?" },
+                    { type: 'B', text: "무거운 트래픽이 몰려도 장애 없이 안정적으로 시스템이 동작하는가?" },
+                    { type: 'C', text: "대용량 데이터가 병목 현상 없이 빠르고 정확하게 적재되고 있는가?" },
+                    { type: 'D', text: "이 데이터 지표와 분석 결과를 믿고 비즈니스 의사결정을 내릴 수 있는가?" },
+                    { type: 'E', text: "민감한 정보 유출이나 보안 위협으로부터 완벽하게 방어되고 있는가?" }
+                ]
             },
             {
-                q: "평소 즐겨 사용하는 앱의 장점은?",
-                a: ["어떤 상황에서도 멈추지 않는 안정성", "매일 봐도 질리지 않는 트렌디한 디자인", "나의 취향을 정확히 맞춘 개인화 추천", "자꾸만 누르고 싶게 만드는 재미있는 기능"]
+                q: "완벽한 AI 서비스를 만들기 위해 당신이 가장 깊게 파보고 싶은 분야는?",
+                options: [
+                    { type: 'A', text: "프론트엔드와 백엔드를 오가며 AI 기능을 서비스에 자연스럽게 녹여내는 기술" },
+                    { type: 'B', text: "무거운 AI 모델(LLM)을 지연 없이 서빙하고 클라우드 리소스를 최적화하는 기술" },
+                    { type: 'C', text: "실시간으로 발생하는 방대한 로그를 수집하고 가공하는 DataOps 플랫폼 구축 기술" },
+                    { type: 'D', text: "AI가 헛소리하지 않도록 고품질의 지식 베이스를 만들고 데이터 품질을 관리하는 기술" },
+                    { type: 'E', text: "AI의 편향성을 검증하고 프롬프트 공격을 막아내는 뚫리지 않는 가드레일 설계 기술" }
+                ]
             },
             {
-                q: "코딩을 할 때 가장 집중이 잘 되는 순간은?",
-                a: ["논리적인 퍼즐이 하나씩 풀려갈 때", "시각적으로 결과물이 하나씩 완성될 때", "코드를 통해 누군가의 문제를 해결해줄 때", "이전에 없던 새로운 기능을 실험해볼 때"]
+                q: "당신이 궁극적으로 되고 싶은 '최고의 AI 실무자'의 모습은?",
+                options: [
+                    { type: 'A', text: "상상을 코드로 빚어내어 사람들의 일상을 혁신하는 크리에이터 (Creator)" },
+                    { type: 'B', text: "모두가 잠든 시간에도 서비스의 심장이 멈추지 않게 지탱하는 수호자 (Guardian)" },
+                    { type: 'C', text: "엉켜있는 데이터의 혼돈을 잠재우고 깨끗한 정보의 길을 내는 개척자 (Pioneer)" },
+                    { type: 'D', text: "데이터의 숨은 맥락을 읽어내어 팀이 나아갈 정확한 나침반이 되어주는 전략가 (Strategist)" },
+                    { type: 'E', text: "어떤 악의적인 위협 속에서도 시스템의 신뢰와 안전을 보장하는 최후의 보루 (Defender)" }
+                ]
             }
         ];
 
-        const results = [
-            {
-                title: "분석형 AI 엔지니어",
-                desc: "당신은 논리적인 구조를 설계하고 데이터를 통해 새로운 가치를 발견하는 데 강점이 있습니다.",
-                keyword: "알고리즘",
-                score: "98%"
+        // 결과 데이터
+        const resultData = {
+            A: {
+                title: "AX 서비스 풀스택 빌더",
+                subtitle: "아이디어를 실제 서비스로 완성하는 AI 메이커",
+                desc: "당신은 눈에 보이는 결과물과 사용자 반응에서 강력한 동기를 얻는 타입입니다. 서비스 기획부터 백엔드·프론트엔드 구현, 그리고 LLM/RAG 기능 연동까지 직접 통제하며 AI 서비스를 끝까지 런칭해내는 풀스택 빌더 과정과 가장 완벽하게 어울립니다.",
+                icon: "monitor-play",
+                colorClass: "text-indigo-400",
+                bgClass: "bg-indigo-500/20",
+                ringClass: "ring-indigo-500/50"
             },
-            {
-                title: "사용자 중심 프론트엔드 개발자",
-                desc: "화면의 완성도와 사용 경험을 세심하게 다듬는 감각이 뛰어나며, 직관적인 서비스 설계에 강합니다.",
-                keyword: "UI/UX",
-                score: "96%"
+            B: {
+                title: "AI 인프라 운영 및 설계 엔지니어",
+                subtitle: "AI 서비스의 심장이 멈추지 않게 만드는 운영 설계자",
+                desc: "당신은 안정성, 확장성, 그리고 흔들림 없는 운영 구조에 강한 매력을 느낍니다. Kubernetes 기반의 대규모 클라우드 환경, GPU/LLM 서빙, 관측성 구축, 그리고 GitOps 기반의 자동화 배포를 다루는 AI 인프라 과정에서 당신의 잠재력을 터뜨리세요.",
+                icon: "server",
+                colorClass: "text-emerald-400",
+                bgClass: "bg-emerald-500/20",
+                ringClass: "ring-emerald-500/50"
             },
-            {
-                title: "협업형 프로덕트 매니저",
-                desc: "여러 이해관계자 사이에서 방향을 정리하고, 사용자의 요구를 실행 계획으로 연결하는 능력이 돋보입니다.",
-                keyword: "커뮤니케이션",
-                score: "95%"
+            C: {
+                title: "AI 네이티브 데이터 플랫폼 엔지니어",
+                subtitle: "데이터가 막힘없이 흐르는 길을 설계하는 파이프라인 빌더",
+                desc: "당신은 복잡한 혼돈을 정리하고 모든 것을 효율적으로 자동화하는 데 탁월한 강점이 있습니다. 수백만 건의 데이터를 수집하고, Airflow/Kafka 기반의 파이프라인을 뚫으며, RAG 시스템을 위한 탄탄한 DataOps 플랫폼을 구축하는 과정이 당신을 기다립니다.",
+                icon: "network",
+                colorClass: "text-cyan-400",
+                bgClass: "bg-cyan-500/20",
+                ringClass: "ring-cyan-500/50"
             },
-            {
-                title: "도전형 서비스 기획자",
-                desc: "새로운 기능과 실험을 빠르게 시도하며, 시장 반응을 바탕으로 서비스를 성장시키는 성향이 강합니다.",
-                keyword: "실험",
-                score: "94%"
+            D: {
+                title: "AI 네이티브 데이터 모델 설계 엔지니어",
+                subtitle: "데이터를 의사결정의 언어로 통역하는 분석 설계자",
+                desc: "당신은 직감보다 정확한 근거와 논리적인 구조를 바탕으로 문제를 해결하는 타입입니다. SQL과 dbt를 활용해 클라우드 DW를 구축하고, 데이터 품질과 지표를 설계하며, RAG 기반 분석 시스템의 뇌를 세팅하는 데이터 모델 과정과 최고의 시너지를 냅니다.",
+                icon: "bar-chart-3",
+                colorClass: "text-amber-400",
+                bgClass: "bg-amber-500/20",
+                ringClass: "ring-amber-500/50"
+            },
+            E: {
+                title: "AI 네이티브 보안 엔지니어",
+                subtitle: "AI 서비스의 절대적 신뢰를 지켜내는 리스크 헌터",
+                desc: "당신은 남들이 보지 못하는 시스템의 허점을 먼저 발견하고, 안전한 구조로 개선하는 데 뛰어난 통찰력을 가졌습니다. 레드팀이 되어 AI 취약점을 검증하고, Llama Guard 같은 지능형 가드레일을 운영하며 무결점 AI를 완성하는 보안 엔지니어 과정에 도전하세요.",
+                icon: "shield-alert",
+                colorClass: "text-rose-400",
+                bgClass: "bg-rose-500/20",
+                ringClass: "ring-rose-500/50"
             }
-        ];
+        };
 
-        let testIdx = 0;
-        let answers = [];
+        // DOM Elements
+        const screens = {
+            intro: document.getElementById('intro-screen'),
+            question: document.getElementById('question-screen'),
+            loading: document.getElementById('loading-screen'),
+            result: document.getElementById('result-screen')
+        };
+        const questionTitle = document.getElementById('question-title');
+        const optionsContainer = document.getElementById('options-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
 
-        function startTest() {
-            answers = [];
-            testIdx = 0;
-            document.getElementById('test-intro').classList.add('hidden');
-            document.getElementById('test-result').classList.add('hidden');
-            document.getElementById('test-question').classList.remove('hidden');
-            showQuestion();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Functions
+        function switchScreen(screenId) {
+            Object.values(screens).forEach(screen => {
+                screen.classList.add('hidden');
+                screen.classList.remove('fade-in');
+            });
+            screens[screenId].classList.remove('hidden');
+            // Force reflow for animation
+            void screens[screenId].offsetWidth; 
+            screens[screenId].classList.add('fade-in');
         }
 
-        function showQuestion() {
-            const q = questions[testIdx];
-            document.getElementById('q-num').innerText = String(testIdx + 1).padStart(2, '0');
-            document.getElementById('q-text').innerText = q.q;
-            document.getElementById('q-progress').style.width = `${((testIdx + 1) / questions.length) * 100}%`;
+        function startTest() {
+            currentQuestionIndex = 0;
+            scores = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+            switchScreen('question');
+            renderQuestion();
+        }
 
-            const optionsBox = document.getElementById('q-options');
-            optionsBox.innerHTML = '';
-            q.a.forEach((ans, answerIdx) => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'test-option';
-                button.innerText = ans;
-                button.onclick = () => {
-                    answers.push(answerIdx);
-                    button.style.backgroundColor = '#ebf5ff';
-                    button.style.borderColor = '#3391fb';
-                    button.style.color = '#3391fb';
-                    setTimeout(nextQuestion, 180);
-                };
-                optionsBox.appendChild(button);
+        function renderQuestion() {
+            const currentQ = questions[currentQuestionIndex];
+            
+            // Update Progress
+            progressText.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+            
+            // Render Title
+            questionTitle.innerHTML = currentQ.q;
+            
+            // Render Options (Shuffle them slightly for UX, or keep static. Keeping static for now)
+            optionsContainer.innerHTML = '';
+            currentQ.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full text-left p-4 sm:p-5 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 text-sm sm:text-base leading-snug";
+                btn.innerHTML = opt.text;
+                btn.onclick = () => handleOptionSelect(opt.type);
+                optionsContainer.appendChild(btn);
             });
         }
 
-        function nextQuestion() {
-            if (testIdx < questions.length - 1) {
-                testIdx += 1;
-                showQuestion();
-                return;
+        function handleOptionSelect(type) {
+            scores[type]++;
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                
+                // Add a small fade effect for the next question
+                optionsContainer.style.opacity = '0';
+                questionTitle.style.opacity = '0';
+                
+                setTimeout(() => {
+                    renderQuestion();
+                    optionsContainer.style.opacity = '1';
+                    questionTitle.style.opacity = '1';
+                    optionsContainer.style.transition = 'opacity 0.2s';
+                    questionTitle.style.transition = 'opacity 0.2s';
+                }, 200);
+
+            } else {
+                calculateResult();
             }
-            showResult();
         }
 
-        function showResult() {
-            const total = answers.reduce((sum, value) => sum + value, 0);
-            const result = results[total % results.length];
+        function calculateResult() {
+            switchScreen('loading');
+            
+            // Find max score
+            let maxType = 'A';
+            let maxScore = scores['A'];
+            for (const [type, score] of Object.entries(scores)) {
+                if (score > maxScore) {
+                    maxScore = score;
+                    maxType = type;
+                }
+            }
 
-            document.getElementById('test-question').classList.add('hidden');
-            document.getElementById('test-result').classList.remove('hidden');
-            document.getElementById('result-title').innerText = result.title;
-            document.getElementById('result-desc').innerText = result.desc;
-            document.getElementById('result-keyword').innerText = result.keyword;
-            document.getElementById('result-score').innerText = result.score;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                showResult(maxType);
+            }, 1500); // 1.5s loading time for anticipation
         }
+
+        function showResult(type) {
+            const res = resultData[type];
+            
+            // Update Result DOM
+            document.getElementById('result-title').innerText = res.title;
+            document.getElementById('result-subtitle').innerText = res.subtitle;
+            document.getElementById('result-desc').innerText = res.desc;
+            
+            // Update Icon
+            const iconContainer = document.getElementById('result-icon-container');
+            iconContainer.className = `w-20 h-20 rounded-2xl flex items-center justify-center mb-6 ring-4 ${res.bgClass} ${res.ringClass}`;
+            iconContainer.innerHTML = `<i data-lucide="${res.icon}" class="w-10 h-10 ${res.colorClass}"></i>`;
+            
+            lucide.createIcons();
+            switchScreen('result');
+        }
+
+        function resetTest() {
+            startTest();
+        }
+
     </script>
 </body>
 </html>
