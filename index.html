@@ -288,54 +288,95 @@
         letter-spacing: 0 !important;
     }
     .campus-hero {
-        min-height: 86vh;
-        background-image:
-            linear-gradient(90deg, rgba(2, 8, 23, 0.92) 0%, rgba(2, 8, 23, 0.62) 42%, rgba(2, 8, 23, 0.18) 100%),
-            linear-gradient(180deg, rgba(2, 8, 23, 0.04) 0%, rgba(2, 8, 23, 0.5) 100%),
-            linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-            url('./hackathon-scene-1.png');
-        background-size: auto, auto, 34px 34px, 34px 34px, cover;
-        background-position: center, center, center, center, center 48%;
+        min-height: 90vh;
+        background:
+            radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.2), transparent 34%),
+            radial-gradient(circle at 22% 28%, rgba(124, 58, 237, 0.16), transparent 30%),
+            linear-gradient(180deg, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.82) 100%);
         color: #fff;
+        text-align: center;
+    }
+    .campus-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+        background-size: 34px 34px, 34px 34px;
+        opacity: 0.35;
+    }
+    .campus-hero-glow-main {
+        width: 620px;
+        height: 620px;
+        background: rgba(34, 211, 238, 0.2);
+        border-radius: 9999px;
+        filter: blur(120px);
+    }
+    .campus-hero-glow-side {
+        width: 300px;
+        height: 300px;
+        background: rgba(139, 92, 246, 0.2);
+        border-radius: 9999px;
+        filter: blur(100px);
     }
     .campus-kicker {
         display: inline-flex;
         align-items: center;
-        gap: 0.55rem;
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 0.78rem;
+        gap: 0.5rem;
+        padding: 0.42rem 0.95rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(248, 113, 113, 0.36);
+        background: rgba(239, 68, 68, 0.12);
+        color: #f87171;
+        font-size: 0.75rem;
         font-weight: 900;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
     }
-    .campus-kicker::before {
-        content: "";
-        width: 42px;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.55);
+    .campus-kicker-dot {
+        width: 0.48rem;
+        height: 0.48rem;
+        border-radius: 9999px;
+        background: #ef4444;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+    }
+    .hero-line-muted {
+        background: linear-gradient(90deg, #e2e8f0 0%, #64748b 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .hero-line-shine {
+        background: linear-gradient(90deg, #22d3ee 0%, #3b82f6 45%, #8b5cf6 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .campus-hero h1 {
-        color: #fff;
-        text-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        text-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
     }
     .campus-hero-subcopy {
-        color: rgba(255, 255, 255, 0.82);
-        text-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
+        color: #94a3b8;
+        text-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+    .campus-hero-subcopy strong {
+        color: #fff;
     }
     .campus-hero-actions a,
     .campus-hero-actions button {
-        min-height: 60px;
-        border-radius: 0.9rem;
+        min-height: 58px;
+        border-radius: 9999px;
     }
     .campus-hero-facts {
-        border-top: 1px solid rgba(255, 255, 255, 0.22);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-        background: rgba(2, 8, 23, 0.22);
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        border-radius: 1.1rem;
+        background: linear-gradient(160deg, rgba(15, 23, 42, 0.74), rgba(15, 23, 42, 0.54));
         backdrop-filter: blur(14px);
     }
     .campus-hero-fact {
-        border-left: 1px solid rgba(255, 255, 255, 0.16);
+        border-left: 1px solid rgba(148, 163, 184, 0.2);
         padding: 1.05rem 1.25rem;
     }
     .campus-hero-fact:first-child {
@@ -357,7 +398,7 @@
     }
     .campus-hero-fact p {
         margin-top: 0.25rem;
-        color: rgba(255, 255, 255, 0.66);
+        color: rgba(226, 232, 240, 0.84);
         font-size: 0.82rem;
         font-weight: 600;
         line-height: 1.55;
@@ -369,8 +410,13 @@
         background-size: auto, 52px 52px;
     }
     @media (max-width: 1024px) {
-        .campus-hero {
-            background-position: center;
+        .campus-hero-glow-main {
+            width: 460px;
+            height: 460px;
+        }
+        .campus-hero-glow-side {
+            width: 220px;
+            height: 220px;
         }
     }
 
@@ -445,6 +491,13 @@
     }
 
     .neon-on { animation: flicker 4s infinite alternate; }
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+    .animate-shine {
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
+    }
 
     body {
         background:
@@ -488,6 +541,7 @@
     section .text-gray-700 { color: #cbd5e1 !important; }
     section .text-gray-600 { color: #94a3b8 !important; }
     section .text-gray-500 { color: #94a3b8 !important; }
+    section .text-gray-400 { color: #cbd5e1 !important; }
 
     section .border-gray-100,
     section .border-gray-200,
@@ -558,31 +612,48 @@
         </div>
     </nav>
     <!-- Hero Section -->
-    <section class="campus-hero relative overflow-hidden flex items-end pt-28 pb-16 md:pb-20">
+    <section class="campus-hero relative overflow-hidden flex flex-col items-center justify-center pt-40 pb-20 lg:pt-48 lg:pb-28">
+        <div class="campus-hero-glow-main absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        <div class="campus-hero-glow-side absolute top-1/4 left-1/4 pointer-events-none"></div>
+
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl text-left">
-                <div class="campus-kicker mb-6 neon-on">ON-AIR · on AI Revolution</div>
-                <h1 class="text-[3.2rem] sm:text-[4.7rem] md:text-[6rem] font-black leading-none mb-8 word-keep">
-                    Learn Beyond<br>Answers.
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex flex-col items-center mb-8">
+                    <div class="campus-kicker mb-2 neon-on">
+                        <span class="campus-kicker-dot"></span>
+                        <span>ON-AIR</span>
+                    </div>
+                    <span class="text-sm text-cyan-300 font-black tracking-[0.26em] uppercase inline-flex items-center gap-2">
+                        <i class="fa-solid fa-sparkles text-xs"></i>
+                        on AI Revolution
+                    </span>
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95] mb-6 word-keep">
+                    <span class="hero-line-muted block">Learn Beyond</span>
+                    <span class="hero-line-shine animate-shine block">Answers.</span>
                 </h1>
-                <p class="campus-hero-subcopy text-lg sm:text-xl md:text-2xl max-w-3xl font-medium leading-relaxed mb-10 word-keep">
-                    AI 시대, 중요한 것은 정답의 양이 아니라 질문의 질입니다.<br>
-                    우리는 Homo Quaerens, 질문하는 인간을 양성합니다.
+                <p class="campus-hero-subcopy text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed mb-10 word-keep">
+                    정답을 아는 것보다 중요한 것은 <strong>어떤 질문을 던지는가</strong> 입니다.<br>
+                    AI 시대, 당신의 무한한 잠재력을 가장 빛나는 가치로 세공합니다.
                 </p>
 
-                <div class="campus-hero-actions flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                    <a href="https://robinkim-hash.github.io/landing_form/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-[240px] bg-white hover:bg-slate-100 text-slate-950 text-base font-black px-7 flex items-center justify-center gap-3 transition-all shadow-[0_16px_36px_rgba(0,0,0,0.24)]">
-                        참여 상담 신청
-                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                <div class="campus-hero-actions mt-12 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+                    <a href="https://robinkim-hash.github.io/landing_form/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-base font-black px-8 py-4 inline-flex items-center justify-center gap-3 transition-all shadow-[0_0_24px_rgba(34,211,238,0.45)] hover:shadow-[0_0_40px_rgba(34,211,238,0.65)]">
+                        캠퍼스 합류하기
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
                     </a>
-                    <button type="button" onclick="openEligibilityModal()" class="w-full sm:w-[240px] bg-transparent hover:bg-white/10 border border-white/45 text-white text-base font-black px-7 transition-all">
+                    <button type="button" onclick="openEligibilityModal()" class="w-full sm:w-auto bg-slate-800/55 hover:bg-slate-800 border border-slate-700 text-white text-base font-black px-8 py-4 transition-all">
                         장학 혜택 확인
                     </button>
-                    <a href="https://www.youtube.com/watch?v=bnQMtkDxgLc&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto min-h-[60px] px-4 inline-flex items-center justify-center gap-2 text-white/82 hover:text-white font-bold transition-colors">
+                </div>
+
+                <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://www.youtube.com/watch?v=bnQMtkDxgLc&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-300 hover:text-white font-bold transition-colors">
                         <i class="fa-brands fa-youtube text-lg"></i>
                         프로그램 소개 영상 보기
                     </a>
-                    <a href="#philosophy" class="w-full sm:w-auto min-h-[60px] px-4 inline-flex items-center justify-center gap-2 text-cyan-200 hover:text-white font-bold transition-colors">
+                    <a href="#philosophy" class="inline-flex items-center gap-2 text-cyan-200 hover:text-white font-bold transition-colors">
                         <i class="fa-solid fa-gem text-base"></i>
                         브랜드 철학 보기
                     </a>
