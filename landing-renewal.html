@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI campus ON-AIR - goorm</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #fbfcfd;
+            color: #0f172a;
+            word-break: keep-all;
+            letter-spacing: -0.02em;
+            overflow-x: hidden;
+        }
+
+        /* sdfsdf.jpg 전면 매치: 히어로 카드 프리미엄 그래디언트 배너 */
+        .hero-premium-card {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(circle at 0% 100%, rgba(254, 205, 165, 0.45) 0px, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(191, 219, 254, 0.6) 0px, transparent 45%),
+                radial-gradient(circle at 50% 100%, rgba(244, 63, 94, 0.12) 0px, transparent 40%);
+        }
+
+        /* 프리미엄 3D 부드러운 섀도우 */
+        .premium-shadow {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.005), 
+                        0 8px 20px rgba(15, 23, 42, 0.02);
+        }
+        .premium-shadow-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-shadow-hover:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01), 
+                        0 20px 38px rgba(15, 23, 42, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* 수료증 배경 클래식 무늬 미세 패턴 */
+        .cert-pattern {
+            background-color: #ffffff;
+            background-image: radial-gradient(#e2e8f0 0.8px, transparent 0.8px);
+            background-size: 12px 12px;
+        }
+
+        /* -------------------------------------
+           🔥 Prism Ambient Gradients (군데군데 은은한 빛 효과)
+           ------------------------------------- */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: multiply;
+        }
+        .orb-peach { background-color: rgba(255, 204, 153, 0.8); }
+        .orb-blue { background-color: rgba(153, 204, 255, 0.8); }
+        .orb-purple { background-color: rgba(216, 180, 254, 0.7); }
+        .orb-pink { background-color: rgba(244, 114, 182, 0.5); }
+        .orb-cyan { background-color: rgba(103, 232, 249, 0.6); }
+
+        /* 부드러운 페이드 인 업 애니메이션 */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 입체 보석 그래픽 애니메이션 */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float-slow 6s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- ==========================================
+         [1] NAVIGATION BAR
+         ========================================== -->
+    <nav class="w-full bg-white/80 backdrop-blur-md border-b border-slate-100/80 sticky top-0 z-50">
+        <div class="max-w-[1920px] mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-10">
+                <div class="text-xl font-bold tracking-tight text-slate-900 flex items-center">
+                    AI campus <span class="font-extrabold ml-1">ON-AIR</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-500">
+                    <a href="#" class="hover:text-slate-900 transition">장학 혜택</a>
+                    <a href="#" class="hover:text-slate-900 transition">트랙 로드맵</a>
+                    <a href="#" class="hover:text-slate-900 transition">커리어센터</a>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 text-sm font-semibold">
+                <a href="#" class="hidden md:flex items-center px-4 py-2 border border-slate-200 rounded-md text-slate-600 hover:bg-slate-50 transition text-xs md:text-sm bg-white">
+                    AI 커리어 진단 테스트
+                    <svg class="w-3.5 h-3.5 ml-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+                <button class="flex items-center px-4 py-2 bg-[#FEE500] hover:bg-[#FDD800] text-[#000000] rounded-md transition shadow-sm text-xs md:text-sm">
+                    <svg class="w-3.5 h-3.5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.523 0-10 3.555-10 7.94 0 2.82 1.865 5.29 4.675 6.64-.16.59-1.01 3.73-1.05 3.9-.06.23.08.23.2.14.09-.07 3.96-2.58 5.56-3.62.2.02.4.03.61.03 5.523 0 10-3.555 10-7.94C22 6.555 17.523 3 12 3z"/></svg>
+                    카카오톡으로 로그인
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="w-full bg-slate-50 border-b border-slate-200">
+        <div class="max-w-[1920px] mx-auto px-6 py-3 flex items-center gap-2 text-sm font-bold">
+            <a href="./index.html" class="px-4 py-2 rounded-lg text-slate-700 hover:bg-white border border-slate-200 transition">기존 버전</a>
+            <a href="./landing-renewal.html" class="px-4 py-2 rounded-lg bg-slate-900 text-white shadow-sm">리뉴얼 버전</a>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         [2] HERO SECTION
+         ========================================== -->
+    <main class="w-full relative pt-6 pb-20 overflow-hidden bg-[#fbfcfd]">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10">
+            
+            <!-- Hero Premium Card -->
+            <div class="hero-premium-card border-2 border-blue-400/20 rounded-[2rem] px-6 py-28 md:py-36 flex flex-col items-center text-center shadow-sm fade-in-up relative overflow-hidden">
+                <div class="flex items-center justify-center space-x-2.5 mb-8 text-slate-500 font-medium text-xs md:text-sm relative z-10">
+                    <div class="flex items-center bg-white/50 px-3.5 py-1.5 rounded-full border border-slate-200/60 backdrop-blur-md shadow-sm">
+                        <svg class="w-4 h-4 mr-1.5 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        고용노동부
+                        <span class="mx-2 text-slate-300">×</span>
+                        <span class="font-extrabold text-slate-700 tracking-tight">goorm</span>
+                    </div>
+                </div>
+
+                <h1 class="text-[2.75rem] md:text-6xl lg:text-[5.5rem] font-black tracking-tight text-slate-950 leading-[1.1] mb-6 relative z-10">
+                    Learn Beyond<br/>Answers.
+                </h1>
+
+                <p class="text-base md:text-lg text-slate-600 mb-10 max-w-xl md:max-w-2xl leading-relaxed font-light relative z-10">
+                    정답을 아는 것보다 중요한 것은 어떤 질문을 던지는가 입니다.<br />
+                    <span class="text-slate-900 font-semibold">AI 시대, 당신의 무한한 잠재력을 가장 빛나는 가치로 세공합니다.</span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center gap-3 relative z-10">
+                    <button class="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm md:text-base transition-all shadow-lg shadow-blue-500/25 flex items-center group">
+                        지원하기
+                        <svg class="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <button class="px-8 py-3.5 bg-white/70 hover:bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-sm md:text-base transition-all backdrop-blur-md shadow-sm">
+                        내일배움카드 발급 대상 확인
+                    </button>
+                </div>
+            </div>
+
+            <!-- 💡 Floating Stats Bar (3대 핵심 지표) -->
+            <div class="relative w-full max-w-[1000px] mx-auto -mt-12 z-20 fade-in-up" style="animation-delay: 0.2s;">
+                <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100 bg-white/90 backdrop-blur-xl border border-white/60 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-6 md:p-8">
+                    <!-- Stat 1 -->
+                    <div class="text-center px-4 py-4 md:py-2">
+                        <div class="text-3xl md:text-4xl font-black text-blue-600 tracking-tight mb-2">2년 연속 <span class="text-blue-700 text-2xl md:text-3xl">1위</span></div>
+                        <div class="font-bold text-slate-800 text-sm md:text-base mb-1">올해의 브랜드 대상</div>
+                        <div class="text-[11px] md:text-xs text-slate-500">2024·2025 코딩 교육 부문</div>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="text-center px-4 py-4 md:py-2">
+                        <div class="text-3xl md:text-4xl font-black text-blue-600 tracking-tight mb-2">4.8<span class="text-2xl md:text-3xl">점</span></div>
+                        <div class="font-bold text-slate-800 text-sm md:text-base mb-1">정규 수업 만족도</div>
+                        <div class="text-[11px] md:text-xs text-slate-500">참여자가 직접 평가한 프로그램 평점</div>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="text-center px-4 py-4 md:py-2">
+                        <div class="text-3xl md:text-4xl font-black text-blue-600 tracking-tight mb-2">90<span class="text-2xl md:text-3xl">%</span></div>
+                        <div class="font-bold text-slate-800 text-sm md:text-base mb-1">수료 후 취업 성공률</div>
+                        <div class="text-[11px] md:text-xs text-slate-500">AI Lab 포트폴리오와 커리어센터 연계</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 💡 Hackathon Award Banner -->
+            <div class="max-w-[1000px] mx-auto mt-6 bg-gradient-to-r from-slate-50 to-white border border-slate-200/60 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 shadow-sm fade-in-up" style="animation-delay: 0.3s;">
+                <div class="flex-shrink-0 text-center md:text-left">
+                    <div class="inline-block px-2.5 py-1 bg-blue-100 text-blue-700 text-[11px] font-black rounded mb-2 uppercase tracking-wider">KDT 해커톤 연속 수상</div>
+                    <h3 class="text-lg font-bold text-slate-900 leading-tight">대상·최우수상 석권</h3>
+                </div>
+                <div class="h-12 w-px bg-slate-200 hidden md:block"></div>
+                <p class="text-slate-600 text-sm leading-relaxed flex-1 font-light text-center md:text-left">
+                    2024·2025 K-디지털 트레이닝 해커톤 연속 수상의 주역은 바로 구름의 훈련생들입니다. 1회차 대상(국무총리상)에 이어 2회차 최우수상·장려상(고용노동부 장관상)을 휩쓸며, 수강생 스스로 압도적인 실전 역량을 증명했습니다.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ==========================================
+         [3] HOMO QUAERENS PREVIEW SECTION
+         ========================================== -->
+    <section class="w-full relative bg-[#fbfcfd] pb-24 overflow-hidden fade-in-up" style="animation-delay: 0.4s;">
+        <!-- 💡 Ambient Orbs -->
+        <div class="bg-orb orb-purple w-[600px] h-[600px] top-[10%] left-[-200px]"></div>
+        <div class="bg-orb orb-blue w-[500px] h-[500px] bottom-[10%] right-[-150px]"></div>
+
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+                새로운 인간상, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Homo Quaerens</span>
+            </h2>
+            <p class="text-slate-500 text-sm md:text-base font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+                AI가 답하는 시대일수록 인간은 질문해야 합니다. AI Campus : ON-AIR는 질문하고, 협업하고, 창출하는 성장 과정을 중심에 둡니다.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                <!-- Card 1 -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/60 hover:shadow-md hover:border-blue-200 transition duration-300">
+                    <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-1.5">Questioning</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">어떤 질문을 던지는가</h3>
+                    <p class="text-xs md:text-sm text-slate-500 leading-relaxed font-light">정답을 외우기보다 문제를 재정의하고, AI와 대화할 질문 구조를 정교하게 설계합니다.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/60 hover:shadow-md hover:border-purple-200 transition duration-300">
+                    <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-6">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <div class="text-[10px] font-bold text-purple-500 uppercase tracking-widest mb-1.5">Collaboration</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">AI와 어떻게 협업하는가</h3>
+                    <p class="text-xs md:text-sm text-slate-500 leading-relaxed font-light">AI를 도구가 아닌 동등한 파트너로 활용해, 탐구와 실행을 반복하는 입체적 협업을 만듭니다.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/60 hover:shadow-md hover:border-pink-200 transition duration-300">
+                    <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center text-pink-600 mb-6">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="text-[10px] font-bold text-pink-500 uppercase tracking-widest mb-1.5">Creation</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">새로운 가치를 어떻게 만드는가</h3>
+                    <p class="text-xs md:text-sm text-slate-500 leading-relaxed font-light">탐구 결과를 실제 동작하는 클라우드 서비스 및 데이터 구조화 등 눈앞의 비즈니스 성과로 연결해 냅니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [4] 4-TRACK CURRICULUM SECTION
+         ========================================== -->
+    <section class="w-full relative bg-[#f8fafc] py-24 border-t border-slate-100 overflow-hidden">
+        <!-- 💡 Ambient Orbs -->
+        <div class="bg-orb orb-peach w-[700px] h-[700px] top-[10%] right-[-200px]"></div>
+        <div class="bg-orb orb-pink w-[500px] h-[500px] bottom-[10%] left-[-150px]"></div>
+
+        <div class="max-w-[1100px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-16">
+                <h3 class="text-2xl md:text-3.5xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                    원석의 가능성을 발견하고,<br class="sm:hidden" /> 실전으로 세공해 보석으로 성장합니다.
+                </h3>
+                <p class="text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light">
+                    정답을 주입하는 학습이 아니라, 질문하고 탐구하고 협업하는 성장 루프를 통해<br class="hidden md:block"/>
+                    실제 프로젝트 결과로 스스로의 가치를 완벽히 증명합니다.
+                </p>
+            </div>
+
+            <!-- Curriculum 4-Card Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Track 1: Data Platform (Yellow Gem) -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white/60 premium-shadow premium-shadow-hover transition duration-300 flex flex-col justify-between relative overflow-hidden">
+                    <div class="grid grid-cols-12 gap-4 items-start relative z-10">
+                        <div class="col-span-12 sm:col-span-8 space-y-4">
+                            <div>
+                                <h4 class="text-lg font-extrabold text-slate-900 leading-tight">
+                                    AI 네이티브 데이터 모델 설계<br />및 운영 엔지니어 과정
+                                </h4>
+                                <p class="text-slate-500 text-[11px] leading-relaxed mt-2 font-light">
+                                    단순한 데이터 분석가를 넘어, 대규모 데이터를 코드로 관리하고(dbt) AI와 비즈니스가 신뢰할 수 있는 클라우드 데이터 웨어하우스(DW)와 지표 체계를 직접 설계하고 싶은 예비 데이터 엔지니어.
+                                </p>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">Python</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">SQL</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">dbt</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">BigQuery</span>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+                                <div class="flex items-center gap-1.5 text-slate-800 text-[11px] font-bold mb-1">
+                                    <span>📍</span> AI Lab 캡스톤
+                                </div>
+                                <p class="text-slate-500 text-[10px] font-light">KPI 통합 데이터 마트 및 RAG 에이전트 구축</p>
+                            </div>
+                        </div>
+
+                        <!-- 3D Yellow Sphere/Capsule Gem Graphic -->
+                        <div class="col-span-12 sm:col-span-4 h-full flex items-center justify-center sm:justify-end py-4 sm:py-0">
+                            <div class="relative w-32 h-32 flex items-center justify-center animate-float">
+                                <div class="w-24 h-12 bg-gradient-to-r from-amber-400/70 to-yellow-300/70 rounded-full border border-yellow-200/30 shadow-[0_4px_16px_rgba(245,158,11,0.15)] backdrop-blur-[2px] absolute"></div>
+                                <div class="w-16 h-16 bg-gradient-to-tr from-yellow-200/60 to-orange-400/60 rounded-full border border-yellow-300/40 shadow-inner absolute -top-4 transform -translate-x-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-5 border-t border-slate-100">
+                        <button class="px-4 py-2 bg-[#1e293b] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+                            트랙 커리큘럼 보기
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 2: Cloud (Blue Stacked Gem) -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white/60 premium-shadow premium-shadow-hover transition duration-300 flex flex-col justify-between relative overflow-hidden">
+                    <div class="grid grid-cols-12 gap-4 items-start relative z-10">
+                        <div class="col-span-12 sm:col-span-8 space-y-4">
+                            <div>
+                                <h4 class="text-lg font-extrabold text-slate-900 leading-tight">
+                                    AI 클라우드 아키텍처 및<br />DevSecOps 엔지니어 과정
+                                </h4>
+                                <p class="text-slate-500 text-[11px] leading-relaxed mt-2 font-light">
+                                    가상 클라우드 아키텍처를 안정적이고 강력하게 통제하는 법을 이수합니다. Terraform 코드로 인프라를 형상 관리하고, CI/CD 배포 자동화 및 위협 탐지 기반 보안 자동화를 완벽히 마스터합니다.
+                                </p>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">AWS</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">Terraform</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">Docker</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">Jenkins</span>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+                                <div class="flex items-center gap-1.5 text-slate-800 text-[11px] font-bold mb-1">
+                                    <span>📍</span> AI Lab 캡스톤
+                                </div>
+                                <p class="text-slate-500 text-[10px] font-light">EKS 기반 다중 보안 티어링 클라우드 설계 및 구축</p>
+                            </div>
+                        </div>
+
+                        <!-- 3D Blue Stacked Gem Graphic -->
+                        <div class="col-span-12 sm:col-span-4 h-full flex items-center justify-center sm:justify-end py-4 sm:py-0">
+                            <div class="relative w-32 h-32 flex flex-col items-center justify-center gap-1.5 animate-float" style="animation-delay: 1.5s;">
+                                <div class="w-16 h-3 bg-gradient-to-r from-sky-400/80 to-blue-500/80 border border-sky-300/40 rounded-sm shadow-md transform -rotate-[30deg] skew-x-[30deg]"></div>
+                                <div class="w-16 h-3 bg-gradient-to-r from-sky-500/80 to-blue-600/80 border border-sky-400/40 rounded-sm shadow-md transform -rotate-[30deg] skew-x-[30deg] -mt-1.5"></div>
+                                <div class="w-16 h-3 bg-gradient-to-r from-blue-500/80 to-indigo-600/80 border border-blue-400/40 rounded-sm shadow-md transform -rotate-[30deg] skew-x-[30deg] -mt-1.5"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-5 border-t border-slate-100">
+                        <button class="px-4 py-2 bg-[#1e293b] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+                            트랙 커리큘럼 보기
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 3: Backend (Green Gem) -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white/60 premium-shadow premium-shadow-hover transition duration-300 flex flex-col justify-between relative overflow-hidden">
+                    <div class="grid grid-cols-12 gap-4 items-start relative z-10">
+                        <div class="col-span-12 sm:col-span-8 space-y-4">
+                            <div>
+                                <h4 class="text-lg font-extrabold text-slate-900 leading-tight">
+                                    AI 백엔드 및 지능형 웹 애플리케이션<br />설계 및 개발 엔지니어 과정
+                                </h4>
+                                <p class="text-slate-500 text-[11px] leading-relaxed mt-2 font-light">
+                                    서버의 구조적 안정성을 완성하고, 사용자 질의에 실시간으로 최적화해 대답하는 백엔드 애플리케이션을 배웁니다. 대용량 트래픽 통제 및 캐시 무효화 아키텍처를 유기적으로 빌드업합니다.
+                                </p>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">FastAPI</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">Node.js</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">Redis</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">PostgreSQL</span>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+                                <div class="flex items-center gap-1.5 text-slate-800 text-[11px] font-bold mb-1">
+                                    <span>📍</span> AI Lab 캡스톤
+                                </div>
+                                <p class="text-slate-500 text-[10px] font-light">실시간 스트리밍 대용량 트래픽 지능형 중계 시스템 설계</p>
+                            </div>
+                        </div>
+
+                        <!-- 3D Green Overlapping Leaf Gem Graphic -->
+                        <div class="col-span-12 sm:col-span-4 h-full flex items-center justify-center sm:justify-end py-4 sm:py-0">
+                            <div class="relative w-32 h-32 flex items-center justify-center animate-float" style="animation-delay: 3s;">
+                                <div class="w-12 h-20 bg-gradient-to-tr from-emerald-400/50 to-teal-300/50 border border-emerald-300/40 rounded-br-[40px] rounded-tl-[40px] transform rotate-45 absolute shadow-md"></div>
+                                <div class="w-12 h-20 bg-gradient-to-tr from-teal-400/40 to-cyan-300/40 border border-teal-300/30 rounded-br-[40px] rounded-tl-[40px] transform -rotate-45 absolute shadow-md"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-5 border-t border-slate-100">
+                        <button class="px-4 py-2 bg-[#1e293b] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+                            트랙 커리큘럼 보기
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 4: LLM Security (Purple Gem) -->
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white/60 premium-shadow premium-shadow-hover transition duration-300 flex flex-col justify-between relative overflow-hidden">
+                    <div class="grid grid-cols-12 gap-4 items-start relative z-10">
+                        <div class="col-span-12 sm:col-span-8 space-y-4">
+                            <div>
+                                <h4 class="text-lg font-extrabold text-slate-900 leading-tight">
+                                    LLM 보안 및 엔터프라이즈 AI<br />솔루션 설계 엔지니어 과정
+                                </h4>
+                                <p class="text-slate-500 text-[11px] leading-relaxed mt-2 font-light">
+                                    현업 기업이 신뢰하고 즉각 배포할 수 있는 초거대 LLM 파이프라인 보안 및 통제를 다룹니다. 프롬프트 인젝션 방어, 벡토라이제이션 데이터 무결성 검증, 데이터 마스크 아키텍처를 연계 설계합니다.
+                                </p>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">LangChain</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">LlamaIndex</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">ELK Stack</span>
+                                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-semibold">OpenAI</span>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+                                <div class="flex items-center gap-1.5 text-slate-800 text-[11px] font-bold mb-1">
+                                    <span>📍</span> AI Lab 캡스톤
+                                </div>
+                                <p class="text-slate-500 text-[10px] font-light">LLM 기반 서비스 프롬프트 어택 방어 가드레일 설계</p>
+                            </div>
+                        </div>
+
+                        <!-- 3D Purple Interlaced Gem Graphic -->
+                        <div class="col-span-12 sm:col-span-4 h-full flex items-center justify-center sm:justify-end py-4 sm:py-0">
+                            <div class="relative w-32 h-32 flex items-center justify-center animate-float" style="animation-delay: 4.5s;">
+                                <div class="w-16 h-16 rounded-full border-[8px] border-purple-500/70 bg-transparent absolute transform rotate-12 shadow-sm"></div>
+                                <div class="w-16 h-16 rounded-full border-[8px] border-indigo-600/60 bg-transparent absolute transform -rotate-12 translate-x-3.5 shadow-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-5 border-t border-slate-100">
+                        <button class="px-4 py-2 bg-[#1e293b] hover:bg-slate-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
+                            트랙 커리큘럼 보기
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [5] ECOSYSTEM INFRASTRUCTURE SECTION
+         ========================================== -->
+    <section class="w-full relative bg-white py-24 border-t border-slate-100 overflow-hidden">
+        <!-- 💡 Ambient Orbs -->
+        <div class="bg-orb orb-blue w-[800px] h-[800px] top-[20%] left-[-300px]"></div>
+        <div class="bg-orb orb-purple w-[600px] h-[600px] bottom-[10%] right-[-200px]"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-20 fade-in-up" style="animation-delay: 0.3s;">
+                <div class="inline-flex items-center space-x-2 border border-blue-200 bg-blue-50 rounded-full px-4 py-1.5 mb-4">
+                    <span class="text-blue-700 text-sm font-semibold tracking-wider">goorm Ecosystem</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+                    완벽한 성장을 뒷받침하는<br/>구름의 3대 핵심 에듀테크 인프라
+                </h2>
+                <p class="text-slate-500 font-medium">
+                    오직 구름 AI 캠퍼스 훈련생만을 위해 제공되는 프리미엄 교육·평가 환경을 경험하세요.
+                </p>
+            </div>
+
+            <div class="space-y-24">
+                
+                <!-- 1. AISA -->
+                <div class="flex flex-col lg:flex-row items-center gap-12 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="flex-1 lg:pr-8">
+                        <div class="text-sm font-black text-pink-500 tracking-widest uppercase mb-2">AISA Evaluation</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+                            AI 시대의 새로운 평가 기준,<br/>AISA
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            단순한 알고리즘 중심의 코딩 테스트를 넘어, 실제 개발 업무에서 AI를 어떻게 활용하는지 증명하세요. AISA는 정답의 정확성뿐만 아니라, 질문의 최적화 수준과 토큰 효율성 등 실질적인 AI 협업 능력과 프롬프트 엔지니어링 역량을 종합적으로 평가합니다.
+                        </p>
+                        <ul class="space-y-3 text-slate-700 font-medium text-sm md:text-base">
+                            <li class="flex items-start"><svg class="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 알고리즘을 넘어선 실무 기반 AI 시나리오 평가</li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 질문 최적화 및 토큰 효율성 기반 정량적 측정</li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-pink-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> ChatGPT, Claude 등 최신 LLM 모델 완벽 지원</li>
+                        </ul>
+                    </div>
+                    <!-- AISA Mockup -->
+                    <div class="flex-1 w-full bg-pink-50/50 rounded-3xl p-8 border border-pink-100 flex items-center justify-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-pink-100/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-full max-w-sm bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 p-6 relative z-10 transform group-hover:scale-[1.02] transition duration-300">
+                            <div class="text-center mb-6">
+                                <div class="text-xs text-gray-400 font-bold mb-1">프롬프트 엔지니어링 역량 레이더</div>
+                                <div class="text-lg font-bold text-gray-800">AISA Score Report</div>
+                            </div>
+                            <div class="relative w-48 h-48 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full text-pink-500/20 drop-shadow-md">
+                                    <polygon points="50,10 90,30 90,70 50,90 10,70 10,30" fill="currentColor" stroke="#fbcfe8" stroke-width="1"/>
+                                    <polygon points="50,25 75,40 85,60 50,80 30,55 20,40" fill="rgba(236,72,153,0.5)" stroke="#db2777" stroke-width="1.5" class="animate-[pulse_3s_infinite]"/>
+                                </svg>
+                                <div class="absolute top-0 w-full text-center text-[10px] text-gray-500 -mt-2">토큰 효율성</div>
+                                <div class="absolute bottom-0 w-full text-center text-[10px] text-gray-500 -mb-2">문제 해결력</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. DEVTH -->
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12 fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="flex-1 lg:pl-8">
+                        <div class="text-sm font-black text-blue-500 tracking-widest uppercase mb-2">goorm DEVTH</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+                            대기업 실전 코딩테스트 완벽 대비,<br/>DEVTH
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            눈으로만 보는 알고리즘, 손으로만 치는 낡은 코딩테스트는 잊으세요. 카카오, 토스 등 국내 수많은 IT 대기업이 실제 채용에서 사용하는 공식 평가 플랫폼 DEVTH를 캠퍼스 내에서 그대로 사용합니다. 입사 시 반드시 거쳐야 하는 실전 코딩테스트를 훈련 기간 동안 완벽하게 미리 체험하고 대비하세요.
+                        </p>
+                        <ul class="space-y-3 text-slate-700 font-medium text-sm md:text-base">
+                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 국내 1,000여 개 기업이 사용하는 실제 채용 평가 환경 제공</li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 실전과 100% 동일한 긴장감 속에서의 모의 코딩테스트 진행</li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 훈련생 개인별 알고리즘 취약점 분석 및 맞춤형 역량 강화</li>
+                        </ul>
+                    </div>
+                    <!-- DEVTH Mockup -->
+                    <div class="flex-1 w-full bg-blue-50/50 rounded-3xl p-8 border border-blue-100 flex items-center justify-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-full max-w-sm bg-[#1e1e1e] rounded-xl shadow-xl border border-gray-800 p-4 relative z-10 font-mono text-sm transform group-hover:-translate-y-1 transition duration-300">
+                            <div class="flex items-center gap-2 mb-4 border-b border-gray-700 pb-3">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <div class="text-gray-400 text-xs ml-2">DEVTH Coding Test Environment</div>
+                            </div>
+                            <div class="text-green-400"># 알고리즘 모의 테스트 - 문항 1</div>
+                            <div class="text-blue-400 mt-2">def <span class="text-yellow-200">solve_problem</span>(data):</div>
+                            <div class="text-gray-300 ml-4">answer = []</div>
+                            <div class="text-gray-300 ml-4">for item in data:</div>
+                            <div class="text-gray-300 ml-8">if is_valid(item):</div>
+                            <div class="text-gray-300 ml-12">answer.append(item)</div>
+                            <div class="text-purple-400 ml-4 mt-2">return answer</div>
+                            <div class="mt-4 pt-3 border-t border-gray-700 flex justify-between items-center text-xs">
+                                <span class="text-gray-500">남은 시간: 45:12</span>
+                                <span class="px-3 py-1 bg-blue-600 text-white rounded">제출 및 채점</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. EDU -->
+                <div class="flex flex-col lg:flex-row items-center gap-12 fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="flex-1 lg:pr-8">
+                        <div class="text-sm font-black text-purple-500 tracking-widest uppercase mb-2">goorm EDU</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+                            언제 어디서나 이어지는 몰입,<br/>goormEDU
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            복잡하고 번거로운 개발 환경 설정 때문에 지치지 마세요. 구름이 직접 만든 국내 최고의 클라우드 기반 학습 플랫폼 goormEDU를 통해, 웹 브라우저 하나만 있으면 온라인 VOD 학습부터 코딩 실습까지 끊김 없는 완벽한 몰입 환경을 제공합니다.
+                        </p>
+                        <ul class="space-y-3 text-slate-700 font-medium text-sm md:text-base">
+                            <li class="flex items-start"><svg class="w-5 h-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 별도 프로그램 설치 없는 100% 클라우드 기반 실습 환경</li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 이론 영상 시청과 코딩 실습이 한 화면에서 이루어지는 최적의 UX</li>
+                            <li class="flex items-start"><svg class="w-5 h-5 text-purple-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 학습 데이터 기반의 1:1 맞춤형 진도 관리 및 피드백 제공</li>
+                        </ul>
+                    </div>
+                    <!-- EDU Mockup -->
+                    <div class="flex-1 w-full bg-purple-50/50 rounded-3xl p-8 border border-purple-100 flex items-center justify-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-full max-w-sm bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 overflow-hidden relative z-10 transform group-hover:scale-[1.02] transition duration-300">
+                            <!-- Video Player Top -->
+                            <div class="w-full h-32 bg-gray-900 relative flex items-center justify-center">
+                                <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <div class="absolute bottom-2 right-2 px-2 py-0.5 bg-black/60 text-white text-[10px] rounded">12:45 / 45:00</div>
+                            </div>
+                            <!-- Content Bottom -->
+                            <div class="p-5">
+                                <div class="flex gap-2 mb-3">
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-700 text-[10px] font-bold rounded">진도율 85%</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-600 text-[10px] font-bold rounded">AI 기초 트랙</span>
+                                </div>
+                                <div class="font-bold text-gray-800 text-sm mb-1">04. 프롬프트 엔지니어링 실습</div>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5 mt-4">
+                                    <div class="bg-purple-500 h-1.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [7] EXCLUSIVE BENEFITS SECTION
+         ========================================== -->
+    <section class="w-full relative bg-[#f8fafc] py-24 border-t border-slate-100 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-16 fade-in-up" style="animation-delay: 0.1s;">
+                <div class="inline-flex items-center space-x-2 border border-green-200 bg-green-50 rounded-full px-4 py-1.5 mb-4">
+                    <span class="text-green-700 text-sm font-semibold tracking-wider">Exclusive Benefits</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+                    수강생의 성장에만 온전히 집중할 수 있도록,<br/>구름만의 압도적인 혜택을 지원합니다.
+                </h2>
+                <p class="text-slate-500 font-medium">
+                    내일배움카드만 있다면 교육비 전액 무료. 더 완벽한 몰입을 위한 18가지 혜택을 모두 누리세요.
+                </p>
+            </div>
+
+            <!-- Big 3 Benefits -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+                
+                <!-- Big 1: 합반 프로젝트 -->
+                <div class="bg-gradient-to-b from-blue-50/50 to-white rounded-3xl p-8 lg:p-10 border border-blue-100 premium-shadow premium-shadow-hover transition duration-300 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 mb-6 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <div class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">Collaboration</div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 leading-tight">4개 과정 융합 합반 프로젝트</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        단일 과정을 넘어, 4개 핵심 과정 수강생이 하나의 팀으로 뭉칩니다. 각자의 전문성을 살려 실제 현업과 완벽히 동일한 실무 중심의 협업을 경험하세요.
+                    </p>
+                </div>
+
+                <!-- Big 2: 자체 해커톤 -->
+                <div class="bg-gradient-to-b from-purple-50/50 to-white rounded-3xl p-8 lg:p-10 border border-purple-100 premium-shadow premium-shadow-hover transition duration-300 fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center text-purple-600 mb-6 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="text-purple-600 font-bold text-sm tracking-widest uppercase mb-2">Challenge</div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 leading-tight">대규모 자체 해커톤 개최</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        수백 명이 동시에 참여하는 압도적 규모의 해커톤을 진행합니다. 극한의 몰입 환경에서 아이디어를 실제 서비스로 구현해 내며 대체 불가능한 포트폴리오를 완성하세요.
+                    </p>
+                </div>
+
+                <!-- Big 3: 커리어 콘서트 (워딩/로고 수정됨) -->
+                <div class="bg-gradient-to-b from-pink-50/50 to-white rounded-3xl p-8 lg:p-10 border border-pink-100 premium-shadow premium-shadow-hover transition duration-300 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 mb-6 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div class="text-pink-600 font-bold text-sm tracking-widest uppercase mb-2">Career</div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4 leading-tight">현직자 초청 커리어 콘서트</h3>
+                    <p class="text-slate-600 leading-relaxed mb-5">
+                        단순한 기술 교육으로 끝나지 않습니다. Google, Apple, 네이버, 무신사 등 국내외 최고 IT 기업의 현직 전문가를 매월 초청합니다. 생생한 실무 노하우부터 최신 채용 트렌드까지, 성공적인 취업을 위한 독보적인 인사이트를 얻어가세요.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Remaining 15 Benefits Grid -->
+            <div class="fade-in-up" style="animation-delay: 0.5s;">
+                <div class="flex items-center justify-center mb-8">
+                    <div class="h-px bg-gray-200 flex-1"></div>
+                    <span class="px-6 text-sm font-bold text-gray-400">구름 훈련생만을 위한 15가지 추가 혜택</span>
+                    <div class="h-px bg-gray-200 flex-1"></div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <!-- 1. 장려금 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-blue-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-blue-100 transition-colors">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">훈련장려금 지급</span>
+                        <span class="text-[11px] text-slate-500 mt-1">매월 최대 40만 원</span>
+                    </div>
+
+                    <!-- 2. 웰컴키트 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-green-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-green-100 transition-colors">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">웰컴키트 지급</span>
+                        <span class="text-[11px] text-slate-500 mt-1">입과 기념 굿즈 세트</span>
+                    </div>
+
+                    <!-- 3. LLM API -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-purple-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-purple-100 transition-colors">
+                            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">LLM API 지원</span>
+                        <span class="text-[11px] text-slate-500 mt-1">프로젝트 실습용 토큰</span>
+                    </div>
+
+                    <!-- 4. 맥북 지원 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-pink-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-pink-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-pink-100 transition-colors">
+                            <svg class="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">최신형 맥북 지원</span>
+                        <span class="text-[11px] text-slate-500 mt-1">개발용 장비 무상 대여</span>
+                    </div>
+
+                    <!-- 5. 멘토링 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-indigo-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-indigo-100 transition-colors">
+                            <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">현직자 멘토링</span>
+                        <span class="text-[11px] text-slate-500 mt-1">업계 선배의 밀착 피드백</span>
+                    </div>
+
+                    <!-- 6. AWS 클라우드 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-orange-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-orange-100 transition-colors">
+                            <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">AWS 클라우드 지원</span>
+                        <span class="text-[11px] text-slate-500 mt-1">실무형 인프라 구축 실습</span>
+                    </div>
+
+                    <!-- 7. AWS GPU -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-red-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-red-100 transition-colors">
+                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">AWS GPU 지원</span>
+                        <span class="text-[11px] text-slate-500 mt-1">고성능 AI 모델 학습 환경</span>
+                    </div>
+
+                    <!-- 8. Google Colab -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-yellow-300 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-yellow-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-yellow-100 transition-colors">
+                            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">Google Colab 지원</span>
+                        <span class="text-[11px] text-slate-500 mt-1">원활한 데이터 분석 및 실습</span>
+                    </div>
+
+                    <!-- 9. 생성형 AI 툴 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-teal-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-teal-100 transition-colors">
+                            <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">생성형 AI 툴 지원</span>
+                        <span class="text-[11px] text-slate-500 mt-1">ChatGPT 등 유료 구독</span>
+                    </div>
+
+                    <!-- 10. 실물 교재 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-stone-300 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-stone-100 transition-colors">
+                            <svg class="w-6 h-6 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">실물 교재 지급</span>
+                        <span class="text-[11px] text-slate-500 mt-1">기초부터 탄탄하게</span>
+                    </div>
+
+                    <!-- 11. 모의 코테 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-cyan-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-cyan-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-cyan-100 transition-colors">
+                            <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">실전 모의 코딩테스트</span>
+                        <span class="text-[11px] text-slate-500 mt-1">DEVTH 기반 실전 대비</span>
+                    </div>
+
+                    <!-- 12. EXP 상점 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-rose-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-rose-100 transition-colors">
+                            <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">EXP 상점</span>
+                        <span class="text-[11px] text-slate-500 mt-1">학습 경험치로 상품 교환</span>
+                    </div>
+
+                    <!-- 13. 우수 훈련생 시상 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-amber-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-amber-100 transition-colors">
+                            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">우수 훈련생 시상</span>
+                        <span class="text-[11px] text-slate-500 mt-1">확실한 학습 동기부여</span>
+                    </div>
+
+                    <!-- 14. 수료증 & 배지 -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-slate-300 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-slate-100 transition-colors">
+                            <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">수료증 및 배지</span>
+                        <span class="text-[11px] text-slate-500 mt-1">스킬 인증 디지털 배지</span>
+                    </div>
+
+                    <!-- 15. 구름톤 In JEJU -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col items-center justify-center text-center hover:border-emerald-200 hover:shadow-md transition-all group">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:bg-emerald-100 transition-colors">
+                            <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <span class="text-[13px] md:text-sm font-bold text-slate-800">구름톤 In JEJU 가산점</span>
+                        <span class="text-[11px] text-slate-500 mt-1">제주 오프라인 해커톤</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [8] INTERACTIVE IMMERSIVE ROUTINE SECTION (DOM Toggle방식으로 최적화)
+         ========================================== -->
+    <section class="w-full relative bg-[#fbfcfd] py-24 border-t border-slate-100 overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-16 fade-in-up" style="animation-delay: 0.1s;">
+                <div class="inline-flex items-center space-x-2 border border-blue-200/60 bg-blue-50/50 rounded-full px-4 py-1.5 mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span class="text-blue-700 text-xs font-semibold tracking-wider uppercase">Immersive Routine</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                    자기주도적 성장을 완성하는<br/>구름의 8시간 몰입 시그니처 루틴
+                </h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto font-light">
+                    단순한 인터넷 강의 시청이 아닙니다. 이론부터 실무 실습, 상호 피드백, 회고까지 완벽한 성장의 루프로 매일의 가치를 쌓아갑니다.
+                </p>
+            </div>
+
+            <!-- Tab Selector -->
+            <div class="flex justify-center mb-12 fade-in-up" style="animation-delay: 0.2s;">
+                <div class="bg-slate-200/60 p-1 rounded-2xl flex space-x-1 border border-slate-300/30 shadow-inner">
+                    <button onclick="switchRoutineTab('theory')" id="tab-btn-theory" class="px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-blue-600 shadow-sm">
+                        이론 학습 기간 (1~3개월차)
+                    </button>
+                    <button onclick="switchRoutineTab('project')" id="tab-btn-project" class="px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-900">
+                        실무 프로젝트 기간 (4~5개월차)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Area (HTML DOM Toggling instead of JS String injection) -->
+            <div class="fade-in-up" style="animation-delay: 0.3s;">
+                
+                <!-- Theory Routine -->
+                <div id="content-theory" class="block">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <!-- Left: Simplified Timetable -->
+                        <div class="lg:col-span-7 bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 border border-slate-200/60 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-bold text-slate-900 flex items-center">
+                                    <span class="w-1.5 h-6 bg-blue-500 rounded-full mr-2.5"></span>
+                                    일주일 학습 루틴 (월~금)
+                                </h3>
+                                <span class="text-xs text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-md">8시간 집중</span>
+                            </div>
+                            
+                            <!-- Responsive Grid Timetable -->
+                            <div class="border border-slate-100 rounded-xl overflow-hidden text-sm">
+                                <div class="grid grid-cols-12 bg-slate-50 border-b border-slate-100 text-center font-bold text-slate-500 py-3">
+                                    <div class="col-span-3">시간</div>
+                                    <div class="col-span-7">학습 프로그램 및 루틴</div>
+                                    <div class="col-span-2">요일</div>
+                                </div>
+                                <div class="divide-y divide-slate-100/70">
+                                    <div class="grid grid-cols-12 text-center py-4 timetable-cell">
+                                        <div class="col-span-3 font-mono text-slate-400 flex items-center justify-center font-semibold">09:00 - 13:00</div>
+                                        <div class="col-span-7 text-slate-700 text-left px-4 flex flex-col justify-center">
+                                            <span class="font-bold text-slate-900">실시간 라이브 핵심 강의 (1~4교시)</span>
+                                            <span class="text-xs text-slate-400 mt-1">현업 필수 개념을 체계적으로 다지는 실시간 강의</span>
+                                        </div>
+                                        <div class="col-span-2 text-slate-400 flex items-center justify-center text-xs font-semibold">월 - 금</div>
+                                    </div>
+                                    <div class="grid grid-cols-12 text-center py-3 bg-slate-50/40">
+                                        <div class="col-span-3 font-mono text-slate-400 flex items-center justify-center text-xs">13:00 - 14:00</div>
+                                        <div class="col-span-9 text-slate-400 flex items-center px-4 font-medium text-xs">점심 식사 및 충전 시간</div>
+                                    </div>
+                                    <div class="grid grid-cols-12 text-center py-4 timetable-cell">
+                                        <div class="col-span-3 font-mono text-slate-400 flex items-center justify-center font-semibold">14:00 - 15:00</div>
+                                        <div class="col-span-7 text-slate-700 text-left px-4 flex flex-col justify-center">
+                                            <span class="font-bold text-[#4B6BFb]">Pair Study (페어 과제 수행)</span>
+                                            <span class="text-xs text-slate-400 mt-1">동료와 짝이 되어 상호 페어 프로그래밍 & 코드 리뷰 진행</span>
+                                        </div>
+                                        <div class="col-span-2 text-slate-400 flex items-center justify-center text-xs font-semibold">월 - 금</div>
+                                    </div>
+                                    <div class="grid grid-cols-12 text-center py-4 timetable-cell">
+                                        <div class="col-span-3 font-mono text-slate-400 flex items-center justify-center font-semibold">15:00 - 16:00</div>
+                                        <div class="col-span-7 text-slate-700 text-left px-4 flex flex-col justify-center">
+                                            <span class="font-bold text-slate-900">EXP 개인 미션 수행</span>
+                                            <span class="text-xs text-slate-400 mt-1">게이미피케이션 플랫폼 미션을 수행하며 경험치 획득 및 성장</span>
+                                        </div>
+                                        <div class="col-span-2 text-slate-400 flex items-center justify-center text-xs font-semibold">월 - 금</div>
+                                    </div>
+                                    <div class="grid grid-cols-12 text-center py-4 timetable-cell">
+                                        <div class="col-span-3 font-mono text-slate-400 flex items-center justify-center font-semibold">16:00 - 17:00</div>
+                                        <div class="col-span-7 text-slate-700 text-left px-4 flex flex-col justify-center">
+                                            <span class="font-bold text-purple-600">Sprint Squad (스프린트 스쿼드)</span>
+                                            <span class="text-xs text-slate-400 mt-1">스쿼드원들과 자율적으로 배운 지식을 토론하고 동료 피드백 진행</span>
+                                        </div>
+                                        <div class="col-span-2 text-slate-400 flex items-center justify-center text-[11px] font-semibold leading-tight">월 - 목</div>
+                                    </div>
+                                    <div class="grid grid-cols-12 text-center py-4 timetable-cell bg-purple-50/20">
+                                        <div class="col-span-3 font-mono text-purple-700 flex items-center justify-center font-bold">16:00 - 18:00</div>
+                                        <div class="col-span-7 text-slate-700 text-left px-4 flex flex-col justify-center">
+                                            <span class="font-bold text-purple-800">Weekly Algorithm Test / Qualifying</span>
+                                            <span class="text-xs text-purple-500 mt-1">주간 알고리즘 테스트 및 정기 교과목 평가를 통한 실력 데이터화</span>
+                                        </div>
+                                        <div class="col-span-2 text-purple-600 flex items-center justify-center text-xs font-black">금요일</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Core Action Cards -->
+                        <div class="lg:col-span-5 space-y-4">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-100 hover:border-blue-200 hover:shadow-md transition">
+                                <div class="flex items-center gap-4 mb-3">
+                                    <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 text-lg">Pair Study (페어 과제 수행)</h4>
+                                </div>
+                                <p class="text-sm text-slate-500 leading-relaxed pl-14 font-light">
+                                    일방향적인 주입식 수업은 끝났습니다. 훈련생이 서로 짝이 되어 코드를 모니터링해주는 <strong>상호 페어 피드백(Pair Review)</strong>을 통해 다른 관점의 논리를 빠르게 체득합니다.
+                                </p>
+                            </div>
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-100 hover:border-purple-200 hover:shadow-md transition">
+                                <div class="flex items-center gap-4 mb-3">
+                                    <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 text-lg">Sprint Squad (스프린트 스쿼드)</h4>
+                                </div>
+                                <p class="text-sm text-slate-500 leading-relaxed pl-14 font-light">
+                                    4~5명의 스쿼드 멤버들이 하루 동안 학습한 핵심 난제를 토론하고 기록하는 <strong>스쿼드 리뷰(Squad Review)</strong> 활동을 진행합니다. 배움을 온전한 나의 실력으로 소화합니다.
+                                </p>
+                            </div>
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-100 hover:border-pink-200 hover:shadow-md transition">
+                                <div class="flex items-center gap-4 mb-3">
+                                    <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center text-pink-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 text-lg">주간 평가 및 Qualifying</h4>
+                                </div>
+                                <p class="text-sm text-slate-500 leading-relaxed pl-14 font-light">
+                                    매주 금요일 실전 알고리즘 모의테스트(DEVTH)와 체계적인 교과목 평가를 거치며 학습 진도를 정량화된 데이터로 정확히 피드백 받아 다음 성장을 준비합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Routine -->
+                <div id="content-project" class="hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <!-- Left: Project Daily Routine -->
+                        <div class="lg:col-span-7 bg-white/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 border border-slate-200/60 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-bold text-slate-900 flex items-center">
+                                    <span class="w-1.5 h-6 bg-purple-500 rounded-full mr-2.5"></span>
+                                    실무 협업 애자일 루틴 (월~목)
+                                </h3>
+                                <span class="text-xs text-purple-600 font-bold bg-purple-50 px-3 py-1 rounded-md">Agile Cycle</span>
+                            </div>
+                            
+                            <div class="space-y-6 relative pl-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-purple-100">
+                                <div class="relative">
+                                    <div class="absolute -left-[22px] top-1.5 w-3.5 h-3.5 rounded-full bg-purple-500 border-4 border-white"></div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-1">
+                                        <span class="font-bold text-slate-900 text-base">Daily Scrum (매일 오전)</span>
+                                        <span class="font-mono text-purple-600 text-xs font-bold">09:00 - 09:30</span>
+                                    </div>
+                                    <p class="text-sm text-slate-500 font-light">오늘 해결할 구체적인 마일스톤과 개발 이슈를 팀원들과 투명하게 공유하고 최적의 동선을 설계하며 하루를 시작합니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute -left-[22px] top-1.5 w-3.5 h-3.5 rounded-full bg-purple-500 border-4 border-white"></div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-1">
+                                        <span class="font-bold text-slate-900 text-base">Team Check-in (매일 오후)</span>
+                                        <span class="font-mono text-purple-600 text-xs font-bold">14:00 - 14:30</span>
+                                    </div>
+                                    <p class="text-sm text-slate-500 font-light">중간 기능 구현 진척률을 공유하고, 발생한 시스템 에러나 트러블슈팅 과제를 적극적으로 해소해 나갑니다.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute -left-[22px] top-1.5 w-3.5 h-3.5 rounded-full bg-purple-500 border-4 border-white"></div>
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-1">
+                                        <span class="font-bold text-slate-900 text-base">Wrap-up (매일 교육 종료 전)</span>
+                                        <span class="font-mono text-purple-600 text-xs font-bold">17:30 - 18:00</span>
+                                    </div>
+                                    <p class="text-sm text-slate-500 font-light">오늘 구현한 형상 관리 소스코드를 GitHub PR(Pull Request)로 반영하고, 개별 회고록(TIL)을 마크다운 문서로 체계적으로 아카이빙합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Friday Special Routines -->
+                        <div class="lg:col-span-5 space-y-4">
+                            <div class="bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-3xl p-6 border border-purple-100/50">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="px-2 py-1 bg-purple-600 text-white text-[10px] font-bold rounded">금요일 SPECIAL</span>
+                                    <h4 class="font-extrabold text-slate-900 text-lg">주간 결과물 발표 & 크로스 피드백</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4 font-light">
+                                    매주 금요일에는 전 수강생이 모여 한 주 동안 개발한 핵심 모듈/결과물을 쇼케이스 형태로 발표하고 논평하는 <strong>Weekly Showcase</strong>를 진행합니다. 타 팀 조원들과 <strong>교차 피드백(Cross Feedback)</strong>을 나누며 넓은 안목과 새로운 인사이트를 키워나갑니다.
+                                </p>
+                                <div class="space-y-3 pt-3 border-t border-purple-100 text-xs text-slate-600 font-semibold">
+                                    <div class="flex items-center"><svg class="w-4 h-4 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Self Review + 차주 애자일 스프린트 계획 수립</div>
+                                    <div class="flex items-center"><svg class="w-4 h-4 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 교강사 1:1 집중 밀착 멘토링</div>
+                                    <div class="flex items-center"><svg class="w-4 h-4 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Fever time (리프레시 주간 융합 네트워킹 이벤트)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [9] PORTFOLIO & CERTIFICATE CREDENTIALS
+         ========================================== -->
+    <section class="w-full relative bg-[#f8fafc] pb-24 pt-16 border-t border-slate-200/50 overflow-hidden">
+        <!-- 💡 Ambient Orbs -->
+        <div class="bg-orb orb-purple w-[800px] h-[800px] top-[10%] left-[20%] opacity-30"></div>
+        <div class="bg-orb orb-pink w-[600px] h-[600px] bottom-[10%] right-[-100px]"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center space-x-2 border border-purple-200 bg-purple-50/50 backdrop-blur-sm rounded-full px-3.5 py-1 mb-4">
+                    <span class="text-purple-700 text-[11px] font-semibold tracking-wider uppercase">Official Credentials</span>
+                </div>
+                <h2 class="text-2xl md:text-4xl font-black text-slate-900 mb-3 tracking-tight leading-tight">
+                    실무 포트폴리오와 공신력 있는 수료증 패키지
+                </h2>
+                <p class="text-slate-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed font-light">
+                    이력서 한 줄을 넘어 채용 담당자가 즉시 신뢰할 수 있는 구름만의 완벽한 아웃풋 증명 체계를 선사합니다.
+                </p>
+            </div>
+
+            <!-- 2-Column Side-by-Side Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Left: Capstone Project Showcase -->
+                <div class="lg:col-span-5 bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 premium-shadow premium-shadow-hover flex flex-col justify-between">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-10 h-10 bg-blue-50 text-blue-600 rounded-xl mb-6">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">실무 포트폴리오로 남는 GitHub 결과물</h3>
+                        <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-6 font-light">
+                            단순 게시판 만들기를 넘어 서비스 기획부터 배포·운영까지 IT 대기업 수준의 <strong>애자일 협업 프로세스와 MSA 아키텍처 설계</strong>를 직접 적용하고, 검증 가능한 소스코드로 아카이빙합니다.
+                        </p>
+                        
+                        <!-- GITHUB COMPONENT -->
+                        <div class="bg-[#0d1117] text-[#c9d1d9] rounded-xl p-4 mb-6 border border-[#30363d] shadow-md font-sans relative z-20">
+                            <div class="flex items-center justify-between border-b border-[#21262d] pb-2.5 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-[#8b949e]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    <span class="text-[#58a6ff] hover:underline font-semibold text-[11px] md:text-xs">goorm-prism/enterprise-platform</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="w-1 h-1 rounded-full bg-green-500 inline-block"></span>
+                                    <span class="text-[9px] text-green-400 font-bold font-mono">Build Passing</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 text-[11px] mb-3">
+                                <p class="text-[#8b949e] leading-snug">AWS 기반 MSA 데이터 파이프라인 인프라 코드베이스입니다.</p>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-1.5 py-0.2 bg-[#161b22] border border-[#30363d] text-[#8b949e] rounded text-[9px]">Python</span>
+                                    <span class="px-1.5 py-0.2 bg-[#161b22] border border-[#30363d] text-[#8b949e] rounded text-[9px]">Kubernetes</span>
+                                    <span class="px-1.5 py-0.2 bg-[#161b22] border border-[#30363d] text-[#8b949e] rounded text-[9px]">FastAPI</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="w-full h-1 rounded-full bg-[#21262d] overflow-hidden flex mb-1.5">
+                                    <div class="h-full bg-[#3572A5]" style="width: 58%"></div>
+                                    <div class="h-full bg-[#3178c6]" style="width: 25%"></div>
+                                    <div class="h-full bg-[#3897ca]" style="width: 17%"></div>
+                                </div>
+                                <div class="flex justify-between text-[8px] text-[#8b949e] font-mono">
+                                    <span>Python 58%</span>
+                                    <span>TS/JS 25%</span>
+                                    <span>DevOps 17%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Compact 2-Column Highlights -->
+                        <div class="grid grid-cols-2 gap-3.5 border-t border-slate-100 pt-5">
+                            <div class="flex gap-2">
+                                <div class="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 text-[10px] font-bold mt-0.5">✓</div>
+                                <div class="text-[11px] leading-snug">
+                                    <span class="font-bold text-slate-800 block mb-0.5">실제 발표자료북</span>
+                                    <span class="text-slate-400 font-light">문제정의부터 아키텍처, 성능 개선안 수록</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="w-4 h-4 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 text-[10px] font-bold mt-0.5">✓</div>
+                                <div class="text-[11px] leading-snug">
+                                    <span class="font-bold text-slate-800 block mb-0.5">실무 데모 비디오</span>
+                                    <span class="text-slate-400 font-light">핵심 기능 시나리오 작동 데모 영상 확보</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <a href="https://on-air.goorm.io/coming-soon" target="_blank" class="w-full sm:w-auto px-4 py-2.5 bg-slate-950 hover:bg-slate-800 text-white rounded-lg text-[11px] font-bold transition flex items-center justify-center group relative z-20">
+                            이전 기수 결과물 더보기
+                            <svg class="w-3 h-3 ml-1 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        <span class="text-[9px] text-slate-400 font-bold">* 실제 AWS/Docker 기반 MSA 설계</span>
+                    </div>
+                </div>
+
+                <!-- Right: Official Certificate Mockup -->
+                <div class="lg:col-span-7 bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 premium-shadow premium-shadow-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 tracking-tight">수료 인증서 및 3대 인증 연동</h3>
+                            </div>
+                            
+                            <div class="bg-white/60 p-0.5 rounded-lg flex border border-slate-200/50 shadow-sm relative z-20">
+                                <button onclick="highlightCertElement('badge')" class="px-2.5 py-1.5 rounded-md text-[10px] font-extrabold text-slate-600 hover:text-purple-600 hover:bg-white transition flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>배지
+                                </button>
+                                <button onclick="highlightCertElement('dashboard')" class="px-2.5 py-1.5 rounded-md text-[10px] font-extrabold text-slate-600 hover:text-blue-600 hover:bg-white transition flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>대시보드
+                                </button>
+                                <button onclick="highlightCertElement('overview')" class="px-2.5 py-1.5 rounded-md text-[10px] font-extrabold text-slate-600 hover:text-emerald-600 hover:bg-white transition flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>과정개요
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Classy HTML/CSS Certificate Mockup -->
+                        <div id="cert-mockup" class="cert-pattern rounded-2xl p-5 border border-slate-200 relative shadow-sm bg-white/90 backdrop-blur-sm transition-all duration-300">
+                            <div class="absolute inset-0 opacity-[0.02] flex items-center justify-center pointer-events-none">
+                                <span class="font-black text-6xl sm:text-8xl tracking-widest uppercase select-none">goorm</span>
+                            </div>
+
+                            <div class="border-2 border-double border-slate-200 p-4 sm:p-5 rounded-xl relative h-full flex flex-col md:flex-row justify-between gap-6">
+                                
+                                <div class="flex-1 space-y-4">
+                                    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                        <div>
+                                            <span class="text-[8px] font-mono text-slate-400 tracking-wider">TEST_EDUOPSS_001</span>
+                                            <h4 class="text-xs font-black text-slate-800 tracking-tight">goorm AI campus</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-y-1">
+                                        <h5 class="text-lg font-black text-slate-900 tracking-tight">김구름</h5>
+                                        <p class="text-[10px] text-blue-600 font-bold tracking-wide">AI 데이터 보안 엔지니어</p>
+                                    </div>
+                                    
+                                    <p class="text-[9px] text-slate-500 leading-relaxed font-medium">
+                                        위 사람은 주식회사 구름이 운영하는 국민내일배움카드 훈련 과정을 수료하였으므로 「국민내일배움카드 운영규정」 제38조 3항에 따라 이 증서를 수여합니다.
+                                    </p>
+
+                                    <div class="grid grid-cols-2 gap-y-1.5 gap-x-4 border-t border-b border-slate-100 py-3 text-[8.5px] text-slate-500 leading-none">
+                                        <div><span class="font-bold text-slate-400 mr-1.5">생년월일</span> 1976.04.15</div>
+                                        <div><span class="font-bold text-slate-400 mr-1.5">훈련번호</span> 12345678</div>
+                                        <div class="col-span-2 leading-relaxed mt-1">
+                                            <span class="font-bold text-slate-400 block mb-0.5 text-[8px]">취득역량</span>
+                                            <span class="text-slate-500 text-[8px] block leading-snug">
+                                                AI 어시스턴트 활용 / 엔터프라이즈 프로젝트 경험 / Python / 기본 ML/LLM / Rest API / 로그 스택 (ELK) / 보안·위협모델링 / 포트폴리오 프리젠테이션 / 웹 설계
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between pt-1">
+                                        <div class="text-[8px] text-slate-400 font-bold leading-tight">
+                                            2026.11.23.<br/>
+                                            <span class="text-slate-900 font-black text-[11px] mt-0.5 block">주식회사 구름</span>
+                                        </div>
+                                        <div class="w-8 h-8 rounded-full border-[1px] border-red-500/85 bg-red-50/20 text-red-500 text-[7px] font-black flex items-center justify-center text-center leading-none tracking-tighter transform -rotate-12 select-none">
+                                            구름<br/>직인
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-full md:w-[130px] border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-5 flex flex-col justify-between items-center text-center gap-4">
+                                    
+                                    <div id="cert-badge-area" class="space-y-0.5 transition-all duration-300 rounded-lg p-1 w-full">
+                                        <span class="text-[8px] text-slate-400 font-bold block uppercase tracking-wider">Course Badge</span>
+                                        <div class="flex items-center justify-center gap-1 bg-purple-50 border border-purple-200/50 rounded-md px-1.5 py-0.5">
+                                            <svg class="w-3 h-3 text-purple-600 animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                            <span class="text-[7px] text-purple-700 font-black tracking-tighter">DIGITAL BADGE</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-y-1">
+                                        <div class="flex items-center justify-center gap-1 text-[8px] text-slate-500 font-semibold bg-slate-50 border border-slate-200/60 rounded px-1.5 py-0.5">
+                                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                                            고용노동부
+                                        </div>
+                                        <span class="text-[10px] font-black text-slate-800 tracking-tight block">goorm</span>
+                                    </div>
+
+                                    <div class="space-y-3 w-full">
+                                        <div class="flex justify-center gap-3 border-t border-slate-100 pt-3 w-full">
+                                            <div id="cert-overview-area" class="text-center transition-all duration-300 rounded-lg p-0.5">
+                                                <div class="w-8 h-8 bg-slate-50 border border-slate-200 rounded p-0.5 mx-auto shadow-sm">
+                                                    <svg class="w-full h-full text-slate-800" viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h10v10h-10zm1 1v8h8v-8zm1 1h6v6h-6zm12-3h10v10h-10zm1 1v8h8v-8zm1 1h6v6h-6zm-14 12h10v10h-10zm1 1v8h8v-8zm1 1h6v6h-6zm14-1h2v2h-2zm2 2h2v2h-2zm-2 2h2v2h-2zm4-4h2v2h-2zm-2-2h2v2h-2zm4 4h2v2h-2z"/></svg>
+                                                </div>
+                                                <span class="text-[7px] text-slate-400 font-bold block mt-1 leading-none">훈련 과정 개요</span>
+                                            </div>
+                                            <div id="cert-dashboard-area" class="text-center transition-all duration-300 rounded-lg p-0.5">
+                                                <div class="w-8 h-8 bg-slate-50 border border-slate-200 rounded p-0.5 mx-auto shadow-sm">
+                                                    <svg class="w-full h-full text-slate-800" viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h10v10h-10zm1 1v8h8v-8zm1 1h6v6h-6zm12-3h10v10h-10zm1 1v8h8v-8zm1 1h6v6h-6zm-14 12h10v10h-10zm1 1v8h8v-8zm1 1h6v6h-6zm14-1h2v2h-2zm2 2h2v2h-2zm-2 2h2v2h-2zm4-4h2v2h-2zm-2-2h2v2h-2zm4 4h2v2h-2z"/></svg>
+                                                </div>
+                                                <span class="text-[7px] text-slate-400 font-bold block mt-1 leading-none">성장 대시보드</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Small Alert Note -->
+            <div class="flex justify-center mt-8 relative z-20">
+                <div class="inline-flex items-center gap-2.5 bg-white/80 backdrop-blur-sm border border-slate-200/80 rounded-full px-5 py-2 text-[10px] md:text-xs text-slate-500 font-medium shadow-sm">
+                    <span class="text-amber-500 text-sm">💡</span> 위 프로젝트들은 실제 AWS / Docker 기반의 MSA 아키텍처로 설계 및 검증되었습니다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [11] PREMIUM BRAND FOOTER
+         ========================================== -->
+    <footer class="w-full text-center pb-12 z-20 pt-12 mt-auto border-t border-slate-200 bg-white">
+        <p class="text-slate-400 text-xs md:text-sm font-semibold tracking-[0.3em] uppercase mb-2">
+            Learn Beyond Answers
+        </p>
+        <p class="text-slate-500 text-xs font-light">© goorm AI Campus : Prism</p>
+    </footer>
+
+    <!-- ==========================================
+         [12] JAVASCRIPT LOGIC (DOM Toggle 방식으로 최적화)
+         ========================================== -->
+    <script>
+        function switchRoutineTab(tabId) {
+            // Content Toggling
+            const contentTheory = document.getElementById('content-theory');
+            const contentProject = document.getElementById('content-project');
+            
+            if(tabId === 'theory') {
+                contentTheory.classList.remove('hidden');
+                contentProject.classList.add('hidden');
+            } else {
+                contentTheory.classList.add('hidden');
+                contentProject.classList.remove('hidden');
+            }
+
+            // Button Styles
+            const btnTheory = document.getElementById('tab-btn-theory');
+            const btnProject = document.getElementById('tab-btn-project');
+
+            if (tabId === 'theory') {
+                btnTheory.className = "px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-blue-600 shadow-sm";
+                btnProject.className = "px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-900";
+            } else {
+                btnTheory.className = "px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-slate-500 hover:text-slate-900";
+                btnProject.className = "px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 bg-white text-purple-600 shadow-sm";
+            }
+        }
+
+        // 수료 인증 요소 임시 강조 렌더링 (Gimmick)
+        function highlightCertElement(type) {
+            const certMockup = document.getElementById('cert-mockup');
+            const targetBadge = document.getElementById('cert-badge-area');
+            const targetOverview = document.getElementById('cert-overview-area');
+            const targetDashboard = document.getElementById('cert-dashboard-area');
+
+            // 초기화
+            targetBadge.style.backgroundColor = 'transparent';
+            targetOverview.style.backgroundColor = 'transparent';
+            targetDashboard.style.backgroundColor = 'transparent';
+            certMockup.style.transform = 'scale(1)';
+
+            // 선택 지점 강조
+            if (type === 'badge') {
+                targetBadge.style.backgroundColor = 'rgba(168, 85, 247, 0.1)';
+                certMockup.style.transform = 'scale(1.006)';
+            } else if (type === 'overview') {
+                targetOverview.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+                certMockup.style.transform = 'scale(1.006)';
+            } else if (type === 'dashboard') {
+                targetDashboard.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                certMockup.style.transform = 'scale(1.006)';
+            }
+
+            // 1.5초 후 자연스러운 페이드아웃 원복
+            setTimeout(() => {
+                targetBadge.style.backgroundColor = 'transparent';
+                targetOverview.style.backgroundColor = 'transparent';
+                targetDashboard.style.backgroundColor = 'transparent';
+                certMockup.style.transform = 'scale(1)';
+            }, 1500);
+        }
+
+        // 페이지 최초 로드 시 '이론 학습 기간' 콘텐츠 자동 활성화
+        document.addEventListener('DOMContentLoaded', () => {
+            switchRoutineTab('theory');
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goorm AI Campus - Selected Sections</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            word-break: keep-all;
+            letter-spacing: -0.02em;
+        }
+
+        /* 공통 프리미엄 섀도우 */
+        .premium-shadow {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.005), 
+                        0 8px 20px rgba(15, 23, 42, 0.02);
+        }
+        .premium-shadow-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .premium-shadow-hover:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        /* 다크모드 벤토박스 빛 효과 */
+        .bento-glow {
+            transition: opacity 0.4s ease;
+            opacity: 0;
+        }
+        .bento-card:hover .bento-glow {
+            opacity: 1;
+        }
+
+        /* 앰비언트 빛 효과 */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: multiply;
+        }
+        .bg-orb-dark {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: screen;
+        }
+
+        /* 부드러운 페이드 인 업 애니메이션 */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc]">
+
+    <!-- ==========================================
+         [1] 최정예 전문가 그룹 (Expert Network)
+         ========================================== -->
+    <section class="w-full relative bg-[#050814] py-24 overflow-hidden">
+        <!-- 다크 모드용 앰비언트 빛 효과 -->
+        <div class="bg-orb-dark bg-indigo-600 w-[600px] h-[600px] top-[-10%] left-[-10%]"></div>
+        <div class="bg-orb-dark bg-fuchsia-600 w-[500px] h-[500px] bottom-[-20%] right-[-10%]"></div>
+        <div class="bg-orb-dark bg-blue-600 w-[400px] h-[400px] top-[40%] left-[40%] opacity-20"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 border border-indigo-500/30 bg-indigo-500/10 rounded-full px-3.5 py-1 mb-5">
+                    <span class="text-indigo-400 text-[11px] font-bold tracking-widest uppercase">Expert Network</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight leading-tight">
+                    업계 최정예 전문가 그룹이<br/>당신의 성장을 직접 디렉팅합니다.
+                </h2>
+                <p class="text-slate-400 font-medium max-w-2xl mx-auto font-light text-sm md:text-base">
+                    대기업 및 유니콘 스타트업 출신의 베테랑 강사진과 연계 기업 멘토단이 함께합니다.
+                </p>
+            </div>
+
+            <!-- Bento Box Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 fade-in-up" style="animation-delay: 0.2s;">
+                
+                <!-- 👨‍💻 Instructor 1 -->
+                <div class="bento-card relative bg-[#0d1326]/80 backdrop-blur-xl border border-slate-700/50 rounded-[2rem] p-8 overflow-hidden group">
+                    <div class="bento-glow absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 blur-xl z-0"></div>
+                    <div class="relative z-10">
+                        <div class="text-[10px] text-blue-400 font-mono font-bold tracking-widest mb-6">LEAD INSTRUCTOR</div>
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-2xl shadow-inner">👨‍💻</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white tracking-tight mb-1">AI/Backend Tech Lead</h3>
+                                <p class="text-slate-400 text-xs font-mono">9년+ 실무 경력</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-700/50 transition group-hover:border-blue-500/30">
+                                <div class="text-[10px] text-slate-500 font-bold mb-1.5 uppercase tracking-wide">핵심 이력</div>
+                                <div class="text-sm text-slate-200 font-light">무신사 백엔드 엔지니어 (2022~2024)</div>
+                            </div>
+                            <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-700/50 transition group-hover:border-blue-500/30">
+                                <div class="text-[10px] text-slate-500 font-bold mb-1.5 uppercase tracking-wide">전문 분야</div>
+                                <div class="text-sm text-slate-200 font-light">대규모 트래픽 및 AI 모델 서비스 구축</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🎓 Instructor 2 -->
+                <div class="bento-card relative bg-[#0d1326]/80 backdrop-blur-xl border border-slate-700/50 rounded-[2rem] p-8 overflow-hidden group">
+                    <div class="bento-glow absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl z-0"></div>
+                    <div class="relative z-10">
+                        <div class="text-[10px] text-purple-400 font-mono font-bold tracking-widest mb-6">INDUSTRY VETERAN</div>
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-2xl shadow-inner">🎓</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white tracking-tight mb-1">Expert Professor</h3>
+                                <p class="text-slate-400 text-xs font-mono">삼성전자 20년 근속</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-700/50 transition group-hover:border-purple-500/30">
+                                <div class="text-[10px] text-slate-500 font-bold mb-1.5 uppercase tracking-wide">핵심 이력</div>
+                                <div class="text-sm text-slate-200 font-light">삼성전자 근무 (1996~2015)</div>
+                            </div>
+                            <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-700/50 transition group-hover:border-purple-500/30">
+                                <div class="text-[10px] text-slate-500 font-bold mb-1.5 uppercase tracking-wide">학술 및 강의</div>
+                                <div class="text-sm text-slate-200 font-light leading-snug">서강대 컴공 석사<br/>가천/건국/한양대 등 겸임교수</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🤝 Mentor Network (참여기업 멘토진) -->
+                <div class="bento-card relative bg-[#0d1326]/80 backdrop-blur-xl border border-slate-700/50 rounded-[2rem] p-8 overflow-hidden group flex flex-col">
+                    <div class="bento-glow absolute -inset-2 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 blur-xl z-0"></div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="text-[10px] text-emerald-400 font-mono font-bold tracking-widest mb-6">MENTOR NETWORK</div>
+                        <h3 class="text-2xl font-bold text-white tracking-tight mb-3">20+ Tech Partners</h3>
+                        <p class="text-sm text-slate-400 font-light leading-relaxed mb-8">
+                            구름과 연계된 약 20여 개 기업의 현직자들이 실무 멘토로 직접 참여하여 프로젝트 디렉팅과 꼼꼼한 코드 리뷰를 지원합니다.
+                        </p>
+                        
+                        <div class="mt-auto flex flex-wrap gap-2.5">
+                            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 text-slate-300 text-xs font-medium rounded-lg shadow-sm">카카오엔터프라이즈</span>
+                            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 text-yellow-500 text-xs font-medium rounded-lg shadow-sm">카카오</span>
+                            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 text-green-500 text-xs font-medium rounded-lg shadow-sm">라인</span>
+                            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 text-slate-300 text-xs font-medium rounded-lg shadow-sm">두산 디지털이노베이션</span>
+                            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 text-slate-300 text-xs font-medium rounded-lg shadow-sm">천재교육</span>
+                            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 text-slate-300 text-xs font-medium rounded-lg shadow-sm">에이럭스</span>
+                            <span class="px-3 py-1.5 bg-slate-900/50 border border-slate-800 text-slate-500 text-xs font-medium rounded-lg">외 15+ 기업</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         [2] 선발 절차 (Admission Process)
+         ========================================== -->
+    <section class="w-full relative bg-white py-24 overflow-hidden">
+        <!-- 💡 Ambient Orbs -->
+        <div class="bg-orb bg-blue-300/40 w-[600px] h-[600px] top-[10%] left-[-200px]"></div>
+
+        <div class="max-w-[1000px] mx-auto px-6 relative z-10">
+            
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 border border-blue-200/60 bg-blue-50/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5">
+                    <span class="text-blue-700 text-xs font-semibold tracking-wider uppercase">Admission Process</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                    Prism 1기 합류를 위한 선발 절차
+                </h2>
+                <p class="text-slate-500 font-medium font-light">
+                    당신의 가능성을 확인하기 위한 여정입니다. 지금 바로 지원서를 제출해 주세요.
+                </p>
+            </div>
+
+            <!-- Process Steps -->
+            <div class="relative mb-20 fade-in-up" style="animation-delay: 0.2s;">
+                <!-- Desktop Connecting Line -->
+                <div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-slate-200 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-white/90 backdrop-blur-md border border-slate-200 rounded-full flex items-center justify-center mb-4 premium-shadow text-blue-600 font-bold text-2xl relative">
+                            1
+                            <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-t-[1.5px] border-r-[1.5px] border-slate-300 rotate-45 bg-white"></div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">지원서 제출</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed px-2 font-light">내일배움카드 발급 확인 및<br/>기본 지원서(폼) 작성</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-white/90 backdrop-blur-md border border-slate-200 rounded-full flex items-center justify-center mb-4 premium-shadow text-purple-600 font-bold text-2xl relative">
+                            2
+                            <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-t-[1.5px] border-r-[1.5px] border-slate-300 rotate-45 bg-white"></div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">AI 역량 평가 (AISA)</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed px-2 font-light">기초 코딩 테스트 및<br/>프롬프트 엔지니어링 평가</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-white/90 backdrop-blur-md border border-slate-200 rounded-full flex items-center justify-center mb-4 premium-shadow text-slate-400 font-bold text-2xl relative">
+                            3
+                            <div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 w-3 h-3 border-t-[1.5px] border-r-[1.5px] border-slate-300 rotate-45 bg-white"></div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">인터뷰 (일부 대상)</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed px-2 font-light">추가 역량 확인이<br/>필요한 인원 대상 비대면 면접</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4 premium-shadow text-white font-bold text-2xl relative">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">최종 합격 및 입과</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed px-2 font-light">수강 등록 완료 및<br/>오리엔테이션 안내</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Free Pass Highlight Card (다크 테마) -->
+            <div class="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-1 shadow-2xl overflow-hidden fade-in-up group" style="animation-delay: 0.4s;">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                
+                <div class="relative bg-slate-900/90 backdrop-blur-xl rounded-[1.4rem] p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 border border-slate-700/50">
+                    <div class="flex-shrink-0 flex flex-col items-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center text-white mb-3 shadow-lg transform -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <span class="px-3 py-1 bg-white text-slate-900 text-[10px] font-black rounded-full tracking-widest uppercase shadow-sm">Free Pass</span>
+                    </div>
+
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-white mb-3 leading-tight">
+                            비전공자·입문자를 위한 초고속 합격 트랙!<br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">Pre AI Campus (AI 기초체력 훈련)</span> 수강 시 프리패스
+                        </h3>
+                        <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-6 font-light">
+                            AI 기초 지식이 없어 평가(AISA)가 걱정되시나요? K-디지털 크레딧(KDC) 기반 100% 온라인 과정인 <strong class="text-white">'구름 AI 기초체력 훈련'</strong>을 선행 학습하시면, <strong class="text-yellow-400">AI 캠퍼스 선발 전형(평가 및 면접)이 전면 면제되어 바로 최종 합격</strong> 처리됩니다.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 text-sm text-slate-300 bg-slate-800/50 rounded-xl p-5 border border-slate-700">
+                            <div class="flex items-start">
+                                <span class="font-bold text-white w-24 flex-shrink-0">프리패스 조건</span>
+                                <span class="font-light">진도율 50% 이상 달성 시 (약 28시간 소요)</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-bold text-white w-24 flex-shrink-0">개강 일정</span>
+                                <span class="font-light">1차: 6/22 | 2차: 6/29 | 3차: 7/6</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-bold text-white w-24 flex-shrink-0">수강 비용</span>
+                                <span class="font-light">국비지원 자비부담금 10% (약 4만 원)</span>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="font-bold text-white w-24 flex-shrink-0">유의 사항</span>
+                                <span class="text-red-400 text-[11px] mt-0.5 leading-tight font-light">지원서 작성 시 '수강 여부' 체크 필수. AI 캠퍼스 본 과정과 학습 시간이 중복되지 않도록 유의해 주세요.</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-center md:justify-start">
+                            <button class="px-6 py-3 bg-white hover:bg-gray-200 text-slate-900 text-sm font-bold rounded-xl transition-colors flex items-center shadow-md">
+                                AI 기초체력 훈련 과정 알아보기
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [3] 취업자 홍보영상 (Success Story)
+         ========================================== -->
+    <section class="w-full relative bg-[#f8fafc] pb-24 border-t border-slate-100 overflow-hidden">
+        <div class="bg-orb bg-pink-300/40 w-[500px] h-[500px] bottom-0 left-[-150px]"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10 pt-20">
+            
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 border border-pink-200 bg-pink-50/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5">
+                    <span class="text-pink-600 text-xs font-bold tracking-wider uppercase">Success Story</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                    결과로 증명하는 선배들의 이야기
+                </h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto font-light">
+                    구름 KDT 과정을 통해 압도적인 성장을 이뤄낸 수료생들의 생생한 인터뷰를 확인하세요.
+                </p>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in-up" style="animation-delay: 0.2s;">
+                
+                <!-- Video Card 1 -->
+                <div class="group cursor-pointer">
+                    <div class="relative w-full aspect-video bg-slate-800 rounded-2xl overflow-hidden premium-shadow mb-4">
+                        <div class="absolute inset-0 bg-slate-800 opacity-80 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
+                            <span class="text-slate-500 font-medium text-xs">[인터뷰 썸네일 이미지]</span>
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md border border-white/40 text-white rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-lg">
+                                <svg class="w-6 h-6 ml-1 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-blue-600 text-[11px] font-bold tracking-wide mb-1.5 uppercase">네이버 클라우드 합격</div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-1.5 group-hover:text-blue-600 transition-colors">"혼자서는 1년 걸릴 프로젝트, 구름에서는 1달이면 충분했습니다."</h4>
+                        <p class="text-xs text-slate-500 font-light">AI 모델 설계 과정 1기 수료생 김OO</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="group cursor-pointer" style="transition-delay: 100ms;">
+                    <div class="relative w-full aspect-video bg-slate-800 rounded-2xl overflow-hidden premium-shadow mb-4">
+                        <div class="absolute inset-0 bg-slate-800 opacity-80 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
+                            <span class="text-slate-500 font-medium text-xs">[인터뷰 썸네일 이미지]</span>
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md border border-white/40 text-white rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-lg">
+                                <svg class="w-6 h-6 ml-1 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-purple-600 text-[11px] font-bold tracking-wide mb-1.5 uppercase">카카오뱅크 합격</div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-1.5 group-hover:text-purple-600 transition-colors">"비전공자였던 저에게 AISA의 상세한 피드백은 기적이었습니다."</h4>
+                        <p class="text-xs text-slate-500 font-light">DevSecOps 과정 2기 수료생 박OO</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="group cursor-pointer" style="transition-delay: 200ms;">
+                    <div class="relative w-full aspect-video bg-slate-800 rounded-2xl overflow-hidden premium-shadow mb-4">
+                        <div class="absolute inset-0 bg-slate-800 opacity-80 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
+                            <span class="text-slate-500 font-medium text-xs">[인터뷰 썸네일 이미지]</span>
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md border border-white/40 text-white rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-lg">
+                                <svg class="w-6 h-6 ml-1 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-pink-600 text-[11px] font-bold tracking-wide mb-1.5 uppercase">해커톤 장관상 수상</div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-1.5 group-hover:text-pink-600 transition-colors">"현직자 멘토링 덕분에 면접관이 놀라는 아키텍처를 그렸습니다."</h4>
+                        <p class="text-xs text-slate-500 font-light">지능형 웹 개발 과정 1기 수료생 이OO</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goorm AI Campus - FAQ & Social Links</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #fbfcfd;
+            word-break: keep-all;
+            letter-spacing: -0.02em;
+        }
+
+        /* 공통 프리미엄 섀도우 */
+        .premium-shadow {
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03), 
+                        0 1px 3px rgba(15, 23, 42, 0.02);
+        }
+        
+        /* 앰비언트 빛 효과 */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: multiply;
+        }
+
+        /* 부드러운 페이드 인 업 애니메이션 */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 아코디언 펼침/접힘 부드러운 트랜지션용 커스텀 */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-[#fbfcfd]">
+
+    <!-- ==========================================
+         [1] 자주 묻는 질문 (FAQ) - 프리미엄 아코디언 UI
+         ========================================== -->
+    <section class="w-full relative bg-[#fbfcfd] py-24 border-t border-slate-100 overflow-hidden">
+        
+        <!-- 💡 Ambient Orbs -->
+        <div class="bg-orb bg-blue-300 w-[600px] h-[600px] top-[10%] left-[-200px]"></div>
+        <div class="bg-orb bg-purple-200 w-[500px] h-[500px] bottom-[10%] right-[-100px]"></div>
+
+        <div class="max-w-[800px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 fade-in-up">
+                <div class="inline-flex items-center space-x-2 border border-blue-200/60 bg-blue-50/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-5">
+                    <span class="text-blue-600 text-xs font-bold tracking-widest uppercase">FAQ</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                    자주 묻는 질문
+                </h2>
+                <p class="text-slate-500 font-medium font-light mt-4">
+                    구름 AI 캠퍼스에 대해 궁금하신 점을 확인해 보세요.
+                </p>
+            </div>
+
+            <!-- FAQ Accordion List -->
+            <div class="space-y-4 fade-in-up" style="animation-delay: 0.2s;">
+                
+                <!-- FAQ Item 1 -->
+                <details class="group bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-blue-300 hover:shadow-xl cursor-pointer premium-shadow">
+                    <summary class="flex items-center justify-between font-bold text-slate-900 text-base md:text-lg select-none outline-none">
+                        <span class="flex items-center gap-4">
+                            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-black text-sm shrink-0">Q</span> 
+                            <span class="tracking-tight">비전공자도 지원 가능한가요?</span>
+                        </span>
+                        <span class="transition-transform duration-300 group-open:-rotate-180 text-slate-400 bg-slate-50 rounded-full p-1.5 flex-shrink-0">
+                            <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="mt-5 pt-5 border-t border-slate-100 flex gap-4 text-sm md:text-base text-slate-500 leading-relaxed font-light">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full text-slate-300 font-black text-sm shrink-0">A</span>
+                        <p class="pt-1.5">네, 가능합니다. 기초 지식이 부족하신 분들을 위해 100% 온라인으로 진행되는 <strong class="text-slate-800 font-semibold">'Pre AI Campus (AI 기초체력 훈련)'</strong> 과정이 준비되어 있습니다. 해당 과정을 수료하시면 본 과정 합격 프리패스 혜택도 제공됩니다.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="group bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-blue-300 hover:shadow-xl cursor-pointer premium-shadow">
+                    <summary class="flex items-center justify-between font-bold text-slate-900 text-base md:text-lg select-none outline-none">
+                        <span class="flex items-center gap-4">
+                            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-black text-sm shrink-0">Q</span> 
+                            <span class="tracking-tight">내일배움카드가 반드시 있어야 하나요?</span>
+                        </span>
+                        <span class="transition-transform duration-300 group-open:-rotate-180 text-slate-400 bg-slate-50 rounded-full p-1.5 flex-shrink-0">
+                            <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="mt-5 pt-5 border-t border-slate-100 flex gap-4 text-sm md:text-base text-slate-500 leading-relaxed font-light">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full text-slate-300 font-black text-sm shrink-0">A</span>
+                        <p class="pt-1.5">네, 본 과정은 고용노동부가 주관하는 K-디지털 트레이닝 과정으로, 수강 신청 및 국비 지원(전액 무료 혜택)을 받기 위해서는 국민내일배움카드 발급이 필수적입니다. HRD-Net을 통해 온라인으로 발급 신청이 가능합니다.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="group bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-blue-300 hover:shadow-xl cursor-pointer premium-shadow">
+                    <summary class="flex items-center justify-between font-bold text-slate-900 text-base md:text-lg select-none outline-none">
+                        <span class="flex items-center gap-4">
+                            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-black text-sm shrink-0">Q</span> 
+                            <span class="tracking-tight">온/오프라인 수업은 어떻게 진행되나요?</span>
+                        </span>
+                        <span class="transition-transform duration-300 group-open:-rotate-180 text-slate-400 bg-slate-50 rounded-full p-1.5 flex-shrink-0">
+                            <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </summary>
+                    <div class="mt-5 pt-5 border-t border-slate-100 flex gap-4 text-sm md:text-base text-slate-500 leading-relaxed font-light">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full text-slate-300 font-black text-sm shrink-0">A</span>
+                        <p class="pt-1.5">기본적으로 ZEP 메타버스 캠퍼스에서 실시간 온라인으로 진행되며, 팀 프로젝트 기획 및 핵심 네트워킹 기간에는 강남 교육장에서 오프라인 몰입 실습이 병행되는 '하이브리드 워크스페이스' 형태로 운영됩니다. 상세 일정은 오리엔테이션에서 안내해 드립니다.</p>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         [2] 공식 소셜 채널 안내 영역 - 고급스러운 Bento 스타일
+         ========================================== -->
+    <section class="w-full relative bg-[#f8fafc] py-24 border-t border-slate-100 overflow-hidden">
+        <div class="bg-orb bg-pink-100 w-[600px] h-[600px] top-[-10%] right-[-10%] opacity-40"></div>
+
+        <div class="max-w-[1000px] mx-auto px-6 text-center relative z-10">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-12 tracking-tight fade-in-up">
+                구름 AI 캠퍼스의 더 많은 소식을 만나보세요
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto fade-in-up" style="animation-delay: 0.2s;">
+                
+                <!-- Instagram Channel Card -->
+                <a href="https://instagram.com/goorm_ai_campus" target="_blank" class="relative overflow-hidden bg-white border border-slate-200/60 rounded-[2rem] p-8 premium-shadow hover:shadow-2xl hover:border-pink-300/50 transition-all duration-400 group flex items-center gap-6 hover:-translate-y-1">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center text-white shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-[11px] text-slate-400 font-bold tracking-widest uppercase mb-1">Official Instagram</div>
+                        <div class="text-lg md:text-xl font-black text-slate-900 tracking-tight group-hover:text-pink-600 transition-colors duration-300">@goorm_ai_campus</div>
+                    </div>
+                </a>
+
+                <!-- KakaoTalk Channel Card -->
+                <a href="#" target="_blank" class="relative overflow-hidden bg-white border border-slate-200/60 rounded-[2rem] p-8 premium-shadow hover:shadow-2xl hover:border-yellow-300/50 transition-all duration-400 group flex items-center gap-6 hover:-translate-y-1">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-[#FEE500] rounded-full blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-500"></div>
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-[#FEE500] flex items-center justify-center text-black shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 3c-5.523 0-10 3.555-10 7.94 0 2.82 1.865 5.29 4.675 6.64-.16.59-1.01 3.73-1.05 3.9-.06.23.08.23.2.14.09-.07 3.96-2.58 5.56-3.62.2.02.4.03.61.03 5.523 0 10-3.555 10-7.94C22 6.555 17.523 3 12 3z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-[11px] text-slate-400 font-bold tracking-widest uppercase mb-1">KakaoTalk Channel</div>
+                        <div class="text-lg md:text-xl font-black text-slate-900 tracking-tight group-hover:text-yellow-600 transition-colors duration-300">구름 AI 캠퍼스</div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
